@@ -51,6 +51,7 @@ public class Commands implements CommandExecutor {
         }
 
         ItemUtils.unbindItem(itemInHand);
+        player.sendMessage("Item unbinded.");
         return true;
     }
 
@@ -65,24 +66,30 @@ public class Commands implements CommandExecutor {
     }
 
     private boolean soulbindCommand(CommandSender sender, String[] args) {
-        Player player = null;
-        switch (args.length) {
-            case 2:
-                player = Bukkit.getPlayer(args[0]);
-            default:
-                if (sender instanceof Player) {
-                    player = (Player) sender;
-                }
-        }
-        if (player == null) {
+        if (!(sender instanceof Player)) {
+            sender.sendMessage("Can't use this from the console, sorry!");
             return false;
         }
+        Player player = (Player) sender;
+        Player target;
+        switch (args.length) {
+            case 2:
+                target = Bukkit.getPlayer(args[0]);
+            default:
+                target = player;
+        }
+
+        if (target == null) {
+            return false;
+        }
+
         ItemStack itemInHand = player.getItemInHand();
 
         if ((itemInHand.getType() == Material.AIR) && ItemUtils.isSoulbound(itemInHand)) {
             return false;
         }
-        ItemUtils.soulbindItem(player, itemInHand);
+        ItemUtils.soulbindItem(target, itemInHand);
+        player.sendMessage("Item is not soulbound to " + target.getName());
 
         return true;
     }

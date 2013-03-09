@@ -29,6 +29,7 @@ public class Soulbound extends JavaPlugin {
 
         getCommand("soulbound").setExecutor(new Commands(this));
         getCommand("bind").setExecutor(new Commands(this));
+        getCommand("unbind").setExecutor(new Commands(this));
 
         checkForUpdates();
 

@@ -10,12 +10,22 @@ commands:
       permission-message: You don't have <permission>
    bind:
       description: Usage /bind
+      alias: bound
       permission: soulbound.bind
       permission-message: You don't have <permission>
+   unbind:
+      description: Usage /unbind
+      alias: unbound
+      permission: soulbound.unbind
+      permission-message: You don't have <permission>
 permissions:
-    soulbound.commands:
+    soulbound.commands.all:
         description: Gives access to the weather commands
         default: op
+        children:
+            soulbound.commands.bind: true
+            soulbound.commands.unbind: true
+            soulbound.updatecheck: true
     soulbound.updatecheck:
         description: Users with this permission will receive a notification when there is a new version available.
         default: op
