@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
@@ -38,6 +39,21 @@ public class PlayerListener implements Listener {
         else if (ItemUtils.isBindOnPickup(itemStack)) {
             ItemUtils.soulbindItem(player, itemStack);
             player.sendMessage("This item is now bounded to you!");
+        }
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    private void onItemDrop(PlayerDropItemEvent event) {
+        Player player = event.getPlayer();
+        Item item = event.getItemDrop();
+        ItemStack itemStack = item.getItemStack();
+
+        if (plugin.getConfig().getBoolean("Soulbound.Allow_Item_Drop")) {
+            return;
+        }
+
+        if (ItemUtils.isSoulbound(itemStack) && ItemUtils.isBindedPlayer(player, itemStack)) {
+            event.setCancelled(true);
         }
     }
 }
