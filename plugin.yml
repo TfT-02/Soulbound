@@ -1,0 +1,17 @@
+name: Soulbound
+author: TfT_02
+main: com.me.tft_02.soulbound.Soulbound
+description: Soulbound items for your RPG servers!
+version: 1.0.0
+commands:
+   soulbound:
+      description: Usage /soulbound
+      permission: soulbound.commands
+      permission-message: You don't have <permission>
+permissions:
+    soulbound.commands:
+        description: Gives access to the weather commands
+        default: op
+    soulbound.updatecheck:
+        description: Users with this permission will receive a notification when there is a new version available.
+        default: op
