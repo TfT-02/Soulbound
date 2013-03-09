@@ -27,6 +27,7 @@ public class Commands implements CommandExecutor {
                     return helpPages(sender);
                 }
             }
+            sender.sendMessage("Soulbound version " + plugin.getDescription().getVersion());
             return printUsage(sender);
         }
         else if (cmd.getName().equalsIgnoreCase("bind") || cmd.getName().equalsIgnoreCase("bound")) {
@@ -61,7 +62,7 @@ public class Commands implements CommandExecutor {
     }
 
     private boolean printUsage(CommandSender sender) {
-        sender.sendMessage("Usage: /soulbound [reload]");
+        sender.sendMessage("Usage: /soulbound [reload | help]");
         return false;
     }
 
@@ -73,14 +74,10 @@ public class Commands implements CommandExecutor {
         Player player = (Player) sender;
         Player target;
         switch (args.length) {
-            case 2:
+            case 1:
                 target = Bukkit.getPlayer(args[0]);
             default:
                 target = player;
-        }
-
-        if (target == null) {
-            return false;
         }
 
         ItemStack itemInHand = player.getItemInHand();
@@ -89,7 +86,7 @@ public class Commands implements CommandExecutor {
             return false;
         }
         ItemUtils.soulbindItem(target, itemInHand);
-        player.sendMessage("Item is not soulbound to " + target.getName());
+        player.sendMessage(ChatColor.GRAY + "Item is now " + ChatColor.GOLD + "Soulbound " + ChatColor.GRAY + "to " + ChatColor.DARK_AQUA + target.getName());
 
         return true;
     }

@@ -7,6 +7,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 public class InventoryListener implements Listener {
     Soulbound plugin;
@@ -20,14 +21,16 @@ public class InventoryListener implements Listener {
         HumanEntity entity = event.getWhoClicked();
         ItemStack itemStack = event.getCurrentItem();
 
-        if (!ItemUtils.isSoulbound(itemStack)) {
+        if (itemStack == null || !ItemUtils.isSoulbound(itemStack)) {
             return;
         }
 
         if (entity instanceof Player) {
             Player player = (Player) entity;
             if (!plugin.getConfig().getBoolean("Soulbound.Allow_Item_Storing")) {
-                event.setCancelled(true);
+                if (!(event.getInventory() instanceof PlayerInventory)) {
+                    event.setCancelled(true);
+                }
             }
 
             if (!ItemUtils.isBindedPlayer(player, itemStack)) {

@@ -41,7 +41,7 @@ public class ItemUtils {
     public static ItemStack unbindItem(ItemStack itemStack) {
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta.hasLore() && isSoulbound(itemStack)) {
-            itemMeta.getLore().clear();
+            itemMeta.setLore(null);
         }
         itemStack.setItemMeta(itemMeta);
         return itemStack;

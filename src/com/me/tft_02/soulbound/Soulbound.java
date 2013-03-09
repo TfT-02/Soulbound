@@ -49,6 +49,9 @@ public class Soulbound extends JavaPlugin {
         config.addDefault("General.stats_tracking_enabled", true);
         config.addDefault("General.update_check_enabled", true);
 
+        config.addDefault("Soulbound.Allow_Item_Drop", true);
+        config.addDefault("Soulbound.Allow_Item_Storing", true);
+
         config.options().copyDefaults(true);
         saveConfig();
     }
