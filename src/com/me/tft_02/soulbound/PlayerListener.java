@@ -27,7 +27,7 @@ public class PlayerListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private void onItemPickup(PlayerPickupItemEvent event) {
         Player player = event.getPlayer();
         Item item = event.getItem();
@@ -42,7 +42,7 @@ public class PlayerListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private void onItemDrop(PlayerDropItemEvent event) {
         Player player = event.getPlayer();
         Item item = event.getItemDrop();

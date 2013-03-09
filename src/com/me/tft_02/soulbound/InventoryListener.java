@@ -16,7 +16,7 @@ public class InventoryListener implements Listener {
         plugin = instance;
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onInventoryClickEvent(InventoryClickEvent event) {
         HumanEntity entity = event.getWhoClicked();
         ItemStack itemStack = event.getCurrentItem();
@@ -27,10 +27,8 @@ public class InventoryListener implements Listener {
 
         if (entity instanceof Player) {
             Player player = (Player) entity;
-            if (!plugin.getConfig().getBoolean("Soulbound.Allow_Item_Storing")) {
-                if (!(event.getInventory() instanceof PlayerInventory)) {
-                    event.setCancelled(true);
-                }
+            if (!plugin.getConfig().getBoolean("Soulbound.Allow_Item_Storing") && !(event.getInventory() instanceof PlayerInventory)) {
+                event.setCancelled(true);
             }
 
             if (!ItemUtils.isBindedPlayer(player, itemStack)) {

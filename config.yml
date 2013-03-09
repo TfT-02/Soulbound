@@ -2,5 +2,5 @@ General:
   stats_tracking_enabled: true
   update_check_enabled: true
 Soulbound:
-  Allow_Item_Drop: false
-  Allow_Item_Storing: false
+  Allow_Item_Drop: true
+  Allow_Item_Storing: true
