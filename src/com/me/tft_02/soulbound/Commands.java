@@ -33,6 +33,9 @@ public class Commands implements CommandExecutor {
         else if (cmd.getName().equalsIgnoreCase("bind") || cmd.getName().equalsIgnoreCase("bound")) {
             return soulbindCommand(sender, args);
         }
+        else if (cmd.getName().equalsIgnoreCase("bindonpickup")) {
+            return bindonpickupCommand(sender, args);
+        }
         else if (cmd.getName().equalsIgnoreCase("unbind") || cmd.getName().equalsIgnoreCase("unbound")) {
             return unbindCommand(sender, args);
         }
@@ -87,6 +90,23 @@ public class Commands implements CommandExecutor {
         }
         ItemUtils.soulbindItem(target, itemInHand);
         player.sendMessage(ChatColor.GRAY + "Item is now " + ChatColor.GOLD + "Soulbound " + ChatColor.GRAY + "to " + ChatColor.DARK_AQUA + target.getName());
+
+        return true;
+    }
+
+    private boolean bindonpickupCommand(CommandSender sender, String[] args) {
+        if (!(sender instanceof Player)) {
+            sender.sendMessage("Can't use this from the console, sorry!");
+            return false;
+        }
+        Player player = (Player) sender;
+        ItemStack itemInHand = player.getItemInHand();
+
+        if ((itemInHand.getType() == Material.AIR) && ItemUtils.isSoulbound(itemInHand)) {
+            return false;
+        }
+        ItemUtils.bopItem(itemInHand);
+        player.sendMessage(ChatColor.GRAY + "Item is now " + ChatColor.DARK_RED + "Bind on pickup");
 
         return true;
     }

@@ -9,6 +9,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class ItemUtils {
+    public enum ItemType {
+        NORMAL,
+        SOULBOUND,
+        BIND_ON_PICKUP,
+        BIND_ON_USE,
+        BIND_ON_EQUIP;
+    };
+
     Soulbound plugin;
 
     public ItemUtils(Soulbound instance) {
@@ -29,7 +37,7 @@ public class ItemUtils {
         return itemStack;
     }
 
-    public static ItemStack bopItem(Player player, ItemStack itemStack) {
+    public static ItemStack bopItem(ItemStack itemStack) {
         ItemMeta itemMeta = itemStack.getItemMeta();
         List<String> itemLore = new ArrayList<String>();
         itemLore.add(ChatColor.DARK_RED + "Bind on pickup");
@@ -77,6 +85,36 @@ public class ItemUtils {
         return false;
     }
 
+    public static boolean isBindOnUse(ItemStack itemStack) {
+        if (!itemStack.hasItemMeta()) {
+            return false;
+        }
+
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        if (itemMeta.hasLore()) {
+            List<String> itemLore = itemMeta.getLore();
+            if (itemLore.contains(ChatColor.DARK_RED + "Bind on use")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isBindOnEquip(ItemStack itemStack) {
+        if (!itemStack.hasItemMeta()) {
+            return false;
+        }
+
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        if (itemMeta.hasLore()) {
+            List<String> itemLore = itemMeta.getLore();
+            if (itemLore.contains(ChatColor.DARK_RED + "Bind on equip")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static boolean isBindedPlayer(Player player, ItemStack itemStack) {
         ItemMeta itemMeta = itemStack.getItemMeta();
         List<String> itemLore = itemMeta.getLore();
@@ -84,5 +122,23 @@ public class ItemUtils {
             return true;
         }
         return false;
+    }
+
+    public static ItemType getItemType(ItemStack itemStack) {
+        if (isSoulbound(itemStack)) {
+            return ItemType.SOULBOUND;
+        }
+        else if (isBindOnPickup(itemStack)) {
+            return ItemType.BIND_ON_PICKUP;
+        }
+        else if (isBindOnUse(itemStack)) {
+            return ItemType.BIND_ON_USE;
+        }
+        else if (isBindOnEquip(itemStack)) {
+            return ItemType.BIND_ON_EQUIP;
+        }
+        else {
+            return ItemType.NORMAL;
+        }
     }
 }

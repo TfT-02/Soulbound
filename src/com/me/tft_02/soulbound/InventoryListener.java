@@ -9,6 +9,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 
+import com.me.tft_02.soulbound.ItemUtils.ItemType;
+
 public class InventoryListener implements Listener {
     Soulbound plugin;
 
@@ -22,20 +24,35 @@ public class InventoryListener implements Listener {
         ItemStack itemStack = event.getCurrentItem();
         InventoryType inventoryType = event.getInventory().getType();
 
-        if (itemStack == null || !ItemUtils.isSoulbound(itemStack)) {
+        ItemType itemType = ItemUtils.getItemType(itemStack);
+
+        if (itemStack == null) {
             return;
         }
 
         if (entity instanceof Player) {
             Player player = (Player) entity;
+            switch (itemType) {
+                case NORMAL:
+                    return;
+                case SOULBOUND:
+                    if (!plugin.getConfig().getBoolean("Soulbound.Allow_Item_Storing") && !(inventoryType == InventoryType.CRAFTING)) {
+                        event.setCancelled(true);
+                    }
+                    
+                    if (!ItemUtils.isBindedPlayer(player, itemStack)) {
+                        event.setCancelled(true);
+                    }
+                    return;
+                case BIND_ON_PICKUP:
+                    ItemUtils.soulbindItem(player, itemStack);
+                    return;
+                default:
+                    return;
 
-            if (!plugin.getConfig().getBoolean("Soulbound.Allow_Item_Storing") && !(inventoryType == InventoryType.CRAFTING)) {
-                event.setCancelled(true);
             }
 
-            if (!ItemUtils.isBindedPlayer(player, itemStack)) {
-                event.setCancelled(true);
-            }
+
         }
     }
 }

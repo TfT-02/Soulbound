@@ -11,12 +11,16 @@ commands:
    bind:
       description: Usage /bind
       alias: bound
-      permission: soulbound.bind
+      permission: soulbound.commands.bind
       permission-message: You don't have <permission>
+   bindonpickup:
+      description: Usage /bindonpickup
+      permission: soulbound.commands.bindonpickup
+      permission-message: You don't have <permission>   
    unbind:
       description: Usage /unbind
       alias: unbound
-      permission: soulbound.unbind
+      permission: soulbound.commands.unbind
       permission-message: You don't have <permission>
 permissions:
     soulbound.commands.all:
