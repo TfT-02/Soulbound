@@ -1,9 +1,13 @@
 package com.me.tft_02.soulbound;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class Commands implements CommandExecutor {
     Soulbound plugin;
@@ -16,20 +20,71 @@ public class Commands implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("soulbound")) {
             if (args.length > 0) {
-               if (args[0].equalsIgnoreCase("reload")) {
+                if (args[0].equalsIgnoreCase("reload")) {
                     return reloadConfiguration(sender);
                 }
+                else if (args[0].equalsIgnoreCase("help") || args[0].equalsIgnoreCase("?")) {
+                    return helpPages(sender);
+                }
             }
-            else {
-                return printUsage(sender);
-            }
+            return printUsage(sender);
         }
+        else if (cmd.getName().equalsIgnoreCase("bind") || cmd.getName().equalsIgnoreCase("bound")) {
+            return soulbindCommand(sender, args);
+        }
+        else if (cmd.getName().equalsIgnoreCase("unbind") || cmd.getName().equalsIgnoreCase("unbound")) {
+            return unbindCommand(sender, args);
+        }
+        return false;
+    }
+
+    private boolean unbindCommand(CommandSender sender, String[] args) {
+        if (!(sender instanceof Player)) {
+            return false;
+        }
+
+        Player player = (Player) sender;
+        ItemStack itemInHand = player.getItemInHand();
+
+        if ((itemInHand.getType() == Material.AIR) && !ItemUtils.isSoulbound(itemInHand)) {
+            return false;
+        }
+
+        ItemUtils.unbindItem(itemInHand);
+        return true;
+    }
+
+    private boolean helpPages(CommandSender sender) {
+        // TODO Auto-generated method stub
         return false;
     }
 
     private boolean printUsage(CommandSender sender) {
         sender.sendMessage("Usage: /soulbound [reload]");
         return false;
+    }
+
+    private boolean soulbindCommand(CommandSender sender, String[] args) {
+        Player player = null;
+        switch (args.length) {
+            case 2:
+                player = Bukkit.getPlayer(args[0]);
+            default:
+                if (sender instanceof Player) {
+                    player = (Player) sender;
+                }
+        }
+        if (player == null) {
+            return false;
+        }
+        ItemStack itemInHand = player.getItemInHand();
+
+        if ((itemInHand.getType() == Material.AIR) && ItemUtils.isSoulbound(itemInHand)) {
+            return false;
+        }
+        ItemUtils.soulbindItem(player, itemInHand);
+
+        return true;
     }
 
     private boolean reloadConfiguration(CommandSender sender) {

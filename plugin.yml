@@ -8,6 +8,10 @@ commands:
       description: Usage /soulbound
       permission: soulbound.commands
       permission-message: You don't have <permission>
+   bind:
+      description: Usage /bind
+      permission: soulbound.bind
+      permission-message: You don't have <permission>
 permissions:
     soulbound.commands:
         description: Gives access to the weather commands

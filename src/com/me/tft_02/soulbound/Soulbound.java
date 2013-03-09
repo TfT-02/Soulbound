@@ -11,6 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Soulbound extends JavaPlugin {
 
     private PlayerListener playerListener = new PlayerListener(this);
+    private InventoryListener inventoryListener = new InventoryListener(this);
 
     // Update Check
     public boolean updateAvailable;
@@ -24,8 +25,10 @@ public class Soulbound extends JavaPlugin {
 
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(playerListener, this);
+        pm.registerEvents(inventoryListener, this);
 
         getCommand("soulbound").setExecutor(new Commands(this));
+        getCommand("bind").setExecutor(new Commands(this));
 
         checkForUpdates();
 
@@ -53,8 +56,7 @@ public class Soulbound extends JavaPlugin {
      * Run things on disable.
      */
     @Override
-    public void onDisable() {
-    }
+    public void onDisable() {}
 
     private void checkForUpdates() {
         if (getConfig().getBoolean("General.update_check_enabled")) {
