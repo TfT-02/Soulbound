@@ -20,9 +20,17 @@ public class InventoryListener implements Listener {
         HumanEntity entity = event.getWhoClicked();
         ItemStack itemStack = event.getCurrentItem();
 
+        if (!ItemUtils.isSoulbound(itemStack)) {
+            return;
+        }
+
         if (entity instanceof Player) {
             Player player = (Player) entity;
-            if (ItemUtils.isSoulbound(itemStack) && !ItemUtils.isBindedPlayer(player, itemStack)) {
+            if (!plugin.getConfig().getBoolean("Soulbound.Allow_Item_Storing")) {
+                event.setCancelled(true);
+            }
+
+            if (!ItemUtils.isBindedPlayer(player, itemStack)) {
                 event.setCancelled(true);
             }
         }
