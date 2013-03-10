@@ -8,8 +8,8 @@ Key:
 
 Version 1.1.0 | Tested on CB 1.4.7-R1.0
  + Added support for DiabloDrops! Make Legendary items Soulbound on pickup, or make armor Sets Soulbound on Equip
- + Added Bind on Equip
- + Added Bind on Use
+ + Added new item type "Bind on Equip", when a player equips this item it will get Soulbound to that player.
+ + Added new item type "Bind on Use", when a player uses this item it will get Soulbound to that player.
 
 Version 1.0.1 | Tested on CB 1.4.7-R1.0
  = Fixed bug with the Update Checker

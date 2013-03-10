@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
@@ -107,5 +111,42 @@ public class PlayerListener implements Listener {
         }
 
         player.updateInventory();
+    }
+
+
+    /**
+     * Monitor PlayerInteract events.
+     * 
+     * @param event The event to watch
+     */
+    @EventHandler(priority = EventPriority.LOW)
+    public void onPlayerInteract(PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        Action action = event.getAction();
+        Block block = event.getClickedBlock();
+        ItemStack inHand = player.getItemInHand();
+        @SuppressWarnings("unused")
+        Material material;
+
+        /* Fix for NPE on interacting with air */
+        if (block == null) {
+            material = Material.AIR;
+        }
+        else {
+            material = block.getType();
+        }
+
+        switch (action) {
+            case RIGHT_CLICK_BLOCK:
+            case RIGHT_CLICK_AIR:
+            case LEFT_CLICK_AIR:
+            case LEFT_CLICK_BLOCK:
+            case PHYSICAL:
+                if (ItemUtils.isBindOnUse(inHand)) {
+                    ItemUtils.soulbindItem(player, inHand);
+                }
+            default:
+                break;
+        }
     }
 }
