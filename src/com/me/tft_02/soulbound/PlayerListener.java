@@ -43,7 +43,6 @@ public class PlayerListener implements Listener {
         }
         else if (ItemUtils.isBindOnPickup(itemStack)) {
             ItemUtils.soulbindItem(player, itemStack);
-            player.sendMessage("This item is now bounded to you!");
         }
     }
 
@@ -87,8 +86,6 @@ public class PlayerListener implements Listener {
 
         PlayerData.storeItemsDeath(player, items);
     }
-
-
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private void onPlayerRespawn(PlayerRespawnEvent event) {

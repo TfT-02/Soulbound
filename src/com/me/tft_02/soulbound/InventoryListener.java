@@ -39,20 +39,17 @@ public class InventoryListener implements Listener {
                     if (!plugin.getConfig().getBoolean("Soulbound.Allow_Item_Storing") && !(inventoryType == InventoryType.CRAFTING)) {
                         event.setCancelled(true);
                     }
-                    
+
                     if (!ItemUtils.isBindedPlayer(player, itemStack)) {
                         event.setCancelled(true);
                     }
                     return;
-                case BIND_ON_PICKUP:
+                case BIND_ON_USE:
                     ItemUtils.soulbindItem(player, itemStack);
                     return;
                 default:
                     return;
-
             }
-
-
         }
     }
 }

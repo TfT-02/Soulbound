@@ -6,7 +6,6 @@ version: 1.0.0
 commands:
    soulbound:
       description: Usage /soulbound
-      permission: soulbound.commands
       permission-message: You don't have <permission>
    bind:
       description: Usage /bind
@@ -28,7 +27,9 @@ permissions:
         default: op
         children:
             soulbound.commands.bind: true
+            soulbound.commands.bindonpickup: true
             soulbound.commands.unbind: true
+            soulbound.commands.reload: true
             soulbound.updatecheck: true
     soulbound.updatecheck:
         description: Users with this permission will receive a notification when there is a new version available.

@@ -48,6 +48,11 @@ public class Commands implements CommandExecutor {
         }
 
         Player player = (Player) sender;
+
+        if (!player.hasPermission("soulbound.commands.unbind")) {
+            return false;
+        }
+
         ItemStack itemInHand = player.getItemInHand();
 
         if ((itemInHand.getType() == Material.AIR) && !ItemUtils.isSoulbound(itemInHand)) {
@@ -55,7 +60,7 @@ public class Commands implements CommandExecutor {
         }
 
         ItemUtils.unbindItem(itemInHand);
-        player.sendMessage("Item unbinded.");
+        player.sendMessage(ChatColor.GRAY + "Item no longer Soulbound.");
         return true;
     }
 
@@ -75,6 +80,11 @@ public class Commands implements CommandExecutor {
             return false;
         }
         Player player = (Player) sender;
+
+        if (!player.hasPermission("soulbound.commands.bind")) {
+            return false;
+        }
+
         Player target;
         switch (args.length) {
             case 1:
@@ -99,7 +109,13 @@ public class Commands implements CommandExecutor {
             sender.sendMessage("Can't use this from the console, sorry!");
             return false;
         }
+
         Player player = (Player) sender;
+
+        if (!player.hasPermission("soulbound.commands.bindonpickup")) {
+            return false;
+        }
+
         ItemStack itemInHand = player.getItemInHand();
 
         if ((itemInHand.getType() == Material.AIR) && ItemUtils.isSoulbound(itemInHand)) {
@@ -112,6 +128,10 @@ public class Commands implements CommandExecutor {
     }
 
     private boolean reloadConfiguration(CommandSender sender) {
+        if (sender instanceof Player && !((Player) sender).hasPermission("soulbound.commands.reload")) {
+            return false;
+        }
+
         plugin.reloadConfig();
         sender.sendMessage(ChatColor.GREEN + "Configuration reloaded.");
         return false;

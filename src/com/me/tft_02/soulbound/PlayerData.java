@@ -23,14 +23,15 @@ public class PlayerData {
         }
 
         playerSoulboundItems.put(playerName, items);
-    }   
+    }
 
     public static List<ItemStack> retrieveItemsDeath(Player player) {
         String playerName = player.getName();
 
         if (playerSoulboundItems.containsKey(playerName)) {
             return playerSoulboundItems.get(playerName);
-        } else {
+        }
+        else {
             return null;
         }
     }

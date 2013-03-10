@@ -8,5 +8,11 @@ Key:
 
 Version 1.0.0 | Tested on CB 1.4.6-R0.2
  + First release
+ + Added Soulbound items
+ + Added Bind on Pickup items
+ + Added prevent storing Soulbound in containers
+ + Added prevent dropping Soulbound items
+ + Added prevent dropping Soulbound items on death
+ + Added keep Soulbound items after death
  + Added Metrics for stats
  + Added an update check
