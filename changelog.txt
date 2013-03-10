@@ -6,7 +6,10 @@ Key:
   ! Change
   - Removal
 
+Version 1.0.2 | Tested on CB 1.4.7-R1.0
+
 Version 1.0.1 | Tested on CB 1.4.7-R1.0
+ = Fixed bug with the Update Checker
 
 Version 1.0.0 | Tested on CB 1.4.7-R1.0
  + First release
