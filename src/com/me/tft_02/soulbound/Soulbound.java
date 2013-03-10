@@ -12,6 +12,10 @@ public class Soulbound extends JavaPlugin {
 
     private PlayerListener playerListener = new PlayerListener(this);
     private InventoryListener inventoryListener = new InventoryListener(this);
+    private DiabloDropsListener diabloDropsListener = new DiabloDropsListener();
+
+    // DiabloDrops Check
+    public static boolean diabloDropsEnabled = false;
 
     // Update Check
     public boolean updateAvailable;
@@ -22,6 +26,8 @@ public class Soulbound extends JavaPlugin {
     @Override
     public void onEnable() {
         setupConfiguration();
+
+        setupDiabloDrops();
 
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(playerListener, this);
@@ -42,6 +48,14 @@ public class Soulbound extends JavaPlugin {
             catch (IOException e) {
                 System.out.println("Failed to submit stats.");
             }
+        }
+    }
+
+    private void setupDiabloDrops() {
+        if (getServer().getPluginManager().isPluginEnabled("DiabloDrops")) {
+            diabloDropsEnabled = true;
+            getLogger().info("Diablo Drops found!");
+            getServer().getPluginManager().registerEvents(diabloDropsListener, this);
         }
     }
 
