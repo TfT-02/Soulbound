@@ -6,11 +6,12 @@ Soulbound:
   Allow_Item_Storing: true
   Delete_On_Death: false
   Keep_On_Death: false
-DiabloDrops:
-  BindOnPickup: Legendary, Rare, Unidentified
-  BindOnUse: Magical
-  BindOnEquip: Set
-EpicBossRecoded:
-  BindOnPickup: true
-  BindOnUse: false
-  BindOnEquip: false
+Dependency_Plugins:
+  DiabloDrops:
+    BindOnPickup: Legendary, Rare, Unidentified
+    BindOnUse: Magical
+    BindOnEquip: Set
+  EpicBossRecoded:
+    BindOnPickup: true
+    BindOnUse: false
+    BindOnEquip: false

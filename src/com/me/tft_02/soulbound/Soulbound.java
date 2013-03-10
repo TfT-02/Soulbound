@@ -13,10 +13,11 @@ public class Soulbound extends JavaPlugin {
     private PlayerListener playerListener = new PlayerListener(this);
     private InventoryListener inventoryListener = new InventoryListener(this);
 
+    // Listeners for hooking into other plugins
     private DiabloDropsListener diabloDropsListener = new DiabloDropsListener(this);
     private EpicBossRecodedListener epicBossRecodedListener = new EpicBossRecodedListener(this);
 
-    // Checks for hooking in to other plugins
+    // Checks for hooking into other plugins
     public static boolean diabloDropsEnabled = false;
     public static boolean epicBossRecodedEnabled = false;
 
@@ -82,15 +83,15 @@ public class Soulbound extends JavaPlugin {
         config.addDefault("Soulbound.Keep_On_Death", false);
 
         if (diabloDropsEnabled) {
-            config.addDefault("DiabloDrops.BindOnPickup", "Legendary, Rare, Unidentified");
-            config.addDefault("DiabloDrops.BindOnUse", "Magical");
-            config.addDefault("DiabloDrops.BindOnEquip", "Set");
+            config.addDefault("Dependency_Plugins.DiabloDrops.BindOnPickup", "Legendary, Rare, Unidentified");
+            config.addDefault("Dependency_Plugins.DiabloDrops.BindOnUse", "Magical");
+            config.addDefault("Dependency_Plugins.DiabloDrops.BindOnEquip", "Set");
         }
 
         if (epicBossRecodedEnabled) {
-            config.addDefault("EpicBossRecoded.BindOnPickUp", true);
-            config.addDefault("EpicBossRecoded.BindOnEquip", false);
-            config.addDefault("EpicBossRecoded.BindOnUse", false);
+            config.addDefault("Dependency_Plugins.EpicBossRecoded.BindOnPickUp", true);
+            config.addDefault("Dependency_Plugins.EpicBossRecoded.BindOnEquip", false);
+            config.addDefault("Dependency_Plugins.EpicBossRecoded.BindOnUse", false);
         }
 
         config.options().copyDefaults(true);
