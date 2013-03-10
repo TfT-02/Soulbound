@@ -26,7 +26,9 @@ public class ItemUtils {
     public static ItemStack soulbindItem(Player player, ItemStack itemStack) {
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta.hasLore() && isBindOnPickup(itemStack)) {
-            itemMeta.getLore().remove(ChatColor.DARK_RED + "Bind on pickup");
+            itemMeta.getLore().remove(ChatColor.DARK_RED + "Bind on Pickup");
+            itemMeta.getLore().remove(ChatColor.DARK_RED + "Bind on Equip");
+            itemMeta.getLore().remove(ChatColor.DARK_RED + "Bind on Use");
         }
 
         List<String> itemLore = new ArrayList<String>();
@@ -44,7 +46,27 @@ public class ItemUtils {
         ItemMeta itemMeta = itemStack.getItemMeta();
         List<String> itemLore = new ArrayList<String>();
         itemLore.addAll(itemMeta.getLore());
-        itemLore.add(ChatColor.DARK_RED + "Bind on pickup");
+        itemLore.add(ChatColor.DARK_RED + "Bind on Pickup");
+        itemMeta.setLore(itemLore);
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
+
+    public static ItemStack boeItem(ItemStack itemStack) {
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        List<String> itemLore = new ArrayList<String>();
+        itemLore.addAll(itemMeta.getLore());
+        itemLore.add(ChatColor.DARK_RED + "Bind on Equip");
+        itemMeta.setLore(itemLore);
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
+
+    public static ItemStack bouItem(ItemStack itemStack) {
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        List<String> itemLore = new ArrayList<String>();
+        itemLore.addAll(itemMeta.getLore());
+        itemLore.add(ChatColor.DARK_RED + "Bind on Use");
         itemMeta.setLore(itemLore);
         itemStack.setItemMeta(itemMeta);
         return itemStack;

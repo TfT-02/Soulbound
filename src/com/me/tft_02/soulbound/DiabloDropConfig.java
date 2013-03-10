@@ -10,11 +10,25 @@ public class DiabloDropConfig {
         plugin = instance;
     }
 
-    String tiersString = plugin.getConfig().getString("DiabloDrops.BindOnPickup");
-
     public List<String> getBindOnPickupTiers() {
+        return getItemTiers("BindOnPickup");
+    }
+
+    public List<String> getBindOnUseTiers() {
+        return getItemTiers("BindOnUse");
+    }
+
+    public List<String> getBindOnEquipTiers() {
+        return getItemTiers("BindOnEquip");
+    }
+
+    public List<String> getItemTiers(String bindType) {
+        String[] tiersString = plugin.getConfig().getString("DiabloDrops." + bindType).replaceAll(" ", "").split("[,]");
         List<String> tiers = new ArrayList<String>();
-        tiers.add(tiersString.replaceAll(" ", "").split("[,]").toString());
+
+        for (String tier : tiersString) {
+            tiers.add(tier);
+        }
         return tiers;
     }
 }

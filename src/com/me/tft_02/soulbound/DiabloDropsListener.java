@@ -32,13 +32,17 @@ public class DiabloDropsListener implements Listener {
             if (tier != null) {
                 tierName = tier.getName();
             }
-            System.out.println("Item has tier " + tierName);
-            for (String bindOnPickupTier : diabloConfig.getBindOnPickupTiers()) {
-                if (tier.equals(bindOnPickupTier)) {
-                    System.out.println("Item marked as BoP.");
-                    ItemUtils.bopItem(item);
-                }
+
+            if (diabloConfig.getBindOnPickupTiers().contains(tierName)) {
+                ItemUtils.bopItem(item);
             }
+            else if (diabloConfig.getBindOnEquipTiers().contains(tierName)) {
+                ItemUtils.boeItem(item);
+            }
+            else if (diabloConfig.getBindOnUseTiers().contains(tierName)) {
+                ItemUtils.bouItem(item);
+            }
+
         }
     }
 }
