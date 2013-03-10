@@ -48,7 +48,7 @@ public class InventoryListener implements Listener {
                             return;
                     }
                     /*
-                case BIND_ON_CLICK:
+                    case BIND_ON_CLICK:
                     ItemUtils.soulbindItem(player, itemStack);
                     return;
                     */

@@ -21,7 +21,7 @@ public class SoulboundConfig {
     public boolean getEBRBindOnUse() {
         return plugin.getConfig().getBoolean("EpicBossRecoded.BindOnUse");
     }
-    
+
     public List<String> getBindOnPickupTiers() {
         return getItemTiers("BindOnPickup");
     }
