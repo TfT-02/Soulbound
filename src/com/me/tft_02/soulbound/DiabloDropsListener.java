@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import com.modcrafting.diablodrops.DiabloDrops;
 import com.modcrafting.diablodrops.drops.DropsAPI;
 import com.modcrafting.diablodrops.events.EntitySpawnWithItemEvent;
+import com.modcrafting.diablodrops.events.RuinGenerateEvent;
 import com.modcrafting.diablodrops.tier.Tier;
 
 public class DiabloDropsListener implements Listener {
@@ -24,25 +25,41 @@ public class DiabloDropsListener implements Listener {
      */
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onEntitySpawnWithItem(EntitySpawnWithItemEvent event) {
+        for (ItemStack itemStack : event.getItems()) {
+            handleDiabloDropsItems(itemStack);
+        }
+    }
+
+    /**
+     * Check RuinGenerateEvent events.
+     * 
+     * @param event The event to check
+     */
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onRuinGenerate(RuinGenerateEvent event) {
+        for (ItemStack itemStack : event.getChest().getDrops()) {
+            handleDiabloDropsItems(itemStack);
+        }
+    }
+
+    public void handleDiabloDropsItems(ItemStack itemStack) {
         DropsAPI dropsAPI = new DropsAPI(DiabloDrops.getInstance());
         DiabloDropConfig diabloConfig = new DiabloDropConfig(plugin);
-        for (ItemStack item : event.getItems()) {
-            Tier tier = dropsAPI.getTier(item);
-            String tierName = "None";
-            if (tier != null) {
-                tierName = tier.getName();
-            }
-
-            if (diabloConfig.getBindOnPickupTiers().contains(tierName)) {
-                ItemUtils.bopItem(item);
-            }
-            else if (diabloConfig.getBindOnEquipTiers().contains(tierName)) {
-                ItemUtils.boeItem(item);
-            }
-            else if (diabloConfig.getBindOnUseTiers().contains(tierName)) {
-                ItemUtils.bouItem(item);
-            }
-
+        Tier tier = dropsAPI.getTier(itemStack);
+        String tierName = "None";
+        if (tier != null) {
+            tierName = tier.getName();
         }
+
+        if (diabloConfig.getBindOnPickupTiers().contains(tierName)) {
+            ItemUtils.bopItem(itemStack);
+        }
+        else if (diabloConfig.getBindOnEquipTiers().contains(tierName)) {
+            ItemUtils.boeItem(itemStack);
+        }
+        else if (diabloConfig.getBindOnUseTiers().contains(tierName)) {
+            ItemUtils.bouItem(itemStack);
+        }
+
     }
 }

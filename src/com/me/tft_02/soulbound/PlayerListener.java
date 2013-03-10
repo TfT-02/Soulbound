@@ -113,7 +113,6 @@ public class PlayerListener implements Listener {
         player.updateInventory();
     }
 
-
     /**
      * Monitor PlayerInteract events.
      * 
