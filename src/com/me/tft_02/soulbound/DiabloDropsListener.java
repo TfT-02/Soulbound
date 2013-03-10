@@ -13,14 +13,13 @@ import com.modcrafting.diablodrops.tier.Tier;
 public class DiabloDropsListener implements Listener {
 
     /**
-     * Monitor EntitySpawnWithItemEvent events.
+     * Check EntitySpawnWithItemEvent events.
      * 
-     * @param event The event to monitor
+     * @param event The event to check
      */
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onEntitySpawnWithItem(EntitySpawnWithItemEvent event) {
         DropsAPI dropsAPI = new DropsAPI(DiabloDrops.getInstance());
-        System.out.println("onEntitySpawnWithItem");
         for (ItemStack item : event.getItems()) {
             Tier tier = dropsAPI.getTier(item);
             String tierName = "None";
