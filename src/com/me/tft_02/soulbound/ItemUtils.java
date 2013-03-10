@@ -30,6 +30,7 @@ public class ItemUtils {
         }
 
         List<String> itemLore = new ArrayList<String>();
+        itemLore.addAll(itemMeta.getLore());
         itemLore.add(ChatColor.GOLD + "Soulbound");
         itemLore.add(player.getName());
         itemMeta.setLore(itemLore);
@@ -40,6 +41,7 @@ public class ItemUtils {
     public static ItemStack bopItem(ItemStack itemStack) {
         ItemMeta itemMeta = itemStack.getItemMeta();
         List<String> itemLore = new ArrayList<String>();
+        itemLore.addAll(itemMeta.getLore());
         itemLore.add(ChatColor.DARK_RED + "Bind on pickup");
         itemMeta.setLore(itemLore);
         itemStack.setItemMeta(itemMeta);
@@ -49,7 +51,19 @@ public class ItemUtils {
     public static ItemStack unbindItem(ItemStack itemStack) {
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta.hasLore() && isSoulbound(itemStack)) {
-            itemMeta.setLore(null);
+            List<String> oldLore = itemMeta.getLore();
+            int loreSize = oldLore.size();
+
+            if (loreSize > 2) {
+                List<String> itemLore = new ArrayList<String>();
+                itemLore.addAll(oldLore);
+                itemLore.remove(oldLore.get(loreSize));
+                itemLore.remove(oldLore.get(loreSize - 1));
+                itemMeta.setLore(itemLore);
+            }
+            else {
+                itemMeta.setLore(null);
+            }
         }
         itemStack.setItemMeta(itemMeta);
         return itemStack;
