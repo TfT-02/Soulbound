@@ -4,3 +4,5 @@ General:
 Soulbound:
   Allow_Item_Drop: true
   Allow_Item_Storing: true
+  Delete_On_Death: false
+  Keep_On_Death: false

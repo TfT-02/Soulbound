@@ -1,14 +1,19 @@
 package com.me.tft_02.soulbound;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class PlayerListener implements Listener {
@@ -54,6 +59,49 @@ public class PlayerListener implements Listener {
 
         if (ItemUtils.isSoulbound(itemStack) && ItemUtils.isBindedPlayer(player, itemStack)) {
             event.setCancelled(true);
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    private void onPlayerDeath(PlayerDeathEvent event) {
+        boolean deleteOnDeath = plugin.getConfig().getBoolean("Soulbound.Delete_On_Death");
+        boolean keepOnDeath = plugin.getConfig().getBoolean("Soulbound.Keep_On_Death");
+
+        Player player = event.getEntity();
+        List<ItemStack> items = new ArrayList<ItemStack>();
+
+        if (!keepOnDeath && !deleteOnDeath) {
+            return;
+        }
+
+        for (ItemStack item : event.getDrops()) {
+            if (ItemUtils.isSoulbound(item) && ItemUtils.isBindedPlayer(player, item)) {
+                if (deleteOnDeath) {
+                    event.getDrops().remove(item);
+                }
+                else if (keepOnDeath) {
+                    items.add(item);
+                }
+            }
+        }
+
+        PlayerData.storeItemsDeath(player, items);
+    }
+
+
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    private void onPlayerRespawn(PlayerRespawnEvent event) {
+        Player player = event.getPlayer();
+        boolean keepOnDeath = plugin.getConfig().getBoolean("Soulbound.Keep_On_Death");
+
+        if (!keepOnDeath) {
+            return;
+        }
+
+        List<ItemStack> items = PlayerData.retrieveItemsDeath(player);
+        for (ItemStack item : items) {
+            player.getInventory().addItem(item);
         }
     }
 }

@@ -52,6 +52,8 @@ public class Soulbound extends JavaPlugin {
 
         config.addDefault("Soulbound.Allow_Item_Drop", true);
         config.addDefault("Soulbound.Allow_Item_Storing", true);
+        config.addDefault("Soulbound.Delete_On_Death", false);
+        config.addDefault("Soulbound.Keep_On_Death", false);
 
         config.options().copyDefaults(true);
         saveConfig();
