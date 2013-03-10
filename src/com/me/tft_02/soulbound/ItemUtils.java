@@ -25,15 +25,14 @@ public class ItemUtils {
 
     public static ItemStack soulbindItem(Player player, ItemStack itemStack) {
         ItemMeta itemMeta = itemStack.getItemMeta();
-        if (itemMeta.hasLore() && isBindOnPickup(itemStack)) {
-            itemMeta.getLore().remove(ChatColor.DARK_RED + "Bind on Pickup");
-            itemMeta.getLore().remove(ChatColor.DARK_RED + "Bind on Equip");
-            itemMeta.getLore().remove(ChatColor.DARK_RED + "Bind on Use");
-        }
-
         List<String> itemLore = new ArrayList<String>();
         if (itemMeta.hasLore()) {
-            itemLore.addAll(itemMeta.getLore());
+            List<String> oldLore =itemMeta.getLore();
+
+            oldLore.remove(ChatColor.DARK_RED + "Bind on Pickup");
+            oldLore.remove(ChatColor.DARK_RED + "Bind on Equip");
+            oldLore.remove(ChatColor.DARK_RED + "Bind on Use");
+            itemLore.addAll(oldLore);
         }
         itemLore.add(ChatColor.GOLD + "Soulbound");
         itemLore.add(player.getName());
@@ -44,8 +43,11 @@ public class ItemUtils {
 
     public static ItemStack bopItem(ItemStack itemStack) {
         ItemMeta itemMeta = itemStack.getItemMeta();
+
         List<String> itemLore = new ArrayList<String>();
-        itemLore.addAll(itemMeta.getLore());
+        if (itemMeta.hasLore()) {
+            itemLore.addAll(itemMeta.getLore());
+        }
         itemLore.add(ChatColor.DARK_RED + "Bind on Pickup");
         itemMeta.setLore(itemLore);
         itemStack.setItemMeta(itemMeta);
@@ -54,8 +56,11 @@ public class ItemUtils {
 
     public static ItemStack boeItem(ItemStack itemStack) {
         ItemMeta itemMeta = itemStack.getItemMeta();
+
         List<String> itemLore = new ArrayList<String>();
-        itemLore.addAll(itemMeta.getLore());
+        if (itemMeta.hasLore()) {
+            itemLore.addAll(itemMeta.getLore());
+        }
         itemLore.add(ChatColor.DARK_RED + "Bind on Equip");
         itemMeta.setLore(itemLore);
         itemStack.setItemMeta(itemMeta);
@@ -64,8 +69,11 @@ public class ItemUtils {
 
     public static ItemStack bouItem(ItemStack itemStack) {
         ItemMeta itemMeta = itemStack.getItemMeta();
+
         List<String> itemLore = new ArrayList<String>();
-        itemLore.addAll(itemMeta.getLore());
+        if (itemMeta.hasLore()) {
+            itemLore.addAll(itemMeta.getLore());
+        }
         itemLore.add(ChatColor.DARK_RED + "Bind on Use");
         itemMeta.setLore(itemLore);
         itemStack.setItemMeta(itemMeta);
@@ -116,7 +124,7 @@ public class ItemUtils {
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta.hasLore()) {
             List<String> itemLore = itemMeta.getLore();
-            if (itemLore.contains(ChatColor.DARK_RED + "Bind on pickup")) {
+            if (itemLore.contains(ChatColor.DARK_RED + "Bind on Pickup")) {
                 return true;
             }
         }
@@ -131,7 +139,7 @@ public class ItemUtils {
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta.hasLore()) {
             List<String> itemLore = itemMeta.getLore();
-            if (itemLore.contains(ChatColor.DARK_RED + "Bind on use")) {
+            if (itemLore.contains(ChatColor.DARK_RED + "Bind on Use")) {
                 return true;
             }
         }
@@ -146,7 +154,7 @@ public class ItemUtils {
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta.hasLore()) {
             List<String> itemLore = itemMeta.getLore();
-            if (itemLore.contains(ChatColor.DARK_RED + "Bind on equip")) {
+            if (itemLore.contains(ChatColor.DARK_RED + "Bind on Equip")) {
                 return true;
             }
         }
@@ -160,6 +168,24 @@ public class ItemUtils {
             return true;
         }
         return false;
+    }
+
+    public static boolean isNormalItem(ItemStack itemStack) {
+        if (!itemStack.hasItemMeta()) {
+            return true;
+        }
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        if (!itemMeta.hasLore()) {
+            return true;
+        }
+
+        ItemType itemType = ItemUtils.getItemType(itemStack);
+        switch (itemType) {
+            case NORMAL:
+                return true;
+            default:
+                return false;
+        }
     }
 
     public static ItemType getItemType(ItemStack itemStack) {

@@ -1,10 +1,12 @@
 package com.me.tft_02.soulbound;
 
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import com.modcrafting.diablodrops.DiabloDrops;
@@ -39,10 +41,12 @@ public class DiabloDropsListener implements Listener {
      */
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onRuinGenerate(RuinGenerateEvent event) {
-        if (event.getChest().getType() == Material.CHEST) {
-            Chest chest = (Chest) event.getChest();
+        Block block = event.getChest();
 
-            for (ItemStack itemStack : chest.getInventory().getContents()) {
+        if (block.getType() == Material.CHEST) {
+            Inventory inventory = ((Chest) block.getState()).getBlockInventory();
+
+            for (ItemStack itemStack : inventory.getContents()) {
                 if (itemStack != null) {
                     handleDiabloDropsItems(itemStack);
                 }

@@ -11,15 +11,15 @@ public class SoulboundConfig {
     }
 
     public boolean getEBRBindOnPickUp() {
-        return plugin.getConfig().getBoolean("EpicBossRecoded.BindOnPickUp");
+        return plugin.getConfig().getBoolean("Dependency_Plugins.EpicBossRecoded.BindOnPickUp");
     }
 
     public boolean getEBRBindOnEquip() {
-        return plugin.getConfig().getBoolean("EpicBossRecoded.BindOnEquip");
+        return plugin.getConfig().getBoolean("Dependency_Plugins.EpicBossRecoded.BindOnEquip");
     }
 
     public boolean getEBRBindOnUse() {
-        return plugin.getConfig().getBoolean("EpicBossRecoded.BindOnUse");
+        return plugin.getConfig().getBoolean("Dependency_Plugins.EpicBossRecoded.BindOnUse");
     }
 
     public List<String> getBindOnPickupTiers() {
@@ -35,7 +35,7 @@ public class SoulboundConfig {
     }
 
     public List<String> getItemTiers(String bindType) {
-        String[] tiersString = plugin.getConfig().getString("DiabloDrops." + bindType).replaceAll(" ", "").split("[,]");
+        String[] tiersString = plugin.getConfig().getString("Dependency_Plugins.DiabloDrops." + bindType).replaceAll(" ", "").split("[,]");
         List<String> tiers = new ArrayList<String>();
 
         for (String tier : tiersString) {
