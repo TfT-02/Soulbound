@@ -13,11 +13,24 @@ public class EpicBossRecodedListener implements Listener {
         plugin = instance;
     }
 
-
-    @EventHandler (ignoreCancelled = true)
+    @EventHandler(ignoreCancelled = true)
     public void onBossDeath(BossDeathEvent event) {
         for (ItemStack itemStack : event.getDrops()) {
+            handleEpicBossItems(itemStack);
+        }
+    }
+
+    public void handleEpicBossItems(ItemStack itemStack) {
+        SoulboundConfig config = new SoulboundConfig(plugin);
+
+        if (config.getEBRBindOnEquip() && ItemUtils.isMinecraftArmor(itemStack)) {
+            ItemUtils.boeItem(itemStack);
+        }
+        else if (config.getEBRBindOnPickUp()) {
             ItemUtils.bopItem(itemStack);
+        }
+        else if (config.getEBRBindOnUse()) {
+            ItemUtils.bouItem(itemStack);
         }
     }
 }

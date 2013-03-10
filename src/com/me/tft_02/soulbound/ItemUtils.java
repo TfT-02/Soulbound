@@ -182,4 +182,90 @@ public class ItemUtils {
             return ItemType.NORMAL;
         }
     }
+
+    /**
+     * Checks to see if an item is a wearable armor piece.
+     *
+     * @param is Item to check
+     * @return true if the item is armor, false otherwise
+     */
+    public static boolean isMinecraftArmor(ItemStack is) {
+        return isLeatherArmor(is) || isGoldArmor(is) || isIronArmor(is) || isDiamondArmor(is);
+    }
+
+    /**
+     * Checks to see if an item is a leather armor piece.
+     *
+     * @param is Item to check
+     * @return true if the item is leather armor, false otherwise
+     */
+    public static boolean isLeatherArmor(ItemStack is) {
+        switch (is.getType()) {
+            case LEATHER_BOOTS:
+            case LEATHER_CHESTPLATE:
+            case LEATHER_HELMET:
+            case LEATHER_LEGGINGS:
+                return true;
+
+            default:
+                return false;
+        }
+    }
+
+    /**
+     * Checks to see if an item is a gold armor piece.
+     *
+     * @param is Item to check
+     * @return true if the item is gold armor, false otherwise
+     */
+    public static boolean isGoldArmor(ItemStack is) {
+        switch (is.getType()) {
+            case GOLD_BOOTS:
+            case GOLD_CHESTPLATE:
+            case GOLD_HELMET:
+            case GOLD_LEGGINGS:
+                return true;
+
+            default:
+                return false;
+        }
+    }
+
+    /**
+     * Checks to see if an item is an iron armor piece.
+     *
+     * @param is Item to check
+     * @return true if the item is iron armor, false otherwise
+     */
+    public static boolean isIronArmor(ItemStack is) {
+        switch (is.getType()) {
+            case IRON_BOOTS:
+            case IRON_CHESTPLATE:
+            case IRON_HELMET:
+            case IRON_LEGGINGS:
+                return true;
+
+            default:
+                return false;
+        }
+    }
+
+    /**
+     * Checks to see if an item is a diamond armor piece.
+     *
+     * @param is Item to check
+     * @return true if the item is diamond armor, false otherwise
+     */
+    public static boolean isDiamondArmor(ItemStack is) {
+        switch (is.getType()) {
+            case DIAMOND_BOOTS:
+            case DIAMOND_CHESTPLATE:
+            case DIAMOND_HELMET:
+            case DIAMOND_LEGGINGS:
+                return true;
+
+            default:
+                return false;
+        }
+    }
 }
