@@ -30,7 +30,9 @@ public class ItemUtils {
         }
 
         List<String> itemLore = new ArrayList<String>();
-        itemLore.addAll(itemMeta.getLore());
+        if (itemMeta.hasLore()) {
+            itemLore.addAll(itemMeta.getLore());
+        }
         itemLore.add(ChatColor.GOLD + "Soulbound");
         itemLore.add(player.getName());
         itemMeta.setLore(itemLore);
@@ -57,8 +59,8 @@ public class ItemUtils {
             if (loreSize > 2) {
                 List<String> itemLore = new ArrayList<String>();
                 itemLore.addAll(oldLore);
-                itemLore.remove(oldLore.get(loreSize));
                 itemLore.remove(oldLore.get(loreSize - 1));
+                itemLore.remove(oldLore.get(loreSize - 2));
                 itemMeta.setLore(itemLore);
             }
             else {
