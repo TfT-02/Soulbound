@@ -11,8 +11,6 @@ import com.modcrafting.diablodrops.events.EntitySpawnWithItemEvent;
 import com.modcrafting.diablodrops.tier.Tier;
 
 public class DiabloDropsListener implements Listener {
-    DiabloDrops plugin;
-
 
     /**
      * Monitor EntitySpawnWithItemEvent events.
@@ -21,11 +19,15 @@ public class DiabloDropsListener implements Listener {
      */
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onEntitySpawnWithItem(EntitySpawnWithItemEvent event) {
-        DropsAPI dropsAPI = new DropsAPI(plugin);
+        DropsAPI dropsAPI = new DropsAPI(DiabloDrops.getInstance());
         System.out.println("onEntitySpawnWithItem");
         for (ItemStack item : event.getItems()) {
             Tier tier = dropsAPI.getTier(item);
-            System.out.println("For item " + item + " tier = " + tier);
+            String tierName = "None";
+            if (tier != null) {
+                tierName = tier.getName();
+            }
+            System.out.println("For item " + item + " with tier " + tierName);
         }
     }
 }

@@ -54,7 +54,7 @@ public class Soulbound extends JavaPlugin {
     private void setupDiabloDrops() {
         if (getServer().getPluginManager().isPluginEnabled("DiabloDrops")) {
             diabloDropsEnabled = true;
-            getLogger().info("Diablo Drops found!");
+            getLogger().info("DiabloDrops found!");
             getServer().getPluginManager().registerEvents(diabloDropsListener, this);
         }
     }
