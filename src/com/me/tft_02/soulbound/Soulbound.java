@@ -12,10 +12,13 @@ public class Soulbound extends JavaPlugin {
 
     private PlayerListener playerListener = new PlayerListener(this);
     private InventoryListener inventoryListener = new InventoryListener(this);
-    private DiabloDropsListener diabloDropsListener = new DiabloDropsListener(this);
 
-    // DiabloDrops Check
+    private DiabloDropsListener diabloDropsListener = new DiabloDropsListener(this);
+    private EpicBossRecodedListener epicBossRecodedListener = new EpicBossRecodedListener(this);
+
+    // Checks for hooking in to other plugins
     public static boolean diabloDropsEnabled = false;
+    public static boolean epicBossRecodedEnabled = false;
 
     // Update Check
     public boolean updateAvailable;
@@ -28,6 +31,7 @@ public class Soulbound extends JavaPlugin {
         setupConfiguration();
 
         setupDiabloDrops();
+        setupEpicBossRecoded();
 
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(playerListener, this);
@@ -59,6 +63,14 @@ public class Soulbound extends JavaPlugin {
         }
     }
 
+    private void setupEpicBossRecoded() {
+        if (getServer().getPluginManager().isPluginEnabled("EpicBossRecoded")) {
+            epicBossRecodedEnabled = true;
+            getLogger().info("EpicBossRecoded found!");
+            getServer().getPluginManager().registerEvents(epicBossRecodedListener, this);
+        }
+    }
+
     private void setupConfiguration() {
         final FileConfiguration config = this.getConfig();
         config.addDefault("General.stats_tracking_enabled", true);
@@ -69,9 +81,17 @@ public class Soulbound extends JavaPlugin {
         config.addDefault("Soulbound.Delete_On_Death", false);
         config.addDefault("Soulbound.Keep_On_Death", false);
 
-        config.addDefault("DiabloDrops.BindOnPickup", "Legendary, Rare, Unidentified");
-        config.addDefault("DiabloDrops.BindOnUse", "Magical");
-        config.addDefault("DiabloDrops.BindOnEquip", "Set");
+        if (diabloDropsEnabled) {
+            config.addDefault("DiabloDrops.BindOnPickup", "Legendary, Rare, Unidentified");
+            config.addDefault("DiabloDrops.BindOnUse", "Magical");
+            config.addDefault("DiabloDrops.BindOnEquip", "Set");
+        }
+
+        if (epicBossRecodedEnabled) {
+            config.addDefault("EpicBossRecoded.BindOnPickUp", true);
+            config.addDefault("EpicBossRecoded.BindOnEquip", false);
+            config.addDefault("EpicBossRecoded.BindOnUse", false);
+        }
 
         config.options().copyDefaults(true);
         saveConfig();

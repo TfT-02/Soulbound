@@ -10,3 +10,7 @@ DiabloDrops:
   BindOnPickup: Legendary, Rare, Unidentified
   BindOnUse: Magical
   BindOnEquip: Set
+EpicBossRecoded:
+  BindOnPickup: true
+  BindOnUse: false
+  BindOnEquip: false

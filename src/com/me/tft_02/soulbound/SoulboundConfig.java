@@ -3,13 +3,25 @@ package com.me.tft_02.soulbound;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DiabloDropConfig {
+public class SoulboundConfig {
     Soulbound plugin;
 
-    public DiabloDropConfig(Soulbound instance) {
+    public SoulboundConfig(Soulbound instance) {
         plugin = instance;
     }
 
+    public boolean getEBRBindOnPickUp() {
+        return plugin.getConfig().getBoolean("EpicBossRecoded.BindOnPickUp");
+    }
+
+    public boolean getEBRBindOnEquip() {
+        return plugin.getConfig().getBoolean("EpicBossRecoded.BindOnEquip");
+    }
+
+    public boolean getEBRBindOnUse() {
+        return plugin.getConfig().getBoolean("EpicBossRecoded.BindOnUse");
+    }
+    
     public List<String> getBindOnPickupTiers() {
         return getItemTiers("BindOnPickup");
     }

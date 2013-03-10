@@ -52,20 +52,20 @@ public class DiabloDropsListener implements Listener {
 
     public void handleDiabloDropsItems(ItemStack itemStack) {
         DropsAPI dropsAPI = new DropsAPI(DiabloDrops.getInstance());
-        DiabloDropConfig diabloConfig = new DiabloDropConfig(plugin);
+        SoulboundConfig config = new SoulboundConfig(plugin);
         Tier tier = dropsAPI.getTier(itemStack);
         String tierName = "None";
         if (tier != null) {
             tierName = tier.getName();
         }
 
-        if (diabloConfig.getBindOnPickupTiers().contains(tierName)) {
+        if (config.getBindOnPickupTiers().contains(tierName)) {
             ItemUtils.bopItem(itemStack);
         }
-        else if (diabloConfig.getBindOnEquipTiers().contains(tierName)) {
+        else if (config.getBindOnEquipTiers().contains(tierName)) {
             ItemUtils.boeItem(itemStack);
         }
-        else if (diabloConfig.getBindOnUseTiers().contains(tierName)) {
+        else if (config.getBindOnUseTiers().contains(tierName)) {
             ItemUtils.bouItem(itemStack);
         }
 
