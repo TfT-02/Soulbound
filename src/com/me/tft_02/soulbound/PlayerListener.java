@@ -74,7 +74,7 @@ public class PlayerListener implements Listener {
             return;
         }
 
-        for (ItemStack item : event.getDrops()) {
+        for (ItemStack item : new ArrayList<ItemStack>(event.getDrops())) {
             if (ItemUtils.isSoulbound(item) && ItemUtils.isBindedPlayer(player, item)) {
                 if (keepOnDeath) {
                     items.add(item);
@@ -98,9 +98,12 @@ public class PlayerListener implements Listener {
             return;
         }
 
-        List<ItemStack> items = PlayerData.retrieveItemsDeath(player);
-        for (ItemStack item : items) {
-            player.getInventory().addItem(item);
+        List<ItemStack> items = new ArrayList<ItemStack>();
+        items = PlayerData.retrieveItemsDeath(player);
+        if (items != null) {
+            for (ItemStack item : items) {
+                player.getInventory().addItem(item);
+            }
         }
     }
 }
