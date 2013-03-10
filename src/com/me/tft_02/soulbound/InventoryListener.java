@@ -24,6 +24,10 @@ public class InventoryListener implements Listener {
         ItemStack itemStack = event.getCurrentItem();
         InventoryType inventoryType = event.getInventory().getType();
 
+        if (inventoryType == null) {
+            return;
+        }
+
         ItemType itemType = ItemUtils.getItemType(itemStack);
 
         if (itemStack == null) {

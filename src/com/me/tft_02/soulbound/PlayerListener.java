@@ -58,6 +58,7 @@ public class PlayerListener implements Listener {
 
         if (ItemUtils.isSoulbound(itemStack) && ItemUtils.isBindedPlayer(player, itemStack)) {
             event.setCancelled(true);
+            player.updateInventory();
         }
     }
 
@@ -75,11 +76,12 @@ public class PlayerListener implements Listener {
 
         for (ItemStack item : event.getDrops()) {
             if (ItemUtils.isSoulbound(item) && ItemUtils.isBindedPlayer(player, item)) {
-                if (deleteOnDeath) {
+                if (keepOnDeath) {
+                    items.add(item);
                     event.getDrops().remove(item);
                 }
-                else if (keepOnDeath) {
-                    items.add(item);
+                else if (deleteOnDeath) {
+                    event.getDrops().remove(item);
                 }
             }
         }

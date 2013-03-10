@@ -125,7 +125,10 @@ public class ItemUtils {
     }
 
     public static ItemType getItemType(ItemStack itemStack) {
-        if (isSoulbound(itemStack)) {
+        if (itemStack == null) {
+            return ItemType.NORMAL;
+        }
+        else if (isSoulbound(itemStack)) {
             return ItemType.SOULBOUND;
         }
         else if (isBindOnPickup(itemStack)) {
