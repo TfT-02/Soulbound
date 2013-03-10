@@ -12,7 +12,7 @@ public class Soulbound extends JavaPlugin {
 
     private PlayerListener playerListener = new PlayerListener(this);
     private InventoryListener inventoryListener = new InventoryListener(this);
-    private DiabloDropsListener diabloDropsListener = new DiabloDropsListener();
+    private DiabloDropsListener diabloDropsListener = new DiabloDropsListener(this);
 
     // DiabloDrops Check
     public static boolean diabloDropsEnabled = false;
@@ -68,6 +68,10 @@ public class Soulbound extends JavaPlugin {
         config.addDefault("Soulbound.Allow_Item_Storing", true);
         config.addDefault("Soulbound.Delete_On_Death", false);
         config.addDefault("Soulbound.Keep_On_Death", false);
+
+        config.addDefault("DiabloDrops.BindOnPickup", "Legendary, Rare, Unidentified");
+        config.addDefault("DiabloDrops.BindOnUse", "Magical");
+        config.addDefault("DiabloDrops.BindOnEquip", "Set");
 
         config.options().copyDefaults(true);
         saveConfig();
