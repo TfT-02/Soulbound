@@ -15,7 +15,7 @@ public class UpdateChecker {
 
     public static boolean updateAvailable() throws Exception {
         String version = plugin.getDescription().getVersion();
-        URL url = new URL("http://api.bukget.org/api2/bukkit/plugin/everlastingweather/latest");
+        URL url = new URL("http://api.bukget.org/api2/bukkit/plugin/soulbound/latest");
         InputStreamReader isr;
         try {
             isr = new InputStreamReader(url.openStream());
