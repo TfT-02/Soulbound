@@ -65,7 +65,7 @@ public class Commands implements CommandExecutor {
     }
 
     private boolean helpPages(CommandSender sender) {
-        // TODO Auto-generated method stub
+        sender.sendMessage(ChatColor.GRAY + "Bind items in hand with /bind [name]");
         return false;
     }
 
