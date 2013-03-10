@@ -3,6 +3,7 @@ package com.me.tft_02.soulbound;
 import me.ThaH3lper.com.Api.BossDeathEvent;
 
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
@@ -13,7 +14,12 @@ public class EpicBossRecodedListener implements Listener {
         plugin = instance;
     }
 
-    @EventHandler(ignoreCancelled = true)
+    /**
+     * Check BossDeathEvent events.
+     * 
+     * @param event The event to check
+     */
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onBossDeath(BossDeathEvent event) {
         for (ItemStack itemStack : event.getDrops()) {
             handleEpicBossItems(itemStack);
