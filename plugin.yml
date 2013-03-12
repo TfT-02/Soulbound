@@ -17,6 +17,14 @@ commands:
       description: Usage /bindonpickup
       permission: soulbound.commands.bindonpickup
       permission-message: You don't have <permission>   
+   bindonuse:
+      description: Usage /bindonuse
+      permission: soulbound.commands.bindonuse
+      permission-message: You don't have <permission>   
+   bindonequip:
+      description: Usage /bindonequip
+      permission: soulbound.commands.bindonequip
+      permission-message: You don't have <permission>   
    unbind:
       description: Usage /unbind
       alias: unbound
@@ -29,6 +37,8 @@ permissions:
         children:
             soulbound.commands.bind: true
             soulbound.commands.bindonpickup: true
+            soulbound.commands.bindonuse: true
+            soulbound.commands.bindonequip: true
             soulbound.commands.unbind: true
             soulbound.commands.reload: true
             soulbound.updatecheck: true
