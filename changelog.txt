@@ -6,10 +6,12 @@ Key:
   ! Change
   - Removal
 
+Version 1.1.1 | Tested on CB 1.4.7-R1.0
+ + Added support for LoreLocks!
+
 Version 1.1.0 | Tested on CB 1.4.7-R1.0
  + Added support for DiabloDrops! Make Legendary items Soulbound on pickup, or make armor Sets Soulbound on Equip
  + Added support for EpicBossRecoded! Drops from an EpicBoss can get flagged as "Bind on Pickup", "Bind on Equip" or "Bind on Use"
- + Added support for LoreLocks!
  + Added new item type "Bind on Equip", when a player equips this item it will get Soulbound to that player
  + Added new item type "Bind on Use", when a player uses (left/right click) this item it will get Soulbound to that player
  = Bind on Pickup, now also binds items when clicking them in containers.
