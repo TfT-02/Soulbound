@@ -14,7 +14,9 @@ Version 1.1.0 | Tested on CB 1.4.7-R1.0
  + Added support for EpicBossRecoded! Drops from an EpicBoss can get flagged as "Bind on Pickup", "Bind on Equip" or "Bind on Use"
  + Added new item type "Bind on Equip", when a player equips this item it will get Soulbound to that player
  + Added new item type "Bind on Use", when a player uses (left/right click) this item it will get Soulbound to that player
- = Bind on Pickup, now also binds items when clicking them in containers.
+ ! Bind on Pickup, now also binds items when clicking them in containers.
+ = Fixed bug where /bindonpickup was broken
+ = Fixed bug where items could have multiple lines with "Soulbound"
 
 Version 1.0.1 | Tested on CB 1.4.7-R1.0
  = Fixed bug with the Update Checker
