@@ -3,13 +3,10 @@ package com.me.tft_02.soulbound;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.Chest;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public class Commands implements CommandExecutor {
@@ -28,9 +25,6 @@ public class Commands implements CommandExecutor {
                 }
                 else if (args[0].equalsIgnoreCase("help") || args[0].equalsIgnoreCase("?")) {
                     return helpPages(sender);
-                }
-                else if (args[0].equalsIgnoreCase("test")) {
-                    return test(sender);
                 }
             }
             sender.sendMessage("Soulbound version " + plugin.getDescription().getVersion());
@@ -51,27 +45,6 @@ public class Commands implements CommandExecutor {
         else if (cmd.getName().equalsIgnoreCase("unbind") || cmd.getName().equalsIgnoreCase("unbound")) {
             return unbindCommand(sender, args);
         }
-        return false;
-    }
-
-    private boolean test(CommandSender sender) {
-        if (!(sender instanceof Player)) {
-            return false;
-        }
-
-        Player player = (Player) sender;
-
-        Block block = player.getTargetBlock(null, 100);
-        if (block.getType() == Material.CHEST) {
-            Inventory inventory = ((Chest) block.getState()).getBlockInventory();
-
-            for (ItemStack itemStack : inventory.getContents()) {
-                if (itemStack != null) {
-                    ItemUtils.bopItem(itemStack);
-                }
-            }
-        }
-
         return false;
     }
 
