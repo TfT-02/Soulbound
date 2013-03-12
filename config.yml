@@ -15,3 +15,5 @@ Dependency_Plugins:
     BindOnPickup: true
     BindOnUse: false
     BindOnEquip: false
+  LoreLocks:
+    Bind_Keys: true

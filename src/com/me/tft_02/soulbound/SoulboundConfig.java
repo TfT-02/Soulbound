@@ -43,4 +43,8 @@ public class SoulboundConfig {
         }
         return tiers;
     }
+
+    public boolean getLoreLocksBindKeys() {
+        return plugin.getConfig().getBoolean("Dependency_Plugins.LoreLocks.Bind_Keys");
+    }
 }

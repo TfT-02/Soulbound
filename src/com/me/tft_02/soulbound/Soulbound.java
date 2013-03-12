@@ -16,10 +16,12 @@ public class Soulbound extends JavaPlugin {
     // Listeners for hooking into other plugins
     private DiabloDropsListener diabloDropsListener = new DiabloDropsListener(this);
     private EpicBossRecodedListener epicBossRecodedListener = new EpicBossRecodedListener(this);
+    private LoreLocksListener loreLocksListener = new LoreLocksListener(this);
 
     // Checks for hooking into other plugins
     public static boolean diabloDropsEnabled = false;
     public static boolean epicBossRecodedEnabled = false;
+    public static boolean loreLocksEnabled = false;
 
     // Update Check
     public boolean updateAvailable;
@@ -33,6 +35,7 @@ public class Soulbound extends JavaPlugin {
 
         setupDiabloDrops();
         setupEpicBossRecoded();
+        setupLoreLocks();
 
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(playerListener, this);
@@ -74,6 +77,14 @@ public class Soulbound extends JavaPlugin {
         }
     }
 
+    private void setupLoreLocks() {
+        if (getServer().getPluginManager().isPluginEnabled("LoreLocks")) {
+            loreLocksEnabled = true;
+            getLogger().info("LoreLocks found!");
+            getServer().getPluginManager().registerEvents(loreLocksListener, this);
+        }
+    }
+
     private void setupConfiguration() {
         final FileConfiguration config = this.getConfig();
         config.addDefault("General.stats_tracking_enabled", true);
@@ -94,6 +105,10 @@ public class Soulbound extends JavaPlugin {
             config.addDefault("Dependency_Plugins.EpicBossRecoded.BindOnPickup", true);
             config.addDefault("Dependency_Plugins.EpicBossRecoded.BindOnEquip", false);
             config.addDefault("Dependency_Plugins.EpicBossRecoded.BindOnUse", false);
+        }
+        
+        if (loreLocksEnabled) {
+            config.addDefault("Dependency_Plugins.LoreLocks.Bind_Keys", true);
         }
 
         config.options().copyDefaults(true);
