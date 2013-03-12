@@ -26,14 +26,15 @@ public class ItemUtils {
     public static ItemStack soulbindItem(Player player, ItemStack itemStack) {
         ItemMeta itemMeta = itemStack.getItemMeta();
         List<String> itemLore = new ArrayList<String>();
-        if (itemMeta.hasLore()) {
-            List<String> oldLore =itemMeta.getLore();
 
+        if (itemMeta.hasLore()) {
+            List<String> oldLore = itemMeta.getLore();
             oldLore.remove(ChatColor.DARK_RED + "Bind on Pickup");
             oldLore.remove(ChatColor.DARK_RED + "Bind on Equip");
             oldLore.remove(ChatColor.DARK_RED + "Bind on Use");
             itemLore.addAll(oldLore);
         }
+
         itemLore.add(ChatColor.GOLD + "Soulbound");
         itemLore.add(player.getName());
         itemMeta.setLore(itemLore);
