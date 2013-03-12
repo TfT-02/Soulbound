@@ -89,7 +89,7 @@ public class Soulbound extends JavaPlugin {
         }
 
         if (epicBossRecodedEnabled) {
-            config.addDefault("Dependency_Plugins.EpicBossRecoded.BindOnPickUp", true);
+            config.addDefault("Dependency_Plugins.EpicBossRecoded.BindOnPickup", true);
             config.addDefault("Dependency_Plugins.EpicBossRecoded.BindOnEquip", false);
             config.addDefault("Dependency_Plugins.EpicBossRecoded.BindOnUse", false);
         }

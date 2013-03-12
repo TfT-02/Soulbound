@@ -10,8 +10,8 @@ public class SoulboundConfig {
         plugin = instance;
     }
 
-    public boolean getEBRBindOnPickUp() {
-        return plugin.getConfig().getBoolean("Dependency_Plugins.EpicBossRecoded.BindOnPickUp");
+    public boolean getEBRBindOnPickup() {
+        return plugin.getConfig().getBoolean("Dependency_Plugins.EpicBossRecoded.BindOnPickup");
     }
 
     public boolean getEBRBindOnEquip() {

@@ -32,7 +32,7 @@ public class EpicBossRecodedListener implements Listener {
         if (config.getEBRBindOnEquip() && ItemUtils.isMinecraftArmor(itemStack)) {
             ItemUtils.boeItem(itemStack);
         }
-        else if (config.getEBRBindOnPickUp()) {
+        else if (config.getEBRBindOnPickup()) {
             ItemUtils.bopItem(itemStack);
         }
         else if (config.getEBRBindOnUse()) {
