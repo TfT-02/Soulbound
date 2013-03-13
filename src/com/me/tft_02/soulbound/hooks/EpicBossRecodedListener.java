@@ -25,6 +25,10 @@ public class EpicBossRecodedListener implements Listener {
      */
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onBossDeath(BossDeathEvent event) {
+        if (event.getDrops().isEmpty()) {
+            return;
+        }
+
         for (ItemStack itemStack : event.getDrops()) {
             handleEpicBossItems(itemStack);
         }
