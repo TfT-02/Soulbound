@@ -93,4 +93,16 @@ public final class ItemAPI {
     public static ItemStack bindOnEquipItem(ItemStack itemStack) {
         return ItemUtils.boeItem(itemStack);
     }
+
+    /**
+     * Get the Soulbound type of an itemstack.
+     * </br>
+     * This function is designed for API usage.
+     *
+     * @param itemStack The itemstack to check
+     * @return the Bind type
+     */
+    public static String getItemType(ItemStack itemStack) {
+        return ItemUtils.getItemType(itemStack).toString();
+    }
 }
