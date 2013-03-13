@@ -9,6 +9,7 @@ Key:
 Version 1.1.1 | Tested on CB 1.4.7-R1.0
  + Added API functions so other plugins can hook into Soulbound as well! (Instead of the other way round)
  + Added support for LoreLocks!
+ = Fixed bug with the Update Checker (I really did this time)
 
 Version 1.1.0 | Tested on CB 1.4.7-R1.0
  + Added support for DiabloDrops! Make Legendary items Soulbound on pickup, or make armor Sets Soulbound on Equip
