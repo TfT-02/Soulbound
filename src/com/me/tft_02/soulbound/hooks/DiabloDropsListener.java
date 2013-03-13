@@ -1,5 +1,6 @@
 package com.me.tft_02.soulbound.hooks;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -45,20 +46,15 @@ public class DiabloDropsListener implements Listener {
      */
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onRuinGenerate(RuinGenerateEvent event) {
-        Block block = event.getChest();
-        BlockState blockState = block.getState();
-
-        if (block.getType() == Material.CHEST) {
-            Chest chest = (Chest) blockState;
-            Inventory inventory = chest.getBlockInventory();
-
-            for (ItemStack itemStack : inventory.getContents()) {
-                if (itemStack != null) {
-                    System.out.println("Editing chest at X:" + block.getLocation().getX() + " Z: " + block.getLocation().getZ());
-                    handleDiabloDropsItems(itemStack);
+        final Block block = event.getChest();
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Soulbound.getInstance(), new Runnable() {
+            @Override
+            public void run() {
+                if (block.getType() == Material.CHEST) {
+                    handleDiabloDropsChests(block);
                 }
             }
-        }
+        }, 1);
     }
 
     public void handleDiabloDropsItems(ItemStack itemStack) {
@@ -79,6 +75,17 @@ public class DiabloDropsListener implements Listener {
         else if (config.getBindOnUseTiers().contains(tierName)) {
             ItemUtils.bouItem(itemStack);
         }
+    }
 
+    public void handleDiabloDropsChests(Block block) {
+        BlockState blockState = block.getState();
+        Chest chest = (Chest) blockState;
+        Inventory inventory = chest.getBlockInventory();
+
+        for (ItemStack itemStack : inventory.getContents()) {
+            if (itemStack != null) {
+                handleDiabloDropsItems(itemStack);
+            }
+        }
     }
 }
