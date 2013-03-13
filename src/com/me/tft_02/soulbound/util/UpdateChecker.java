@@ -1,4 +1,4 @@
-package com.me.tft_02.soulbound;
+package com.me.tft_02.soulbound.util;
 
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -8,13 +8,15 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.me.tft_02.soulbound.Soulbound;
+
 public class UpdateChecker {
     static Soulbound plugin;
 
     private UpdateChecker() {}
 
     public static boolean updateAvailable() throws Exception {
-        String version = plugin.getDescription().getVersion();
+        String version = Soulbound.getInstance().getDescription().getVersion();
         URL url = new URL("http://api.bukget.org/api2/bukkit/plugin/soulbound/latest");
         InputStreamReader isr;
         try {

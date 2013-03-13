@@ -8,7 +8,16 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.me.tft_02.soulbound.hooks.DiabloDropsListener;
+import com.me.tft_02.soulbound.hooks.EpicBossRecodedListener;
+import com.me.tft_02.soulbound.hooks.LoreLocksListener;
+import com.me.tft_02.soulbound.listeners.InventoryListener;
+import com.me.tft_02.soulbound.listeners.PlayerListener;
+import com.me.tft_02.soulbound.util.Metrics;
+import com.me.tft_02.soulbound.util.UpdateChecker;
+
 public class Soulbound extends JavaPlugin {
+    public static Soulbound instance;
 
     private PlayerListener playerListener = new PlayerListener(this);
     private InventoryListener inventoryListener = new InventoryListener(this);
@@ -26,11 +35,16 @@ public class Soulbound extends JavaPlugin {
     // Update Check
     public boolean updateAvailable;
 
+    public static Soulbound getInstance() {
+        return instance;
+    }
+
     /**
      * Run things on enable.
      */
     @Override
     public void onEnable() {
+        instance = this;
         setupConfiguration();
 
         setupDiabloDrops();
@@ -106,7 +120,7 @@ public class Soulbound extends JavaPlugin {
             config.addDefault("Dependency_Plugins.EpicBossRecoded.BindOnEquip", false);
             config.addDefault("Dependency_Plugins.EpicBossRecoded.BindOnUse", false);
         }
-        
+
         if (loreLocksEnabled) {
             config.addDefault("Dependency_Plugins.LoreLocks.Bind_Keys", true);
         }

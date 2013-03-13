@@ -1,4 +1,4 @@
-package com.me.tft_02.soulbound;
+package com.me.tft_02.soulbound.hooks;
 
 import me.ThaH3lper.com.Api.BossDeathEvent;
 
@@ -6,6 +6,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
+
+import com.me.tft_02.soulbound.Soulbound;
+import com.me.tft_02.soulbound.SoulboundConfig;
+import com.me.tft_02.soulbound.util.ItemUtils;
 
 public class EpicBossRecodedListener implements Listener {
     Soulbound plugin;
@@ -27,7 +31,7 @@ public class EpicBossRecodedListener implements Listener {
     }
 
     public void handleEpicBossItems(ItemStack itemStack) {
-        SoulboundConfig config = new SoulboundConfig(plugin);
+        SoulboundConfig config = new SoulboundConfig(Soulbound.getInstance());
 
         if (config.getEBRBindOnEquip() && ItemUtils.isMinecraftArmor(itemStack)) {
             ItemUtils.boeItem(itemStack);

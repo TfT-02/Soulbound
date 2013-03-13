@@ -1,9 +1,11 @@
-package com.me.tft_02.soulbound;
+package com.me.tft_02.soulbound.listeners;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+
+import com.me.tft_02.soulbound.Soulbound;
 
 public class EntityListener implements Listener {
     Soulbound plugin;
@@ -19,7 +21,7 @@ public class EntityListener implements Listener {
      */
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onEntityDeath(EntityDeathEvent event) {
-        
+
     }
 
 }

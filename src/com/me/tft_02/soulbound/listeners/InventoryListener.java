@@ -1,4 +1,4 @@
-package com.me.tft_02.soulbound;
+package com.me.tft_02.soulbound.listeners;
 
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
@@ -10,7 +10,9 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.inventory.InventoryType.SlotType;
 import org.bukkit.inventory.ItemStack;
 
-import com.me.tft_02.soulbound.ItemUtils.ItemType;
+import com.me.tft_02.soulbound.Soulbound;
+import com.me.tft_02.soulbound.util.ItemUtils;
+import com.me.tft_02.soulbound.util.ItemUtils.ItemType;
 
 public class InventoryListener implements Listener {
     Soulbound plugin;
@@ -83,7 +85,7 @@ public class InventoryListener implements Listener {
                 case NORMAL:
                     return;
                 case SOULBOUND:
-                    if (!plugin.getConfig().getBoolean("Soulbound.Allow_Item_Storing") && !(inventoryType == InventoryType.CRAFTING)) {
+                    if (!Soulbound.getInstance().getConfig().getBoolean("Soulbound.Allow_Item_Storing") && !(inventoryType == InventoryType.CRAFTING)) {
                         event.setCancelled(true);
                     }
 

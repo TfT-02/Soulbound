@@ -1,4 +1,4 @@
-package com.me.tft_02.soulbound;
+package com.me.tft_02.soulbound.hooks;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -10,6 +10,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import com.me.tft_02.soulbound.Soulbound;
+import com.me.tft_02.soulbound.SoulboundConfig;
+import com.me.tft_02.soulbound.util.ItemUtils;
 import com.modcrafting.diablodrops.DiabloDrops;
 import com.modcrafting.diablodrops.drops.DropsAPI;
 import com.modcrafting.diablodrops.events.EntitySpawnWithItemEvent;
@@ -43,10 +46,10 @@ public class DiabloDropsListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onRuinGenerate(RuinGenerateEvent event) {
         Block block = event.getChest();
-        BlockState blockState =  block.getState();
+        BlockState blockState = block.getState();
 
         if (block.getType() == Material.CHEST) {
-            Chest chest = (Chest)blockState;
+            Chest chest = (Chest) blockState;
             Inventory inventory = chest.getBlockInventory();
 
             for (ItemStack itemStack : inventory.getContents()) {
@@ -60,7 +63,7 @@ public class DiabloDropsListener implements Listener {
 
     public void handleDiabloDropsItems(ItemStack itemStack) {
         DropsAPI dropsAPI = new DropsAPI(DiabloDrops.getInstance());
-        SoulboundConfig config = new SoulboundConfig(plugin);
+        SoulboundConfig config = new SoulboundConfig(Soulbound.getInstance());
         Tier tier = dropsAPI.getTier(itemStack);
         String tierName = "Any";
         if (tier != null) {

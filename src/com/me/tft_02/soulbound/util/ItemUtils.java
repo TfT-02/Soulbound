@@ -1,4 +1,4 @@
-package com.me.tft_02.soulbound;
+package com.me.tft_02.soulbound.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import com.me.tft_02.soulbound.Soulbound;
+import com.me.tft_02.soulbound.events.SoulbindItemEvent;
 
 public class ItemUtils {
     public enum ItemType {
@@ -24,6 +27,10 @@ public class ItemUtils {
     }
 
     public static ItemStack soulbindItem(Player player, ItemStack itemStack) {
+        SoulbindItemEvent soulbindItemEvent = new SoulbindItemEvent(player, itemStack);
+        Soulbound.getInstance().getServer().getPluginManager().callEvent(soulbindItemEvent);
+        itemStack = soulbindItemEvent.getItemStack();
+
         ItemMeta itemMeta = itemStack.getItemMeta();
         List<String> itemLore = new ArrayList<String>();
 

@@ -1,4 +1,4 @@
-package com.me.tft_02.soulbound;
+package com.me.tft_02.soulbound.listeners;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +20,10 @@ import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 
+import com.me.tft_02.soulbound.PlayerData;
+import com.me.tft_02.soulbound.Soulbound;
+import com.me.tft_02.soulbound.util.ItemUtils;
+
 public class PlayerListener implements Listener {
     Soulbound plugin;
 
@@ -30,7 +34,7 @@ public class PlayerListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     private void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if (plugin.updateAvailable && player.hasPermission("soulbound.updatecheck")) {
+        if (Soulbound.getInstance().updateAvailable && player.hasPermission("soulbound.updatecheck")) {
             player.sendMessage(ChatColor.GOLD + "Soulbound is outdated!");
             player.sendMessage(ChatColor.AQUA + "http://dev.bukkit.org/server-mods/Soulbound/");
         }
@@ -56,7 +60,7 @@ public class PlayerListener implements Listener {
         Item item = event.getItemDrop();
         ItemStack itemStack = item.getItemStack();
 
-        if (plugin.getConfig().getBoolean("Soulbound.Allow_Item_Drop")) {
+        if (Soulbound.getInstance().getConfig().getBoolean("Soulbound.Allow_Item_Drop")) {
             return;
         }
 
@@ -96,7 +100,7 @@ public class PlayerListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private void onPlayerRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
-        boolean keepOnDeath = plugin.getConfig().getBoolean("Soulbound.Keep_On_Death");
+        boolean keepOnDeath = Soulbound.getInstance().getConfig().getBoolean("Soulbound.Keep_On_Death");
 
         if (!keepOnDeath) {
             return;
