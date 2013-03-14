@@ -24,6 +24,7 @@ public class InventoryListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     void onInventoryClick(InventoryClickEvent event) {
         HumanEntity entity = event.getWhoClicked();
+        ItemStack cursor = event.getCursor();
         ItemStack itemStack = event.getCurrentItem();
         SlotType slotType = event.getSlotType();
         InventoryType inventoryType = event.getInventory().getType();
@@ -32,26 +33,21 @@ public class InventoryListener implements Listener {
             return;
         }
 
-        ItemType itemType = ItemUtils.getItemType(itemStack);
-
         if (itemStack == null) {
             return;
         }
 
         if (entity instanceof Player) {
             Player player = (Player) entity;
-            switch (itemType) {
-                case BIND_ON_EQUIP:
-                    switch (slotType) {
-                        case ARMOR:
-                            ItemUtils.soulbindItem(player, itemStack);
-                            return;
-                        default:
-                            return;
-                    }
-                case BIND_ON_PICKUP:
-                    switch (slotType) {
-                        case CONTAINER:
+            switch (slotType) {
+                case ARMOR:
+                    handleBindOnEquip(player, itemStack);
+                    handleBindOnEquip(player, cursor);
+                    return;
+                case CONTAINER:
+                    ItemType itemType = ItemUtils.getItemType(itemStack);
+                    switch (itemType) {
+                        case BIND_ON_PICKUP:
                             ItemUtils.soulbindItem(player, itemStack);
                             return;
                         default:
@@ -60,6 +56,17 @@ public class InventoryListener implements Listener {
                 default:
                     break;
             }
+        }
+    }
+    
+    public void handleBindOnEquip(Player player, ItemStack itemStack) {
+        ItemType itemType = ItemUtils.getItemType(itemStack);
+        switch (itemType) {
+            case BIND_ON_EQUIP:
+                ItemUtils.soulbindItem(player, itemStack);
+                break;
+            default:
+                break;
         }
     }
 
