@@ -224,7 +224,7 @@ public class ItemUtils {
      * @return true if the item is armor, false otherwise
      */
     public static boolean isMinecraftArmor(ItemStack is) {
-        return isLeatherArmor(is) || isGoldArmor(is) || isIronArmor(is) || isDiamondArmor(is);
+        return isLeatherArmor(is) || isGoldArmor(is) || isIronArmor(is) || isDiamondArmor(is) || isChainmailArmor(is);
     }
 
     /**
@@ -296,6 +296,25 @@ public class ItemUtils {
             case DIAMOND_CHESTPLATE:
             case DIAMOND_HELMET:
             case DIAMOND_LEGGINGS:
+                return true;
+
+            default:
+                return false;
+        }
+    }
+
+    /**
+     * Checks to see if an item is a chainmail armor piece.
+     *
+     * @param is Item to check
+     * @return true if the item is chainmail armor, false otherwise
+     */
+    public static boolean isChainmailArmor(ItemStack is) {
+        switch (is.getType()) {
+            case CHAINMAIL_BOOTS:
+            case CHAINMAIL_CHESTPLATE:
+            case CHAINMAIL_HELMET:
+            case CHAINMAIL_LEGGINGS:
                 return true;
 
             default:
