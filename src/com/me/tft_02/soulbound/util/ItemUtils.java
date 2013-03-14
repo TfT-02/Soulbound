@@ -51,6 +51,10 @@ public class ItemUtils {
     }
 
     public static ItemStack bopItem(ItemStack itemStack) {
+        if (!itemStack.hasItemMeta()) {
+            return itemStack;
+        }
+
         ItemMeta itemMeta = itemStack.getItemMeta();
 
         List<String> itemLore = new ArrayList<String>();
@@ -64,6 +68,10 @@ public class ItemUtils {
     }
 
     public static ItemStack boeItem(ItemStack itemStack) {
+        if (!itemStack.hasItemMeta()) {
+            return itemStack;
+        }
+
         ItemMeta itemMeta = itemStack.getItemMeta();
 
         List<String> itemLore = new ArrayList<String>();
@@ -77,6 +85,10 @@ public class ItemUtils {
     }
 
     public static ItemStack bouItem(ItemStack itemStack) {
+        if (!itemStack.hasItemMeta()) {
+            return itemStack;
+        }
+
         ItemMeta itemMeta = itemStack.getItemMeta();
 
         List<String> itemLore = new ArrayList<String>();
@@ -90,6 +102,10 @@ public class ItemUtils {
     }
 
     public static ItemStack unbindItem(ItemStack itemStack) {
+        if (!itemStack.hasItemMeta()) {
+            return itemStack;
+        }
+
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta.hasLore() && isSoulbound(itemStack)) {
             List<String> oldLore = itemMeta.getLore();
