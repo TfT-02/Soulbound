@@ -129,6 +129,8 @@ public class Commands implements CommandExecutor {
         if ((itemInHand.getType() == Material.AIR) && ItemUtils.isSoulbound(itemInHand)) {
             return false;
         }
+
+        ItemUtils.unbindItem(itemInHand);
         ItemUtils.bopItem(itemInHand);
         player.sendMessage(ChatColor.GRAY + "Item is now " + ChatColor.DARK_RED + "Bind on pickup");
 
@@ -152,6 +154,8 @@ public class Commands implements CommandExecutor {
         if ((itemInHand.getType() == Material.AIR) && ItemUtils.isSoulbound(itemInHand)) {
             return false;
         }
+
+        ItemUtils.unbindItem(itemInHand);
         ItemUtils.bouItem(itemInHand);
         player.sendMessage(ChatColor.GRAY + "Item is now " + ChatColor.DARK_RED + "Bind on Use");
 
@@ -175,6 +179,8 @@ public class Commands implements CommandExecutor {
         if ((itemInHand.getType() == Material.AIR) && ItemUtils.isSoulbound(itemInHand)) {
             return false;
         }
+
+        ItemUtils.unbindItem(itemInHand);
         ItemUtils.boeItem(itemInHand);
         player.sendMessage(ChatColor.GRAY + "Item is now " + ChatColor.DARK_RED + "Bind on Equip");
 
