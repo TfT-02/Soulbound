@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -215,6 +216,16 @@ public class ItemUtils {
         else {
             return ItemType.NORMAL;
         }
+    }
+
+    /**
+     * Checks to see if an item is an equipable item.
+     *
+     * @param is Item to check
+     * @return true if the item is equipable, false otherwise
+     */
+    public static boolean isEquipable(ItemStack is) {
+        return isMinecraftArmor(is) || is.getType() == Material.SKULL_ITEM;
     }
 
     /**
