@@ -26,7 +26,7 @@ public class Commands implements CommandExecutor {
                     return reloadConfiguration(sender);
                 }
                 else if (args[0].equalsIgnoreCase("help") || args[0].equalsIgnoreCase("?")) {
-                    return helpPages(sender);
+                    return helpPages(sender, args);
                 }
             }
             sender.sendMessage("Soulbound version " + plugin.getDescription().getVersion());
@@ -52,9 +52,9 @@ public class Commands implements CommandExecutor {
 
     private boolean unbindCommand(CommandSender sender, String[] args) {
         if (!(sender instanceof Player)) {
+            sender.sendMessage("Can't use this from the console, sorry!");
             return false;
         }
-
         Player player = (Player) sender;
 
         if (!player.hasPermission("soulbound.commands.unbind")) {
@@ -72,9 +72,71 @@ public class Commands implements CommandExecutor {
         return true;
     }
 
-    private boolean helpPages(CommandSender sender) {
-        sender.sendMessage(ChatColor.GRAY + "Bind items in hand with /bind [name]");
-        return false;
+    private boolean helpPages(CommandSender sender, String[] args) {
+        if (!(sender instanceof Player)) {
+            sender.sendMessage("Can't use this from the console, sorry!");
+            return false;
+        }
+        Player player = (Player) sender;
+
+        if (args.length == 2) {
+            if (Integer.parseInt(args[1]) > 1) {
+                getHelpPage(Integer.parseInt(args[1]), player);
+                return true;
+            }
+            else {
+                getHelpPage(1, player);
+                return true;
+            }
+        }
+        else {
+            getHelpPage(1, player);
+            return true;
+        }
+    }
+
+    private void getHelpPage(int page, Player player) {
+        int maxPages = 2;
+        int nextPage = page + 1;
+        if (page > maxPages) {
+            player.sendMessage(ChatColor.RED + "This page does not exist." + ChatColor.GOLD + " /help [0-" + maxPages + "]");
+        }
+        else {
+            String dot = ChatColor.DARK_RED + "* ";
+            player.sendMessage(ChatColor.GRAY + "-----[ " + ChatColor.GOLD + "Soulbound Help" + ChatColor.GRAY + " ]----- Page " + page + "/" + maxPages);
+            if (page == 1) {
+                player.sendMessage(ChatColor.GOLD + "How does it work?");
+                player.sendMessage(dot + ChatColor.GRAY + "Soulbound items are special items which are bound to a player.");
+                player.sendMessage(dot + ChatColor.GRAY + "Players are prevented from doing certain actions with Soulbound items, such as:");
+                player.sendMessage(dot + ChatColor.GRAY + "dropping them on the ground, storing them in chests or giving them to other players.");
+                player.sendMessage(dot + ChatColor.GRAY + "Items marked as 'Bind on Pickup' will get Soulbound as soon as they get picked up.");
+                player.sendMessage(dot + ChatColor.GRAY + "Items marked as 'Bind on Use' will get Soulbound as soon as they get used.");
+                player.sendMessage(dot + ChatColor.GRAY + "Items marked as 'Bind on Equip' will get Soulbound as soon as they get equipped.");
+            }
+            if (page == 2) {
+                player.sendMessage(ChatColor.GOLD + "Commands:");
+                if (player.hasPermission("soulbound.commands.bindonpickup")) {
+                    player.sendMessage(dot + ChatColor.GREEN + "/soulbound" + ChatColor.GRAY + " Check the status of the plugin.");
+                }
+                if (player.hasPermission("soulbound.commands.bind")) {
+                    player.sendMessage(dot + ChatColor.GREEN + "/bind <player>" + ChatColor.GRAY + " Soulbound the item currently in hand.");
+                }
+                if (player.hasPermission("soulbound.commands.bindonpickup")) {
+                    player.sendMessage(dot + ChatColor.GREEN + "/bindonpickup" + ChatColor.GRAY + " Mark the item in hand as 'Bind on Pickup'");
+                }
+                if (player.hasPermission("soulbound.commands.bindonuse")) {
+                    player.sendMessage(dot + ChatColor.GREEN + "/bindonuse" + ChatColor.GRAY + " Mark the item in hand as 'Bind on Use'");
+                }
+                if (player.hasPermission("soulbound.commands.bindonequip")) {
+                    player.sendMessage(dot + ChatColor.GREEN + "/bindonequip" + ChatColor.GRAY + " Mark the item in hand as 'Bind on Equip'");
+                }
+                if (player.hasPermission("soulbound.commands.unbind")) {
+                    player.sendMessage(dot + ChatColor.GREEN + "/unbind" + ChatColor.GRAY + " Unbind the item in hand.");
+                }
+            }
+            if (nextPage <= maxPages)
+                player.sendMessage(ChatColor.GOLD + "Type /soulbound help " + nextPage + " for more");
+        }
     }
 
     private boolean printUsage(CommandSender sender) {
