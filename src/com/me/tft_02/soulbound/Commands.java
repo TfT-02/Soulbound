@@ -166,6 +166,7 @@ public class Commands implements CommandExecutor {
         ItemStack itemInHand = player.getItemInHand();
 
         if ((itemInHand.getType() == Material.AIR) || ItemUtils.isSoulbound(itemInHand)) {
+            player.sendMessage(ChatColor.GRAY + "You can't " + ChatColor.GOLD + "Soulbound " + ChatColor.GRAY + "this item.");
             return false;
         }
         ItemUtils.soulbindItem(target, itemInHand);
