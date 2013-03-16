@@ -165,7 +165,7 @@ public class Commands implements CommandExecutor {
 
         ItemStack itemInHand = player.getItemInHand();
 
-        if ((itemInHand.getType() == Material.AIR) && ItemUtils.isSoulbound(itemInHand)) {
+        if ((itemInHand.getType() == Material.AIR) || ItemUtils.isSoulbound(itemInHand)) {
             return false;
         }
         ItemUtils.soulbindItem(target, itemInHand);
