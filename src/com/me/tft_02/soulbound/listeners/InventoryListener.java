@@ -62,7 +62,7 @@ public class InventoryListener implements Listener {
             }
         }
     }
-    
+
     public void handleBindOnEquip(Player player, ItemStack itemStack) {
         ItemType itemType = ItemUtils.getItemType(itemStack);
         switch (itemType) {
