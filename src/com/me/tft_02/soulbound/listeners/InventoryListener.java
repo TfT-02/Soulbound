@@ -23,9 +23,13 @@ public class InventoryListener implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     void onInventoryClick(InventoryClickEvent event) {
+        if (event.getSlot() < 0) {
+            return;
+        }
         HumanEntity entity = event.getWhoClicked();
         ItemStack cursor = event.getCursor();
         ItemStack itemStack = event.getCurrentItem();
+
         SlotType slotType = event.getSlotType();
         InventoryType inventoryType = event.getInventory().getType();
 
