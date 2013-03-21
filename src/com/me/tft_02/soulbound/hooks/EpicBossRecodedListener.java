@@ -37,7 +37,7 @@ public class EpicBossRecodedListener implements Listener {
     public void handleEpicBossItems(ItemStack itemStack) {
         SoulboundConfig config = new SoulboundConfig(Soulbound.getInstance());
 
-        if (config.getEBRBindOnEquip() && ItemUtils.isMinecraftArmor(itemStack)) {
+        if (config.getEBRBindOnEquip() && ItemUtils.isEquipable(itemStack)) {
             ItemUtils.boeItem(itemStack);
         }
         else if (config.getEBRBindOnPickup()) {

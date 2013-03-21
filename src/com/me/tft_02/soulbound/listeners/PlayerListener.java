@@ -144,7 +144,6 @@ public class PlayerListener implements Listener {
             case RIGHT_CLICK_AIR:
             case LEFT_CLICK_AIR:
             case LEFT_CLICK_BLOCK:
-            case PHYSICAL:
                 if (ItemUtils.isBindOnUse(inHand)) {
                     ItemUtils.soulbindItem(player, inHand);
                 }
