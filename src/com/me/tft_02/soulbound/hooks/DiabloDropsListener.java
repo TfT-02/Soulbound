@@ -66,7 +66,7 @@ public class DiabloDropsListener implements Listener {
             tierName = tier.getName();
         }
 
-        if (config.getBindOnEquipTiers().contains(tierName) && ItemUtils.isMinecraftArmor(itemStack)) {
+        if (config.getBindOnEquipTiers().contains(tierName) && ItemUtils.isEquipable(itemStack)) {
             ItemUtils.boeItem(itemStack);
         }
         else if (config.getBindOnPickupTiers().contains(tierName)) {
