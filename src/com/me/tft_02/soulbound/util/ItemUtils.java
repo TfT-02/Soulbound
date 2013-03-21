@@ -241,7 +241,7 @@ public class ItemUtils {
      * @return true if the item is equipable, false otherwise
      */
     public static boolean isEquipable(ItemStack is) {
-        return isMinecraftArmor(is) || is.getType() == Material.SKULL_ITEM;
+        return isMinecraftArmor(is) || is.getType() == Material.SKULL_ITEM || is.getType() == Material.JACK_O_LANTERN;
     }
 
     /**
