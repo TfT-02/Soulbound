@@ -32,6 +32,10 @@ public class ItemUtils {
         Soulbound.getInstance().getServer().getPluginManager().callEvent(soulbindItemEvent);
         itemStack = soulbindItemEvent.getItemStack();
 
+        if (soulbindItemEvent.isCancelled()) {
+            return itemStack;
+        }
+
         ItemMeta itemMeta = itemStack.getItemMeta();
         List<String> itemLore = new ArrayList<String>();
 
