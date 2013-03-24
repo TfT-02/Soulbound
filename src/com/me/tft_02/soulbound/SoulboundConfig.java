@@ -10,6 +10,8 @@ public class SoulboundConfig {
         plugin = instance;
     }
 
+    // EpicBossRecoded config settings
+
     public boolean getEBRBindOnPickup() {
         return plugin.getConfig().getBoolean("Dependency_Plugins.EpicBossRecoded.BindOnPickup");
     }
@@ -22,19 +24,21 @@ public class SoulboundConfig {
         return plugin.getConfig().getBoolean("Dependency_Plugins.EpicBossRecoded.BindOnUse");
     }
 
-    public List<String> getBindOnPickupTiers() {
-        return getItemTiers("BindOnPickup");
+    // DiabloDrops config settings
+
+    public List<String> getDiabloDropsBindOnPickupTiers() {
+        return getDiabloDropsItemTiers("BindOnPickup");
     }
 
-    public List<String> getBindOnUseTiers() {
-        return getItemTiers("BindOnUse");
+    public List<String> getDiabloDropsBindOnUseTiers() {
+        return getDiabloDropsItemTiers("BindOnUse");
     }
 
-    public List<String> getBindOnEquipTiers() {
-        return getItemTiers("BindOnEquip");
+    public List<String> getDiabloDropsBindOnEquipTiers() {
+        return getDiabloDropsItemTiers("BindOnEquip");
     }
 
-    public List<String> getItemTiers(String bindType) {
+    public List<String> getDiabloDropsItemTiers(String bindType) {
         String[] tiersString = plugin.getConfig().getString("Dependency_Plugins.DiabloDrops." + bindType).replaceAll(" ", "").split("[,]");
         List<String> tiers = new ArrayList<String>();
 
@@ -43,6 +47,8 @@ public class SoulboundConfig {
         }
         return tiers;
     }
+
+    // LoreLocks config settings
 
     public boolean getLoreLocksBindKeys() {
         return plugin.getConfig().getBoolean("Dependency_Plugins.LoreLocks.Bind_Keys");

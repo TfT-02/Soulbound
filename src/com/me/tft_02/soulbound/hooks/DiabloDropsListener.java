@@ -66,13 +66,13 @@ public class DiabloDropsListener implements Listener {
             tierName = tier.getName();
         }
 
-        if (config.getBindOnEquipTiers().contains(tierName) && ItemUtils.isEquipable(itemStack)) {
+        if (config.getDiabloDropsBindOnEquipTiers().contains(tierName) && ItemUtils.isEquipable(itemStack)) {
             ItemUtils.boeItem(itemStack);
         }
-        else if (config.getBindOnPickupTiers().contains(tierName)) {
+        else if (config.getDiabloDropsBindOnPickupTiers().contains(tierName)) {
             ItemUtils.bopItem(itemStack);
         }
-        else if (config.getBindOnUseTiers().contains(tierName)) {
+        else if (config.getDiabloDropsBindOnUseTiers().contains(tierName)) {
             ItemUtils.bouItem(itemStack);
         }
     }
