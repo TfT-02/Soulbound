@@ -18,10 +18,12 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import com.me.tft_02.soulbound.PlayerData;
 import com.me.tft_02.soulbound.Soulbound;
+import com.me.tft_02.soulbound.events.SoulbindItemEvent;
 import com.me.tft_02.soulbound.util.ItemUtils;
 
 public class PlayerListener implements Listener {
@@ -29,6 +31,24 @@ public class PlayerListener implements Listener {
 
     public PlayerListener(Soulbound instance) {
         plugin = instance;
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    private void onItemSoulbound(SoulbindItemEvent event) {
+        Player player = event.getPlayer();
+        Inventory inventory = player.getInventory();
+        int count = 0;
+        int maxAmount = 5;
+        
+        for (ItemStack itemStack : inventory.getContents()) {
+            if (itemStack != null && ItemUtils.isSoulbound(itemStack)) {
+                count++;
+            }
+        }
+        if (count >= maxAmount) {
+            player.sendMessage(ChatColor.RED + "Cannot Soulbind any more items, maximum amount reached! " + ChatColor.GOLD + "(" + maxAmount + ")");
+            event.setCancelled(true);
+        }
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
