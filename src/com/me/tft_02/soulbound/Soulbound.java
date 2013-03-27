@@ -11,6 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.me.tft_02.soulbound.hooks.DiabloDropsListener;
 import com.me.tft_02.soulbound.hooks.EpicBossRecodedListener;
 import com.me.tft_02.soulbound.hooks.LoreLocksListener;
+import com.me.tft_02.soulbound.hooks.MythicDropsListener;
 import com.me.tft_02.soulbound.listeners.InventoryListener;
 import com.me.tft_02.soulbound.listeners.PlayerListener;
 import com.me.tft_02.soulbound.util.Metrics;
@@ -26,11 +27,13 @@ public class Soulbound extends JavaPlugin {
     private DiabloDropsListener diabloDropsListener = new DiabloDropsListener(this);
     private EpicBossRecodedListener epicBossRecodedListener = new EpicBossRecodedListener(this);
     private LoreLocksListener loreLocksListener = new LoreLocksListener(this);
+    private MythicDropsListener mythicDropsListener = new MythicDropsListener(this);
 
     // Checks for hooking into other plugins
     public static boolean diabloDropsEnabled = false;
     public static boolean epicBossRecodedEnabled = false;
     public static boolean loreLocksEnabled = false;
+    public static boolean mythicDropsEnabled = false;
 
     // Update Check
     public boolean updateAvailable;
@@ -50,6 +53,7 @@ public class Soulbound extends JavaPlugin {
         setupDiabloDrops();
         setupEpicBossRecoded();
         setupLoreLocks();
+        setupMythicDrops();
 
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(playerListener, this);
@@ -96,6 +100,14 @@ public class Soulbound extends JavaPlugin {
             loreLocksEnabled = true;
             getLogger().info("LoreLocks found!");
             getServer().getPluginManager().registerEvents(loreLocksListener, this);
+        }
+    }
+
+    private void setupMythicDrops() {
+        if (getServer().getPluginManager().isPluginEnabled("MythicDrops")) {
+            mythicDropsEnabled = true;
+            getLogger().info("MythicDrops found!");
+            getServer().getPluginManager().registerEvents(mythicDropsListener, this);
         }
     }
 
