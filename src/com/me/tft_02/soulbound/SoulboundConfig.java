@@ -53,4 +53,29 @@ public class SoulboundConfig {
     public boolean getLoreLocksBindKeys() {
         return plugin.getConfig().getBoolean("Dependency_Plugins.LoreLocks.Bind_Keys");
     }
+
+    // MythicDrops config settings
+
+    public List<String> getMythicDropsBindOnPickupTiers() {
+        return getMythicDropsItemTiers("BindOnPickup");
+    }
+
+    public List<String> getMythicDropsBindOnUseTiers() {
+        return getMythicDropsItemTiers("BindOnUse");
+    }
+
+    public List<String> getMythicDropsBindOnEquipTiers() {
+        return getMythicDropsItemTiers("BindOnEquip");
+    }
+
+    public List<String> getMythicDropsItemTiers(String bindType) {
+        String[] tiersString = plugin.getConfig().getString("Dependency_Plugins.MythicDrops." + bindType).replaceAll(" ", "").split("[,]");
+        List<String> tiers = new ArrayList<String>();
+
+        for (String tier : tiersString) {
+            tiers.add(tier);
+        }
+        return tiers;
+    }
+
 }
