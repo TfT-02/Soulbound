@@ -171,8 +171,9 @@ public class Commands implements CommandExecutor {
             return false;
         }
         ItemUtils.soulbindItem(target, itemInHand);
-        player.sendMessage(ChatColor.GRAY + "Item is now " + ChatColor.GOLD + "Soulbound " + ChatColor.GRAY + "to " + ChatColor.DARK_AQUA + target.getName());
-
+        if (ItemUtils.isSoulbound(itemInHand)) {
+            player.sendMessage(ChatColor.GRAY + "Item is now " + ChatColor.GOLD + "Soulbound " + ChatColor.GRAY + "to " + ChatColor.DARK_AQUA + target.getName());
+        }
         return true;
     }
 

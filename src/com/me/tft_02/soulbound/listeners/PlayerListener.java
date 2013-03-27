@@ -25,6 +25,7 @@ import com.me.tft_02.soulbound.PlayerData;
 import com.me.tft_02.soulbound.Soulbound;
 import com.me.tft_02.soulbound.events.SoulbindItemEvent;
 import com.me.tft_02.soulbound.util.ItemUtils;
+import com.me.tft_02.soulbound.util.Permissions;
 
 public class PlayerListener implements Listener {
     Soulbound plugin;
@@ -37,9 +38,13 @@ public class PlayerListener implements Listener {
     private void onItemSoulbound(SoulbindItemEvent event) {
         Player player = event.getPlayer();
         Inventory inventory = player.getInventory();
+        int maxAmount = Permissions.getSoulbindMaximum(player);
+
+        if (maxAmount < 0) {
+            return;
+        }
+
         int count = 0;
-        int maxAmount = 5;
-        
         for (ItemStack itemStack : inventory.getContents()) {
             if (itemStack != null && ItemUtils.isSoulbound(itemStack)) {
                 count++;
