@@ -48,12 +48,13 @@ public class Soulbound extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        setupConfiguration();
 
         setupDiabloDrops();
         setupEpicBossRecoded();
         setupLoreLocks();
         setupMythicDrops();
+
+        setupConfiguration();
 
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(playerListener, this);
@@ -135,6 +136,12 @@ public class Soulbound extends JavaPlugin {
 
         if (loreLocksEnabled) {
             config.addDefault("Dependency_Plugins.LoreLocks.Bind_Keys", true);
+        }
+
+        if (mythicDropsEnabled) {
+            config.addDefault("Dependency_Plugins.MythicDrops.BindOnPickup", "common, uncommon, rare");
+            config.addDefault("Dependency_Plugins.MythicDrops.BindOnUse", "terric, netheric");
+            config.addDefault("Dependency_Plugins.MythicDrops.BindOnEquip", "endric");
         }
 
         config.options().copyDefaults(true);

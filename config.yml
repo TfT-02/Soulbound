@@ -17,3 +17,7 @@ Dependency_Plugins:
     BindOnEquip: false
   LoreLocks:
     Bind_Keys: true
+  MythicDrops:
+    BindOnPickup: common, uncommon, rare
+    BindOnUse: terric, netheric
+    BindOnEquip: endric
