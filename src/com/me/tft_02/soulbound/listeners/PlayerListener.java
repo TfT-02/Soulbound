@@ -72,6 +72,10 @@ public class PlayerListener implements Listener {
         ItemStack itemStack = item.getItemStack();
 
         if (ItemUtils.isSoulbound(itemStack) && !ItemUtils.isBindedPlayer(player, itemStack)) {
+            if (player.hasPermission("soulbound.pickup.bypass")) {
+                return;
+            }
+
             event.setCancelled(true);
         }
         else if (ItemUtils.isBindOnPickup(itemStack)) {

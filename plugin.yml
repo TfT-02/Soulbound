@@ -42,6 +42,9 @@ permissions:
             soulbound.commands.unbind: true
             soulbound.commands.reload: true
             soulbound.updatecheck: true
+    soulbound.pickup.bypass
+        description: Users with this permission will be able to pickup Soulbound items that do not belong to them.
+        default: false
     soulbound.updatecheck:
         description: Users with this permission will receive a notification when there is a new version available.
         default: op
