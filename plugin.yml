@@ -42,7 +42,7 @@ permissions:
             soulbound.commands.unbind: true
             soulbound.commands.reload: true
             soulbound.updatecheck: true
-    soulbound.pickup.bypass
+    soulbound.pickup.bypass:
         description: Users with this permission will be able to pickup Soulbound items that do not belong to them.
         default: false
     soulbound.updatecheck:
