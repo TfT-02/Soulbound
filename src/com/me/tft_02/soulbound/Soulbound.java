@@ -12,6 +12,8 @@ import com.me.tft_02.soulbound.hooks.DiabloDropsListener;
 import com.me.tft_02.soulbound.hooks.EpicBossRecodedListener;
 import com.me.tft_02.soulbound.hooks.LoreLocksListener;
 import com.me.tft_02.soulbound.hooks.MythicDropsListener;
+import com.me.tft_02.soulbound.listeners.BlockListener;
+import com.me.tft_02.soulbound.listeners.EntityListener;
 import com.me.tft_02.soulbound.listeners.InventoryListener;
 import com.me.tft_02.soulbound.listeners.PlayerListener;
 import com.me.tft_02.soulbound.util.Metrics;
@@ -22,6 +24,8 @@ public class Soulbound extends JavaPlugin {
 
     private PlayerListener playerListener = new PlayerListener(this);
     private InventoryListener inventoryListener = new InventoryListener(this);
+    private EntityListener entityListener = new EntityListener(this);
+    private BlockListener blockListener = new BlockListener(this);
 
     // Listeners for hooking into other plugins
     private DiabloDropsListener diabloDropsListener = new DiabloDropsListener(this);
@@ -59,6 +63,8 @@ public class Soulbound extends JavaPlugin {
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(playerListener, this);
         pm.registerEvents(inventoryListener, this);
+        pm.registerEvents(entityListener, this);
+        pm.registerEvents(blockListener, this);
 
         getCommand("soulbound").setExecutor(new Commands(this));
         getCommand("bind").setExecutor(new Commands(this));
@@ -121,6 +127,7 @@ public class Soulbound extends JavaPlugin {
         config.addDefault("Soulbound.Allow_Item_Storing", true);
         config.addDefault("Soulbound.Delete_On_Death", false);
         config.addDefault("Soulbound.Keep_On_Death", false);
+        config.addDefault("Soulbound.Infinite_Durability", false);
 
         if (diabloDropsEnabled) {
             config.addDefault("Dependency_Plugins.DiabloDrops.BindOnPickup", "Legendary, Rare, Unidentified");

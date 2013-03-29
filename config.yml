@@ -6,6 +6,7 @@ Soulbound:
   Allow_Item_Storing: true
   Delete_On_Death: false
   Keep_On_Death: false
+  Infinite_Durability: false
 Dependency_Plugins:
   DiabloDrops:
     BindOnPickup: Legendary, Rare, Unidentified
