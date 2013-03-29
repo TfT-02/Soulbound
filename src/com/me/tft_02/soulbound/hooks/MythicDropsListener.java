@@ -26,15 +26,17 @@ public class MythicDropsListener implements Listener {
      * @param event The event to check
      */
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onEntitySpawn(CreatureEquippedWithItemStackEvent event) {
+    public void onMythicDropsEntitySpawn(CreatureEquippedWithItemStackEvent event) {
         ItemStack itemStack = event.getItemStack();
+//        System.out.println("itemStack " + itemStack);
         handleMythicDropsItems(itemStack);
     }
 
-    public void handleMythicDropsItems(ItemStack itemStack) {
+    private void handleMythicDropsItems(ItemStack itemStack) {
         SoulboundConfig config = new SoulboundConfig(Soulbound.getInstance());
         TierAPI tierAPI = new TierAPI(mythicDrops);
         Tier tier = tierAPI.getTierFromItemStack(itemStack);
+//        System.out.println("tier " + tier);
         String tierName = "Any";
         if (tier != null) {
             tierName = tier.getName();
