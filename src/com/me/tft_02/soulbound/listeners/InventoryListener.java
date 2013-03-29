@@ -101,6 +101,10 @@ public class InventoryListener implements Listener {
                     }
 
                     if (!ItemUtils.isBindedPlayer(player, itemStack)) {
+                        if (player.hasPermission("soulbound.pickup.bypass")) {
+                            return;
+                        }
+
                         event.setCancelled(true);
                     }
                     return;
