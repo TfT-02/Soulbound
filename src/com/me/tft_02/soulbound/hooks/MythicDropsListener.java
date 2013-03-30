@@ -5,7 +5,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
-import com.conventnunnery.plugins.MythicDrops.MythicDrops;
 import com.conventnunnery.plugins.MythicDrops.api.TierAPI;
 import com.conventnunnery.plugins.MythicDrops.events.CreatureEquippedWithItemStackEvent;
 import com.conventnunnery.plugins.MythicDrops.objects.Tier;
