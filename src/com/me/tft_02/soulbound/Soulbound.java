@@ -5,9 +5,11 @@ import java.util.logging.Level;
 
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.conventnunnery.plugins.MythicDrops.MythicDrops;
 import com.me.tft_02.soulbound.hooks.DiabloDropsListener;
 import com.me.tft_02.soulbound.hooks.EpicBossRecodedListener;
 import com.me.tft_02.soulbound.hooks.LoreLocksListener;
@@ -116,6 +118,15 @@ public class Soulbound extends JavaPlugin {
             getLogger().info("MythicDrops found!");
             getServer().getPluginManager().registerEvents(mythicDropsListener, this);
         }
+    }
+
+    public MythicDrops getMythicDrops() {
+        Plugin plugin = getServer().getPluginManager().getPlugin("MythicDrops");
+
+        if ((plugin == null) || !(plugin instanceof MythicDrops))
+            return null;
+
+        return (MythicDrops) plugin;
     }
 
     private void setupConfiguration() {
