@@ -167,7 +167,8 @@ public class Commands implements CommandExecutor {
                 if (args[1].equalsIgnoreCase("inventory")) {
                     bindFullInventory = true;
                     target = Bukkit.getPlayer(args[0]);
-                } else {
+                }
+                else {
                     player.sendMessage(ChatColor.RED + "Proper usage: " + ChatColor.GREEN + "/bind <player> inventory");
                     return true;
                 }

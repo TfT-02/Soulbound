@@ -17,12 +17,11 @@ public class BlockListener implements Listener {
         plugin = instance;
     }
 
-
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onBlockBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
         ItemStack itemStack = player.getItemInHand();
-        
+
         if (ItemUtils.isSoulbound(itemStack) && Soulbound.getInstance().getConfig().getBoolean("Soulbound.Infinite_Durability")) {
             itemStack.setDurability((short) 0);
             return;

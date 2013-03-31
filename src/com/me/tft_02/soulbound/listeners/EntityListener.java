@@ -31,7 +31,6 @@ public class EntityListener implements Listener {
             return;
         }
 
-
         if (event.getEntity() instanceof LivingEntity) {
             combatChecks(event);
         }
@@ -47,16 +46,16 @@ public class EntityListener implements Listener {
         EntityType damagerType = damager.getType();
 
         switch (damagerType) {
-        case PLAYER:
-            Player attacker = (Player) event.getDamager();
-            ItemStack itemInHand = attacker.getItemInHand();
+            case PLAYER:
+                Player attacker = (Player) event.getDamager();
+                ItemStack itemInHand = attacker.getItemInHand();
 
-            if (ItemUtils.isSoulbound(itemInHand) && Soulbound.getInstance().getConfig().getBoolean("Soulbound.Infinite_Durability")) {
-                itemInHand.setDurability((short) 0);
+                if (ItemUtils.isSoulbound(itemInHand) && Soulbound.getInstance().getConfig().getBoolean("Soulbound.Infinite_Durability")) {
+                    itemInHand.setDurability((short) 0);
+                    return;
+                }
+            default:
                 return;
-            }
-        default:
-            return;
         }
     }
 }
