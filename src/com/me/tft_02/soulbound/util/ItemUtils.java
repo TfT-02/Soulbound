@@ -28,6 +28,10 @@ public class ItemUtils {
     }
 
     public static ItemStack soulbindItem(Player player, ItemStack itemStack) {
+        if (itemStack == null) {
+            return itemStack;
+        }
+
         SoulbindItemEvent soulbindItemEvent = new SoulbindItemEvent(player, itemStack);
         Soulbound.getInstance().getServer().getPluginManager().callEvent(soulbindItemEvent);
         itemStack = soulbindItemEvent.getItemStack();
@@ -55,7 +59,7 @@ public class ItemUtils {
     }
 
     public static ItemStack bopItem(ItemStack itemStack) {
-        if (!itemStack.hasItemMeta()) {
+        if (itemStack == null) {
             return itemStack;
         }
 
@@ -72,7 +76,7 @@ public class ItemUtils {
     }
 
     public static ItemStack boeItem(ItemStack itemStack) {
-        if (!itemStack.hasItemMeta()) {
+        if (itemStack == null) {
             return itemStack;
         }
 
@@ -89,7 +93,7 @@ public class ItemUtils {
     }
 
     public static ItemStack bouItem(ItemStack itemStack) {
-        if (!itemStack.hasItemMeta()) {
+        if (itemStack == null) {
             return itemStack;
         }
 
@@ -106,7 +110,7 @@ public class ItemUtils {
     }
 
     public static ItemStack unbindItem(ItemStack itemStack) {
-        if (!itemStack.hasItemMeta()) {
+        if (itemStack == null) {
             return itemStack;
         }
 

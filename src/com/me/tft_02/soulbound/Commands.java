@@ -179,7 +179,7 @@ public class Commands implements CommandExecutor {
         if (bindFullInventory) {
             for (ItemStack itemStack : player.getInventory().getContents()) {
                 if (itemStack != null) {
-                    if (!(itemStack.getType() == Material.AIR) || !ItemUtils.isSoulbound(itemStack)) {
+                    if (!(itemStack.getType() == Material.AIR) && !ItemUtils.isSoulbound(itemStack)) {
                         ItemUtils.soulbindItem(target, itemStack);
                     }
                 }
@@ -274,7 +274,13 @@ public class Commands implements CommandExecutor {
 
         ItemUtils.unbindItem(itemInHand);
         ItemUtils.boeItem(itemInHand);
-        player.sendMessage(ChatColor.GRAY + "Item is now " + ChatColor.DARK_RED + "Bind on Equip");
+
+        if (ItemUtils.isBindOnEquip(itemInHand)) {
+            player.sendMessage(ChatColor.GRAY + "Item is now " + ChatColor.DARK_RED + "Bind on Equip");
+        }
+        else {
+            player.sendMessage(ChatColor.RED + "Cannot mark this item as " + ChatColor.DARK_RED + "Bind on Equip");
+        }
 
         return true;
     }

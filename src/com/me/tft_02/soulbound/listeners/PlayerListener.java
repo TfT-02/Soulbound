@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -24,6 +22,7 @@ import org.bukkit.inventory.ItemStack;
 import com.me.tft_02.soulbound.PlayerData;
 import com.me.tft_02.soulbound.Soulbound;
 import com.me.tft_02.soulbound.events.SoulbindItemEvent;
+import com.me.tft_02.soulbound.runnables.UpdateArmorTask;
 import com.me.tft_02.soulbound.util.ItemUtils;
 import com.me.tft_02.soulbound.util.Permissions;
 
@@ -155,25 +154,17 @@ public class PlayerListener implements Listener {
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         Action action = event.getAction();
-        Block block = event.getClickedBlock();
         ItemStack inHand = player.getItemInHand();
-        @SuppressWarnings("unused")
-        Material material;
-
-        /* Fix for NPE on interacting with air */
-        if (block == null) {
-            material = Material.AIR;
-        }
-        else {
-            material = block.getType();
-        }
 
         switch (action) {
             case RIGHT_CLICK_BLOCK:
             case RIGHT_CLICK_AIR:
             case LEFT_CLICK_AIR:
             case LEFT_CLICK_BLOCK:
-                if (ItemUtils.isBindOnUse(inHand)) {
+                if (ItemUtils.isEquipable(inHand)) {
+                    new UpdateArmorTask(player).runTaskLater(Soulbound.getInstance(), 2);
+                }
+                else if (ItemUtils.isBindOnUse(inHand)) {
                     ItemUtils.soulbindItem(player, inHand);
                 }
             default:

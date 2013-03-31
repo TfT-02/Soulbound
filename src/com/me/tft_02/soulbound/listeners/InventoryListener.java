@@ -11,6 +11,7 @@ import org.bukkit.event.inventory.InventoryType.SlotType;
 import org.bukkit.inventory.ItemStack;
 
 import com.me.tft_02.soulbound.Soulbound;
+import com.me.tft_02.soulbound.runnables.UpdateArmorTask;
 import com.me.tft_02.soulbound.util.ItemUtils;
 import com.me.tft_02.soulbound.util.ItemUtils.ItemType;
 
@@ -24,7 +25,6 @@ public class InventoryListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     void onInventoryClick(InventoryClickEvent event) {
         HumanEntity entity = event.getWhoClicked();
-        ItemStack cursor = event.getCursor();
         ItemStack itemStack = event.getCurrentItem();
 
         SlotType slotType = event.getSlotType();
@@ -42,8 +42,7 @@ public class InventoryListener implements Listener {
             Player player = (Player) entity;
             switch (slotType) {
                 case ARMOR:
-                    handleBindOnEquip(player, itemStack);
-                    handleBindOnEquip(player, cursor);
+                    new UpdateArmorTask(player).runTaskLater(Soulbound.getInstance(), 2);
                     return;
                 case CONTAINER:
                     ItemType itemType = ItemUtils.getItemType(itemStack);
@@ -55,19 +54,12 @@ public class InventoryListener implements Listener {
                             return;
                     }
                 default:
+                    if (ItemUtils.isEquipable(itemStack) && event.isShiftClick()) {
+                        new UpdateArmorTask(player).runTaskLater(Soulbound.getInstance(), 2);
+                        return;
+                    }
                     break;
             }
-        }
-    }
-
-    public void handleBindOnEquip(Player player, ItemStack itemStack) {
-        ItemType itemType = ItemUtils.getItemType(itemStack);
-        switch (itemType) {
-            case BIND_ON_EQUIP:
-                ItemUtils.soulbindItem(player, itemStack);
-                break;
-            default:
-                break;
         }
     }
 
