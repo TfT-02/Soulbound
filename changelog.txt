@@ -6,6 +6,8 @@ Key:
   ! Change
   - Removal
 
+Version 1.1.4 | Tested on CB 1.5.0-R0.1
+
 Version 1.1.3 | Tested on CB 1.5.0-R0.1
  + Added MythicDrops support
  + Added permission node which allows certain players to pickup items which are not Soulbound to that player
