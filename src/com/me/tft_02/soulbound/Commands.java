@@ -121,6 +121,7 @@ public class Commands implements CommandExecutor {
                 }
                 if (player.hasPermission("soulbound.commands.bind")) {
                     player.sendMessage(dot + ChatColor.GREEN + "/bind <player>" + ChatColor.GRAY + " Soulbound the item currently in hand.");
+                    player.sendMessage(dot + ChatColor.GREEN + "/bind <player> inventory" + ChatColor.GRAY + " Soulbound an entire inventory.");
                 }
                 if (player.hasPermission("soulbound.commands.bindonpickup")) {
                     player.sendMessage(dot + ChatColor.GREEN + "/bindonpickup" + ChatColor.GRAY + " Mark the item in hand as 'Bind on Pickup'");
@@ -156,12 +157,34 @@ public class Commands implements CommandExecutor {
             return false;
         }
 
+        boolean bindFullInventory = false;
+
         Player target;
         switch (args.length) {
             case 1:
                 target = Bukkit.getPlayer(args[0]);
+            case 2:
+                if (args[1].equalsIgnoreCase("inventory")) {
+                    bindFullInventory = true;
+                    target = Bukkit.getPlayer(args[0]);
+                } else {
+                    player.sendMessage(ChatColor.RED + "Proper usage: " + ChatColor.GREEN + "/bind <player> inventory");
+                    return true;
+                }
             default:
                 target = player;
+        }
+
+        if (bindFullInventory) {
+            for (ItemStack itemStack : player.getInventory().getContents()) {
+                if (itemStack != null) {
+                    if (!(itemStack.getType() == Material.AIR) || !ItemUtils.isSoulbound(itemStack)) {
+                        ItemUtils.soulbindItem(target, itemStack);
+                    }
+                }
+            }
+            player.sendMessage(ChatColor.GRAY + "All items in " + ChatColor.DARK_AQUA + target.getName() + ChatColor.GRAY + "'s inventory are now " + ChatColor.GOLD + "Soulbound " + ChatColor.GRAY + "to " + ChatColor.DARK_AQUA + target.getName());
+            return true;
         }
 
         ItemStack itemInHand = player.getItemInHand();

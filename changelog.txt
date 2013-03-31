@@ -11,6 +11,7 @@ Version 1.1.3 | Tested on CB 1.4.7-R1.0 & 1.5.0-R0.1
  + Added permission node which allows certain players to pickup items which are not Soulbound to that player
  + Added permission node which limit the maximum amount of Soulbound items a player can carry at once
  + Added new configuration option to let Soulbound items have infinite durability
+ + Added new command to Soulbind a full inventory
  = Fixed bug which caused the plugin to ignore cancelled SoulbindItemEvents
 
 Version 1.1.2 | Tested on CB 1.4.7-R1.0 & 1.5.0-R0.1
