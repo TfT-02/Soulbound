@@ -162,16 +162,28 @@ public class Commands implements CommandExecutor {
         Player target;
         switch (args.length) {
             case 1:
-                target = Bukkit.getPlayer(args[0]);
+                target = Bukkit.getPlayerExact(args[0]);
+
+                if (target == null) {
+                    player.sendMessage(ChatColor.RED + "Target is offline!");
+                    return true;
+                }
+                break;
             case 2:
                 if (args[1].equalsIgnoreCase("inventory")) {
                     bindFullInventory = true;
-                    target = Bukkit.getPlayer(args[0]);
+                    target = Bukkit.getPlayerExact(args[0]);
+
+                    if (target == null) {
+                        player.sendMessage(ChatColor.RED + "Target is offline!");
+                        return true;
+                    }
                 }
                 else {
                     player.sendMessage(ChatColor.RED + "Proper usage: " + ChatColor.GREEN + "/bind <player> inventory");
                     return true;
                 }
+                break;
             default:
                 target = player;
         }
@@ -194,7 +206,9 @@ public class Commands implements CommandExecutor {
             player.sendMessage(ChatColor.GRAY + "You can't " + ChatColor.GOLD + "Soulbound " + ChatColor.GRAY + "this item.");
             return false;
         }
+
         ItemUtils.soulbindItem(target, itemInHand);
+
         if (ItemUtils.isSoulbound(itemInHand)) {
             player.sendMessage(ChatColor.GRAY + "Item is now " + ChatColor.GOLD + "Soulbound " + ChatColor.GRAY + "to " + ChatColor.DARK_AQUA + target.getName());
         }
