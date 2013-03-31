@@ -5,6 +5,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
+import com.conventnunnery.plugins.MythicDrops.MythicDrops;
 import com.conventnunnery.plugins.MythicDrops.api.TierAPI;
 import com.conventnunnery.plugins.MythicDrops.events.CreatureEquippedWithItemStackEvent;
 import com.conventnunnery.plugins.MythicDrops.objects.Tier;
@@ -32,7 +33,7 @@ public class MythicDropsListener implements Listener {
 
     private void handleMythicDropsItems(ItemStack itemStack) {
         SoulboundConfig config = new SoulboundConfig(Soulbound.getInstance());
-        TierAPI tierAPI = Soulbound.getInstance().getMythicDrops().getTierAPI();
+        TierAPI tierAPI = MythicDrops.getInstance().getTierAPI();
         Tier tier = tierAPI.getTierFromItemStack(itemStack);
         String tierName = "Any";
         if (tier != null) {
