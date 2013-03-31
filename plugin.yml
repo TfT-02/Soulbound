@@ -32,7 +32,7 @@ commands:
       permission-message: You don't have <permission>
 permissions:
     soulbound.commands.all:
-        description: Gives access to the weather commands
+        description: Gives access to the Soulbound commands
         default: op
         children:
             soulbound.commands.bind: true
