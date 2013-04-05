@@ -11,12 +11,12 @@
   </issueManagement>
     <build>
         <finalName>Soulbound</finalName>
-        <sourceDirectory>${basedir}/src/java</sourceDirectory>
+        <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
         <resources>
             <resource>
                 <targetPath>.</targetPath>
                 <filtering>true</filtering>
-                <directory>${basedir}/src/resources/</directory>
+                <directory>${basedir}/src/main/resources/</directory>
                 <includes>
                     <include>*.yml</include>
                     <include>.jenkins</include>
