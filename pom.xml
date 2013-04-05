@@ -12,6 +12,17 @@
     <build>
         <finalName>Soulbound</finalName>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+        <resources>
+            <resource>
+                <targetPath>.</targetPath>
+                <filtering>true</filtering>
+                <directory>${basedir}/src/resources/</directory>
+                <includes>
+                    <include>*.yml</include>
+                    <include>.jenkins</include>
+                </includes>
+            </resource>
+        </resources>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
