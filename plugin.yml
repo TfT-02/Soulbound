@@ -1,8 +1,8 @@
 name: Soulbound
+version: ${project.version}-b${BUILD_NUMBER}
 author: TfT_02
 main: com.me.tft_02.soulbound.Soulbound
 description: Soulbound items for your RPG servers!
-version: 1.1.4
 softdepend: [DiabloDrops, EpicBossRecoded, LoreLocks, MythicDrops]
 commands:
    soulbound:
