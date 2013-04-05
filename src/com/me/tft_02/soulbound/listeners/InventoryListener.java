@@ -6,6 +6,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryMoveItemEvent;
+import org.bukkit.event.inventory.InventoryPickupItemEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.inventory.InventoryType.SlotType;
 import org.bukkit.inventory.ItemStack;
@@ -100,6 +102,48 @@ public class InventoryListener implements Listener {
                 default:
                     return;
             }
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onInventoryMoveEvent(InventoryMoveItemEvent event) {
+        ItemStack itemStack = event.getItem();
+
+        ItemType itemType = ItemUtils.getItemType(itemStack);
+
+        if (itemStack == null) {
+            return;
+        }
+
+        switch (itemType) {
+            case NORMAL:
+                return;
+            case SOULBOUND:
+                event.setCancelled(true);
+                return;
+            default:
+                return;
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onInventoryPickupItemEvent(InventoryPickupItemEvent event) {
+        ItemStack itemStack = event.getItem().getItemStack();
+
+        ItemType itemType = ItemUtils.getItemType(itemStack);
+
+        if (itemStack == null) {
+            return;
+        }
+
+        switch (itemType) {
+            case NORMAL:
+                return;
+            case SOULBOUND:
+                event.setCancelled(true);
+                return;
+            default:
+                return;
         }
     }
 }
