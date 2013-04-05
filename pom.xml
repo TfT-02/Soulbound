@@ -11,7 +11,7 @@
   </issueManagement>
     <build>
         <finalName>Soulbound</finalName>
-        <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+        <sourceDirectory>${basedir}/src/java</sourceDirectory>
         <resources>
             <resource>
                 <targetPath>.</targetPath>
