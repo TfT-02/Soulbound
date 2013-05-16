@@ -49,7 +49,7 @@
         </repository>
         <repository>
             <id>mythicdrops-repo</id>
-            <url>https://repository-topplethenun.forge.cloudbees.com/snapshot/</url>
+            <url>http://repository-topplethenun.forge.cloudbees.com/snapshot/</url>
         </repository>
     </repositories>
     <dependencies>
