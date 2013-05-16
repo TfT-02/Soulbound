@@ -8,6 +8,7 @@ Key:
 
 Version 1.1.4 | Tested on CB 1.5.0-R0.1
  ! Hoppers can no longer pickup Soulbound items
+ = Fixed infinite durability not working for armor and special tools
 
 Version 1.1.3 | Tested on CB 1.5.0-R0.1
  + Added MythicDrops support
