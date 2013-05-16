@@ -43,6 +43,10 @@
             <id>diablodrops-repo</id>
             <url>http://ci.modcrafting.com/plugin/repository/everything/</url>
         </repository>
+        <repository>
+            <id>nuclearw-repo</id>
+            <url>http://repo.nuclearw.com/</url>
+        </repository>
     </repositories>
     <dependencies>
         <dependency>
@@ -56,6 +60,13 @@
             <groupId>DiabloDrops</groupId>
             <artifactId>DiabloDrops</artifactId>
             <version>2.5.1</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.derwisch.loreLocks</groupId>
+            <artifactId>LoreLocks</artifactId>
+            <version>2.1.0.0</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
