@@ -12,10 +12,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.PlayerShearEntityEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -23,6 +25,7 @@ import com.me.tft_02.soulbound.PlayerData;
 import com.me.tft_02.soulbound.Soulbound;
 import com.me.tft_02.soulbound.events.SoulbindItemEvent;
 import com.me.tft_02.soulbound.runnables.UpdateArmorTask;
+import com.me.tft_02.soulbound.util.DurabilityUtils;
 import com.me.tft_02.soulbound.util.ItemUtils;
 import com.me.tft_02.soulbound.util.Permissions;
 
@@ -170,5 +173,19 @@ public class PlayerListener implements Listener {
             default:
                 break;
         }
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    private void onPlayerFish(PlayerFishEvent event) {
+        ItemStack itemInHand = event.getPlayer().getItemInHand();
+
+        DurabilityUtils.handleInfiniteDurability(itemInHand);
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    private void onPlayerShearEntity(PlayerShearEntityEvent event) {
+        ItemStack itemInHand = event.getPlayer().getItemInHand();
+
+        DurabilityUtils.handleInfiniteDurability(itemInHand);
     }
 }
