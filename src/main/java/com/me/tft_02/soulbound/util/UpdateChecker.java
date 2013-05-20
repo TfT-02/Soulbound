@@ -40,10 +40,10 @@ public class UpdateChecker {
             jo = (JSONObject) jo.get("versions");
             newVersion = (String) jo.get("version");
 
-            String[] oldTokens = version.split("[.]");
-            String[] newTokens = newVersion.split("[.]");
+            String[] oldTokens = version.replaceAll("(?i)(-)(.+?)(-)", "-").split("[.]|-b");
+            String[] newTokens = newVersion.replaceAll("(?i)(-)(.+?)(-)", "-").split("[.]|-b");
 
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 4; i++) {
                 Integer newVer = Integer.parseInt(newTokens[i]);
                 Integer oldVer;
                 try {
