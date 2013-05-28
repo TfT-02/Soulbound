@@ -6,7 +6,9 @@ Key:
   ! Change
   - Removal
 
-Version 1.1.4 | Tested on CB 1.5.0-R0.1
+Version 1.1.4 | Tested on CB 1.5.2-R0.1
+ + Added a new configuration option to prevent using certain commands when holding a Soulbound item
+ + Added a new configuration option to Soulbind the item in hand when a certain command is used.
  ! Hoppers can no longer pickup Soulbound items
  = Fixed infinite durability not working for armor and special tools
 

@@ -1,6 +1,7 @@
 package com.me.tft_02.soulbound;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.logging.Level;
 
 import org.bukkit.ChatColor;
@@ -128,6 +129,12 @@ public class Soulbound extends JavaPlugin {
         config.addDefault("Soulbound.Delete_On_Death", false);
         config.addDefault("Soulbound.Keep_On_Death", false);
         config.addDefault("Soulbound.Infinite_Durability", false);
+
+        String[] defaultBlockedcmds = { "/blockedcommand" };
+        config.addDefault("Soulbound.Blocked_Commands", Arrays.asList(defaultBlockedcmds));
+
+        String[] defaultSoulbindcmds = { "/enchant" };
+        config.addDefault("Soulbound.Commands_Bind_When_Used", Arrays.asList(defaultSoulbindcmds));
 
         if (diabloDropsEnabled) {
             config.addDefault("Dependency_Plugins.DiabloDrops.BindOnPickup", "Legendary, Rare, Unidentified");

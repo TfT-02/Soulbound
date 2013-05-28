@@ -11,6 +11,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -187,5 +188,23 @@ public class PlayerListener implements Listener {
         ItemStack itemInHand = event.getPlayer().getItemInHand();
 
         DurabilityUtils.handleInfiniteDurability(itemInHand);
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+    public void onPlayerCommand(PlayerCommandPreprocessEvent event) {
+        Player player = event.getPlayer();
+        ItemStack inHand = player.getItemInHand();
+        String command = event.getMessage();
+
+        List<String> blockedCmds = Soulbound.getInstance().getConfig().getStringList("Soulbound.Blocked_Commands");
+        if (ItemUtils.isSoulbound(inHand) && blockedCmds.contains(command)) {
+            player.sendMessage(ChatColor.RED + "You're not allowed to use " + ChatColor.GOLD + command + ChatColor.RED + " command while holding a Soulbound item.");
+            event.setCancelled(true);
+        }
+
+        List<String> bindCmds = Soulbound.getInstance().getConfig().getStringList("Soulbound.Commands_Bind_When_Used");
+        if (!ItemUtils.isSoulbound(inHand) && bindCmds.contains(command)) {
+            ItemUtils.soulbindItem(player, inHand);
+        }
     }
 }
