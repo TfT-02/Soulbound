@@ -10,6 +10,10 @@ public class SoulboundConfig {
         plugin = instance;
     }
 
+    public static boolean getFeedbackMessagesEnabled() {
+        return Soulbound.getInstance().getConfig().getBoolean("Soulbound.Feedback_Messages_Enabled", true);
+    }
+
     // EpicBossRecoded config settings
 
     public boolean getEBRBindOnPickup() {

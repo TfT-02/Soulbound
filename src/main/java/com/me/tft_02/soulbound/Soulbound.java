@@ -124,6 +124,7 @@ public class Soulbound extends JavaPlugin {
         config.addDefault("General.stats_tracking_enabled", true);
         config.addDefault("General.update_check_enabled", true);
 
+        config.addDefault("Soulbound.Feedback_Messages_Enabled", true);
         config.addDefault("Soulbound.Allow_Item_Drop", true);
         config.addDefault("Soulbound.Allow_Item_Storing", true);
         config.addDefault("Soulbound.Delete_On_Death", false);

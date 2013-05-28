@@ -196,7 +196,10 @@ public class Commands implements CommandExecutor {
                     }
                 }
             }
-            player.sendMessage(ChatColor.GRAY + "All items in " + ChatColor.DARK_AQUA + target.getName() + ChatColor.GRAY + "'s inventory are now " + ChatColor.GOLD + "Soulbound " + ChatColor.GRAY + "to " + ChatColor.DARK_AQUA + target.getName());
+
+            if (SoulboundConfig.getFeedbackMessagesEnabled()) {
+                player.sendMessage(ChatColor.GRAY + "All items in " + ChatColor.DARK_AQUA + target.getName() + ChatColor.GRAY + "'s inventory are now " + ChatColor.GOLD + "Soulbound " + ChatColor.GRAY + "to " + ChatColor.DARK_AQUA + target.getName());
+            }
             return true;
         }
 
@@ -209,7 +212,7 @@ public class Commands implements CommandExecutor {
 
         ItemUtils.soulbindItem(target, itemInHand);
 
-        if (ItemUtils.isSoulbound(itemInHand)) {
+        if (ItemUtils.isSoulbound(itemInHand) && SoulboundConfig.getFeedbackMessagesEnabled()) {
             player.sendMessage(ChatColor.GRAY + "Item is now " + ChatColor.GOLD + "Soulbound " + ChatColor.GRAY + "to " + ChatColor.DARK_AQUA + target.getName());
         }
         return true;
