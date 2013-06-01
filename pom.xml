@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.me.tft_02.soulbound</groupId>
   <artifactId>Soulbound</artifactId>
-  <version>1.1.4</version>
+  <version>1.1.5-dev</version>
   <name>Soulbound</name>
   <url>https://github.com/TfT-02/Soulbound</url>
   <issueManagement>
