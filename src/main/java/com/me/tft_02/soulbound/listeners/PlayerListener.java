@@ -125,7 +125,7 @@ public class PlayerListener implements Listener {
     }
 
     /**
-     * Monitor PlayerInteract events.
+     * Watch PlayerInteract events.
      * 
      * @param event The event to watch
      */
@@ -151,6 +151,11 @@ public class PlayerListener implements Listener {
         }
     }
 
+    /**
+     * Monitor PlayerFishEvent events.
+     * 
+     * @param event The event to monitor
+     */
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     private void onPlayerFish(PlayerFishEvent event) {
         ItemStack itemInHand = event.getPlayer().getItemInHand();
@@ -158,6 +163,11 @@ public class PlayerListener implements Listener {
         DurabilityUtils.handleInfiniteDurability(itemInHand);
     }
 
+    /**
+     * Monitor PlayerShearEntityEvent events.
+     * 
+     * @param event The event to monitor
+     */
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     private void onPlayerShearEntity(PlayerShearEntityEvent event) {
         ItemStack itemInHand = event.getPlayer().getItemInHand();
@@ -165,6 +175,11 @@ public class PlayerListener implements Listener {
         DurabilityUtils.handleInfiniteDurability(itemInHand);
     }
 
+    /**
+     * Watch PlayerCommandPreprocessEvent events.
+     * 
+     * @param event The event to watch
+     */
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onPlayerCommand(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
@@ -176,6 +191,18 @@ public class PlayerListener implements Listener {
             player.sendMessage(ChatColor.RED + "You're not allowed to use " + ChatColor.GOLD + command + ChatColor.RED + " command while holding a Soulbound item.");
             event.setCancelled(true);
         }
+    }
+
+    /**
+     * Monitor PlayerCommandPreprocessEvent events.
+     * 
+     * @param event The event to monitor
+     */
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onPlayerCommandMonitor(PlayerCommandPreprocessEvent event) {
+        Player player = event.getPlayer();
+        ItemStack inHand = player.getItemInHand();
+        String command = event.getMessage();
 
         List<String> bindCmds = Soulbound.getInstance().getConfig().getStringList("Soulbound.Commands_Bind_When_Used");
         if (!ItemUtils.isSoulbound(inHand) && bindCmds.contains(command)) {
