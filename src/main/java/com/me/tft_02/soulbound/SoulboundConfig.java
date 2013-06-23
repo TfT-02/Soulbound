@@ -1,18 +1,39 @@
 package com.me.tft_02.soulbound;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public class SoulboundConfig {
+    public enum ActionType {
+        OPEN_CHEST,
+        PICKUP_ITEM,
+        DROP_ITEM;
+    };
 
     static FileConfiguration config = Soulbound.getInstance().getConfig();
 
     public static boolean getFeedbackMessagesEnabled() {
         return config.getBoolean("Soulbound.Feedback_Messages_Enabled", true);
     }
-    
+
+    // Binding certain items by material name
+    public static HashSet<Material> getAlwaysSoulboundItems(ActionType action) {
+        HashSet<Material> items = new HashSet<Material>();
+
+        for (String item : config.getStringList("Misc.Soulbound_On_Action." + action.toString().toLowerCase())) {
+            Material material = Material.getMaterial(item.toUpperCase());
+
+            if (material != null) {
+                items.add(material);
+            }
+        }
+        return items;
+    }
+
     // EpicBossRecoded config settings
 
     public boolean getEBRBindOnPickup() {

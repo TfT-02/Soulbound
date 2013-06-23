@@ -1,5 +1,8 @@
 package com.me.tft_02.soulbound.listeners;
 
+import java.util.HashSet;
+
+import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -7,12 +10,15 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryPickupItemEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.inventory.InventoryType.SlotType;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import com.me.tft_02.soulbound.Soulbound;
+import com.me.tft_02.soulbound.SoulboundConfig;
 import com.me.tft_02.soulbound.runnables.UpdateArmorTask;
 import com.me.tft_02.soulbound.util.ItemUtils;
 import com.me.tft_02.soulbound.util.ItemUtils.ItemType;
@@ -144,6 +150,25 @@ public class InventoryListener implements Listener {
                 return;
             default:
                 return;
+        }
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onInventoryOpen(InventoryOpenEvent event) {
+        HumanEntity humanEntity = event.getPlayer();
+        Inventory inventory = event.getInventory();
+        
+        if (humanEntity instanceof Player) {
+            Player player = (Player) humanEntity;
+            
+            HashSet<Material> items = SoulboundConfig.getAlwaysSoulboundItems(SoulboundConfig.ActionType.OPEN_CHEST);
+            if (items != null) {
+                for (ItemStack itemStack : inventory.getContents()) {
+                    if (itemStack != null && items.contains(itemStack.getType())) {
+                        ItemUtils.soulbindItem(player, itemStack);
+                    }
+                }
+            }
         }
     }
 }

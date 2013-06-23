@@ -1,9 +1,11 @@
 package com.me.tft_02.soulbound.listeners;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,6 +25,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.me.tft_02.soulbound.PlayerData;
 import com.me.tft_02.soulbound.Soulbound;
+import com.me.tft_02.soulbound.SoulboundConfig;
 import com.me.tft_02.soulbound.runnables.UpdateArmorTask;
 import com.me.tft_02.soulbound.util.DurabilityUtils;
 import com.me.tft_02.soulbound.util.ItemUtils;
@@ -74,6 +77,13 @@ public class PlayerListener implements Listener {
         if (ItemUtils.isSoulbound(itemStack) && ItemUtils.isBindedPlayer(player, itemStack)) {
             player.updateInventory();
             event.setCancelled(true);
+        }
+
+        HashSet<Material> items = SoulboundConfig.getAlwaysSoulboundItems(SoulboundConfig.ActionType.DROP_ITEM);
+        if (items != null) {
+            if (items.contains(itemStack.getType())) {
+                ItemUtils.soulbindItem(player, itemStack);
+            }
         }
     }
 
