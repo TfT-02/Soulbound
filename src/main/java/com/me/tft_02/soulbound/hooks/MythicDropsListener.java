@@ -32,7 +32,7 @@ public class MythicDropsListener implements Listener {
     }
 
     private void handleMythicDropsItems(ItemStack itemStack) {
-        SoulboundConfig config = new SoulboundConfig(Soulbound.getInstance());
+        SoulboundConfig config = new SoulboundConfig();
         TierManager tierManager = MythicDrops.getInstance().getTierManager();
         Tier tier = tierManager.getTierFromItemStack(itemStack);
         String tierName = "Any";

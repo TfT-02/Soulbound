@@ -35,7 +35,7 @@ public class EpicBossRecodedListener implements Listener {
     }
 */
     public void handleEpicBossItems(ItemStack itemStack) {
-        SoulboundConfig config = new SoulboundConfig(Soulbound.getInstance());
+        SoulboundConfig config = new SoulboundConfig();
 
         if (config.getEBRBindOnEquip() && ItemUtils.isEquipable(itemStack)) {
             ItemUtils.boeItem(itemStack);

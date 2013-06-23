@@ -59,7 +59,7 @@ public class DiabloDropsListener implements Listener {
 
     public void handleDiabloDropsItems(ItemStack itemStack) {
         DropsAPI dropsAPI = new DropsAPI(DiabloDrops.getInstance());
-        SoulboundConfig config = new SoulboundConfig(Soulbound.getInstance());
+        SoulboundConfig config = new SoulboundConfig();
         Tier tier = dropsAPI.getTier(itemStack);
         String tierName = "Any";
         if (tier != null) {

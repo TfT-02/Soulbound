@@ -27,7 +27,7 @@ public class LoreLocksListener implements Listener {
     public void onKeyCreate(KeyCreateEvent event) {
         Player player = event.getPlayer();
         ItemStack itemStack = event.getKey();
-        SoulboundConfig config = new SoulboundConfig(Soulbound.getInstance());
+        SoulboundConfig config = new SoulboundConfig();
 
         if (itemStack != null && config.getLoreLocksBindKeys()) {
             event.setKey(ItemUtils.soulbindItem(player, itemStack));
