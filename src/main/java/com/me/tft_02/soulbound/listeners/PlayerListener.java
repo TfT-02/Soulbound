@@ -76,6 +76,7 @@ public class PlayerListener implements Listener {
 
         if (ItemUtils.isSoulbound(itemStack) && ItemUtils.isBindedPlayer(player, itemStack)) {
             player.updateInventory();
+            item.setPickupDelay(2 * 20);
             event.setCancelled(true);
         }
 
