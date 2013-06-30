@@ -45,6 +45,12 @@ permissions:
     soulbound.pickup.bypass:
         description: Users with this permission will be able to pickup Soulbound items that do not belong to them.
         default: false
+    soulbound.items.keep_on_death:
+        description: Users with this permission will keep their Soulbound items after dying
+        default: false
+    soulbound.items.delete_on_death:
+        description: Users with this permission will have their Soulbound items deleted on death
+        default: false
     soulbound.updatecheck:
         description: Users with this permission will receive a notification when there is a new version available.
         default: op

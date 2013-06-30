@@ -1,9 +1,13 @@
 package com.me.tft_02.soulbound.util;
 
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 
 public class Permissions {
+
+    public static boolean keepOnDeath(Permissible permissible) { return permissible.hasPermission("soulbound.items.keep_on_death"); }
+    public static boolean deleteOnDeath(Permissible permissible) { return permissible.hasPermission("soulbound.items.delete_on_death"); }
 
     public static int getSoulbindMaximum(Player player) {
         String match = "soulbound.maximum_allowed.";

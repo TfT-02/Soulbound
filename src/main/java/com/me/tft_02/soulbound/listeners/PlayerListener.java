@@ -29,6 +29,7 @@ import com.me.tft_02.soulbound.SoulboundConfig;
 import com.me.tft_02.soulbound.runnables.UpdateArmorTask;
 import com.me.tft_02.soulbound.util.DurabilityUtils;
 import com.me.tft_02.soulbound.util.ItemUtils;
+import com.me.tft_02.soulbound.util.Permissions;
 
 public class PlayerListener implements Listener {
     Soulbound plugin;
@@ -90,10 +91,11 @@ public class PlayerListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private void onPlayerDeath(PlayerDeathEvent event) {
-        boolean deleteOnDeath = plugin.getConfig().getBoolean("Soulbound.Delete_On_Death");
-        boolean keepOnDeath = plugin.getConfig().getBoolean("Soulbound.Keep_On_Death");
-
         Player player = event.getEntity();
+
+        boolean deleteOnDeath = Permissions.deleteOnDeath(player);
+        boolean keepOnDeath = Permissions.keepOnDeath(player);
+
         List<ItemStack> items = new ArrayList<ItemStack>();
 
         if (!keepOnDeath && !deleteOnDeath) {
@@ -118,7 +120,7 @@ public class PlayerListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private void onPlayerRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
-        boolean keepOnDeath = Soulbound.getInstance().getConfig().getBoolean("Soulbound.Keep_On_Death");
+        boolean keepOnDeath = Permissions.keepOnDeath(player);
 
         if (!keepOnDeath) {
             return;

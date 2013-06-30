@@ -6,7 +6,9 @@ Key:
   ! Change
   - Removal
 
-Version 1.1.5 | Tested on CB 1.5.2-R0.1
+Version 1.1.5 | Tested on CB 1.5.2-R1.0
+ + Added new permission nodes soulbound.items.keep_on_death and soulbound.items.delete_on_death, both are false by default
+ - Removed config options "Keep_On_Death" and "Delete_On_Death". Use permissions instead!
 
 Version 1.1.4 | Tested on CB 1.5.2-R0.1
  + Added a new configuration option to prevent using certain commands when holding a Soulbound item
