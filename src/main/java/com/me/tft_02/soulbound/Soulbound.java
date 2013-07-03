@@ -8,6 +8,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.mcstats.Metrics;
 
 import com.me.tft_02.soulbound.hooks.DiabloDropsListener;
 import com.me.tft_02.soulbound.hooks.EpicBossRecodedListener;
@@ -17,7 +18,6 @@ import com.me.tft_02.soulbound.listeners.BlockListener;
 import com.me.tft_02.soulbound.listeners.EntityListener;
 import com.me.tft_02.soulbound.listeners.InventoryListener;
 import com.me.tft_02.soulbound.listeners.PlayerListener;
-import com.me.tft_02.soulbound.util.Metrics;
 import com.me.tft_02.soulbound.util.UpdateChecker;
 
 public class Soulbound extends JavaPlugin {
@@ -82,7 +82,6 @@ public class Soulbound extends JavaPlugin {
                 metrics.start();
             }
             catch (IOException e) {
-                System.out.println("Failed to submit stats.");
             }
         }
     }

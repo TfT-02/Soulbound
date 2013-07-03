@@ -40,6 +40,10 @@
             <url>http://repo.bukkit.org/content/groups/public/</url>
         </repository>
         <repository>
+           <id>Plugin Metrics</id>
+            <url>http://repo.mcstats.org/content/repositories/public</url>
+        </repository>
+        <repository>
             <id>diablodrops-repo</id>
             <url>http://ci.modcrafting.com/plugin/repository/everything/</url>
         </repository>
@@ -58,6 +62,12 @@
             <artifactId>bukkit</artifactId>
             <version>LATEST</version>
             <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mcstats.bukkit</groupId>
+            <artifactId>metrics</artifactId>
+            <version>R7</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
