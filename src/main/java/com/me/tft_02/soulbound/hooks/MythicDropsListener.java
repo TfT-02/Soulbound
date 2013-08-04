@@ -28,10 +28,15 @@ public class MythicDropsListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onMythicDropsEntitySpawn(CreatureEquippedWithItemStackEvent event) {
         ItemStack itemStack = event.getItemStack();
-        handleMythicDropsItems(itemStack);
+
+        ItemStack newItemStack = handleMythicDropsItems(itemStack);
+
+        if (newItemStack != null) {
+            event.setItemStack(newItemStack);
+        }
     }
 
-    private void handleMythicDropsItems(ItemStack itemStack) {
+    private ItemStack handleMythicDropsItems(ItemStack itemStack) {
         SoulboundConfig config = new SoulboundConfig();
         TierManager tierManager = MythicDrops.getInstance().getTierManager();
         Tier tier = tierManager.getTierFromItemStack(itemStack);
@@ -41,13 +46,14 @@ public class MythicDropsListener implements Listener {
         }
 
         if (config.getMythicDropsBindOnEquipTiers().contains(tierName) && ItemUtils.isEquipable(itemStack)) {
-            ItemUtils.boeItem(itemStack);
+            return ItemUtils.boeItem(itemStack);
         }
         else if (config.getMythicDropsBindOnPickupTiers().contains(tierName)) {
-            ItemUtils.bopItem(itemStack);
+            return ItemUtils.bopItem(itemStack);
         }
         else if (config.getMythicDropsBindOnUseTiers().contains(tierName)) {
-            ItemUtils.bouItem(itemStack);
+            return ItemUtils.bouItem(itemStack);
         }
+        return null;
     }
 }
