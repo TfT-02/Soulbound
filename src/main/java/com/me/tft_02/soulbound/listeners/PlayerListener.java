@@ -47,7 +47,7 @@ public class PlayerListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     private void onItemPickup(PlayerPickupItemEvent event) {
         Player player = event.getPlayer();
         Item item = event.getItem();
