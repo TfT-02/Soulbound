@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -80,6 +81,9 @@ public class PlayerListener implements Listener {
             }
         }
 
+        if (Config.getInstance().getDeleteOnDrop()) {
+            player.playSound(player.getLocation(), Sound.ITEM_BREAK, 1.0F, 1.0F);
+            event.getItemDrop().remove();
         }
 
         HashSet<Material> items = Config.getInstance().getAlwaysSoulboundItems(ActionType.DROP_ITEM);
