@@ -35,9 +35,9 @@ Soulbound:
 Misc:
   Soulbound_On_Action:
     open_chest:
-      - Diamond_Sword
+#      - Diamond_Sword
     drop_item:
-      - Diamond_Shovel
+#      - Diamond_Shovel
 
 Dependency_Plugins:
   DiabloDrops:
