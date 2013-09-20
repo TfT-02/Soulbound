@@ -1,10 +1,43 @@
+#
+#  Soulbound configuration
+#  Last updated on ${project.version}-b${BUILD_NUMBER}
+#
+#####
+
+#
+#  Settings for Soulbound in general
+###
 General:
-  stats_tracking_enabled: true
-  update_check_enabled: true
+    # Allow Soulbound to report on basic anonymous usage
+    Stats_Tracking: true
+
+    # Allow Soulbound to check if a new version is available
+    Update_Check: true
+    Prefer_Beta: false
+
+    # Should Soulbound print out debug messages?
+    Verbose_Logging: false
+
+    # Should Soulbound over-write configs to update, or make new ones ending in .new?
+    Config_Update_Overwrite: true
+
 Soulbound:
+  Feedback_Messages_Enabled: true
   Allow_Item_Drop: true
   Allow_Item_Storing: true
   Infinite_Durability: false
+  Blocked_Commands:
+      /blockedcommand
+  Commands_Bind_When_Used:
+      /enchant
+
+Misc:
+  Soulbound_On_Action:
+    open_chest:
+      - Diamond_Sword
+    drop_item:
+      - Diamond_Shovel
+
 Dependency_Plugins:
   DiabloDrops:
     BindOnPickup: Legendary, Rare, Unidentified

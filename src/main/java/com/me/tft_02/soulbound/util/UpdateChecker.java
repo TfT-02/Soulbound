@@ -4,23 +4,22 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.UnknownHostException;
 
+import com.me.tft_02.soulbound.Soulbound;
+import com.me.tft_02.soulbound.config.Config;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import com.me.tft_02.soulbound.Soulbound;
-
 public class UpdateChecker {
-    static Soulbound plugin;
-
     private UpdateChecker() {}
 
     public static boolean updateAvailable() throws Exception {
-        String version = Soulbound.getInstance().getDescription().getVersion();
-        URL url = new URL("http://api.bukget.org/api2/bukkit/plugin/soulbound/latest");
+        String checkType = Config.getInstance().getPreferBeta() ? "latest" : "release";
+        String version = Soulbound.p.getDescription().getVersion();
         InputStreamReader isr;
+
         try {
-            isr = new InputStreamReader(url.openStream());
+            isr = new InputStreamReader(new URL("http://api.bukget.org/api2/bukkit/plugin/soulbound/" + checkType).openStream());
         }
         catch (UnknownHostException e) {
             return false;

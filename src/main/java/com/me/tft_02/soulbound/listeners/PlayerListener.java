@@ -23,9 +23,10 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerShearEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.me.tft_02.soulbound.PlayerData;
+import com.me.tft_02.soulbound.util.PlayerData;
 import com.me.tft_02.soulbound.Soulbound;
-import com.me.tft_02.soulbound.SoulboundConfig;
+import com.me.tft_02.soulbound.config.Config;
+import com.me.tft_02.soulbound.datatypes.ActionType;
 import com.me.tft_02.soulbound.runnables.UpdateArmorTask;
 import com.me.tft_02.soulbound.util.DurabilityUtils;
 import com.me.tft_02.soulbound.util.ItemUtils;
@@ -41,7 +42,7 @@ public class PlayerListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     private void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if (Soulbound.getInstance().updateAvailable && player.hasPermission("soulbound.updatecheck")) {
+        if (Soulbound.p.updateAvailable && player.hasPermission("soulbound.updatecheck")) {
             player.sendMessage(ChatColor.GOLD + "Soulbound is outdated!");
             player.sendMessage(ChatColor.AQUA + "http://dev.bukkit.org/server-mods/Soulbound/");
         }
@@ -71,7 +72,7 @@ public class PlayerListener implements Listener {
         Item item = event.getItemDrop();
         ItemStack itemStack = item.getItemStack();
 
-        if (Soulbound.getInstance().getConfig().getBoolean("Soulbound.Allow_Item_Drop")) {
+        if (Config.getInstance().getAllowItemDrop()) {
             return;
         }
 
@@ -81,7 +82,7 @@ public class PlayerListener implements Listener {
             event.setCancelled(true);
         }
 
-        HashSet<Material> items = SoulboundConfig.getAlwaysSoulboundItems(SoulboundConfig.ActionType.DROP_ITEM);
+        HashSet<Material> items = Config.getInstance().getAlwaysSoulboundItems(ActionType.DROP_ITEM);
         if (items != null) {
             if (items.contains(itemStack.getType())) {
                 ItemUtils.soulbindItem(player, itemStack);
@@ -154,7 +155,7 @@ public class PlayerListener implements Listener {
             case LEFT_CLICK_AIR:
             case LEFT_CLICK_BLOCK:
                 if (ItemUtils.isEquipable(inHand)) {
-                    new UpdateArmorTask(player).runTaskLater(Soulbound.getInstance(), 2);
+                    new UpdateArmorTask(player).runTaskLater(Soulbound.p, 2);
                 }
                 else if (ItemUtils.isBindOnUse(inHand)) {
                     ItemUtils.soulbindItem(player, inHand);
@@ -199,8 +200,7 @@ public class PlayerListener implements Listener {
         ItemStack inHand = player.getItemInHand();
         String command = event.getMessage();
 
-        List<String> blockedCmds = Soulbound.getInstance().getConfig().getStringList("Soulbound.Blocked_Commands");
-        if (ItemUtils.isSoulbound(inHand) && blockedCmds.contains(command)) {
+        if (ItemUtils.isSoulbound(inHand) && Config.getInstance().getBlockedCommands().contains(command)) {
             player.sendMessage(ChatColor.RED + "You're not allowed to use " + ChatColor.GOLD + command + ChatColor.RED + " command while holding a Soulbound item.");
             event.setCancelled(true);
         }
@@ -217,8 +217,7 @@ public class PlayerListener implements Listener {
         ItemStack inHand = player.getItemInHand();
         String command = event.getMessage();
 
-        List<String> bindCmds = Soulbound.getInstance().getConfig().getStringList("Soulbound.Commands_Bind_When_Used");
-        if (!ItemUtils.isSoulbound(inHand) && bindCmds.contains(command)) {
+        if (!ItemUtils.isSoulbound(inHand) && Config.getInstance().getBindCommands().contains(command)) {
             ItemUtils.soulbindItem(player, inHand);
         }
     }

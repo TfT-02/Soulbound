@@ -18,7 +18,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import com.me.tft_02.soulbound.Soulbound;
-import com.me.tft_02.soulbound.SoulboundConfig;
+import com.me.tft_02.soulbound.config.Config;
+import com.me.tft_02.soulbound.datatypes.ActionType;
 import com.me.tft_02.soulbound.runnables.UpdateArmorTask;
 import com.me.tft_02.soulbound.util.ItemUtils;
 import com.me.tft_02.soulbound.util.ItemUtils.ItemType;
@@ -50,7 +51,7 @@ public class InventoryListener implements Listener {
             Player player = (Player) entity;
             switch (slotType) {
                 case ARMOR:
-                    new UpdateArmorTask(player).runTaskLater(Soulbound.getInstance(), 2);
+                    new UpdateArmorTask(player).runTaskLater(Soulbound.p, 2);
                     return;
                 case CONTAINER:
                     ItemType itemType = ItemUtils.getItemType(itemStack);
@@ -63,7 +64,7 @@ public class InventoryListener implements Listener {
                     }
                 default:
                     if (ItemUtils.isEquipable(itemStack) && event.isShiftClick()) {
-                        new UpdateArmorTask(player).runTaskLater(Soulbound.getInstance(), 2);
+                        new UpdateArmorTask(player).runTaskLater(Soulbound.p, 2);
                         return;
                     }
                     break;
@@ -93,7 +94,7 @@ public class InventoryListener implements Listener {
                 case NORMAL:
                     return;
                 case SOULBOUND:
-                    if (!Soulbound.getInstance().getConfig().getBoolean("Soulbound.Allow_Item_Storing") && !(inventoryType == InventoryType.CRAFTING)) {
+                    if (!Config.getInstance().getAllowItemStoring() && !(inventoryType == InventoryType.CRAFTING)) {
                         event.setCancelled(true);
                     }
 
@@ -161,7 +162,7 @@ public class InventoryListener implements Listener {
         if (humanEntity instanceof Player) {
             Player player = (Player) humanEntity;
             
-            HashSet<Material> items = SoulboundConfig.getAlwaysSoulboundItems(SoulboundConfig.ActionType.OPEN_CHEST);
+            HashSet<Material> items = Config.getInstance().getAlwaysSoulboundItems(ActionType.OPEN_CHEST);
             if (items != null) {
                 for (ItemStack itemStack : inventory.getContents()) {
                     if (itemStack != null && items.contains(itemStack.getType())) {

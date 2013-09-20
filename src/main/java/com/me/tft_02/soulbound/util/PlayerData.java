@@ -1,10 +1,12 @@
-package com.me.tft_02.soulbound;
+package com.me.tft_02.soulbound.util;
 
 import java.util.HashMap;
 import java.util.List;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import com.me.tft_02.soulbound.Soulbound;
 
 public class PlayerData {
     Soulbound plugin;

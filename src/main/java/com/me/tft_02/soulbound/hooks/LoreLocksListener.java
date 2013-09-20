@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.github.derwisch.loreLocks.KeyCreateEvent;
 import com.me.tft_02.soulbound.Soulbound;
-import com.me.tft_02.soulbound.SoulboundConfig;
+import com.me.tft_02.soulbound.config.Config;
 import com.me.tft_02.soulbound.util.ItemUtils;
 
 public class LoreLocksListener implements Listener {
@@ -27,9 +27,8 @@ public class LoreLocksListener implements Listener {
     public void onKeyCreate(KeyCreateEvent event) {
         Player player = event.getPlayer();
         ItemStack itemStack = event.getKey();
-        SoulboundConfig config = new SoulboundConfig();
 
-        if (itemStack != null && config.getLoreLocksBindKeys()) {
+        if (itemStack != null && Config.getInstance().getLoreLocksBindKeys()) {
             event.setKey(ItemUtils.soulbindItem(player, itemStack));
         }
     }

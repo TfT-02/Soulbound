@@ -1,15 +1,15 @@
 package com.me.tft_02.soulbound;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.logging.Level;
 
 import org.bukkit.ChatColor;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.mcstats.Metrics;
 
+import com.me.tft_02.soulbound.commands.Commands;
+import com.me.tft_02.soulbound.config.Config;
 import com.me.tft_02.soulbound.hooks.DiabloDropsListener;
 import com.me.tft_02.soulbound.hooks.EpicBossRecodedListener;
 import com.me.tft_02.soulbound.hooks.LoreLocksListener;
@@ -18,10 +18,18 @@ import com.me.tft_02.soulbound.listeners.BlockListener;
 import com.me.tft_02.soulbound.listeners.EntityListener;
 import com.me.tft_02.soulbound.listeners.InventoryListener;
 import com.me.tft_02.soulbound.listeners.PlayerListener;
+import com.me.tft_02.soulbound.util.LogFilter;
 import com.me.tft_02.soulbound.util.UpdateChecker;
+import org.mcstats.Metrics;
 
 public class Soulbound extends JavaPlugin {
-    public static Soulbound instance;
+    /* File Paths */
+    private static String mainDirectory;
+
+    public static Soulbound p;
+
+    // Jar Stuff
+    public static File soulbound;
 
     private PlayerListener playerListener = new PlayerListener(this);
     private InventoryListener inventoryListener = new InventoryListener(this);
@@ -43,23 +51,20 @@ public class Soulbound extends JavaPlugin {
     // Update Check
     public boolean updateAvailable;
 
-    public static Soulbound getInstance() {
-        return instance;
-    }
-
     /**
      * Run things on enable.
      */
     @Override
     public void onEnable() {
-        instance = this;
+        p = this;
+        getLogger().setFilter(new LogFilter(this));
+
+        setupFilePaths();
 
         setupDiabloDrops();
         setupEpicBossRecoded();
         setupLoreLocks();
         setupMythicDrops();
-
-        setupConfiguration();
 
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(playerListener, this);
@@ -76,13 +81,12 @@ public class Soulbound extends JavaPlugin {
 
         checkForUpdates();
 
-        if (getConfig().getBoolean("General.stats_tracking_enabled")) {
+        if (Config.getInstance().getStatsTrackingEnabled()) {
             try {
                 Metrics metrics = new Metrics(this);
                 metrics.start();
             }
-            catch (IOException e) {
-            }
+            catch (IOException e) {}
         }
     }
 
@@ -118,56 +122,30 @@ public class Soulbound extends JavaPlugin {
         }
     }
 
-    private void setupConfiguration() {
-        final FileConfiguration config = this.getConfig();
-        config.addDefault("General.stats_tracking_enabled", true);
-        config.addDefault("General.update_check_enabled", true);
-
-        config.addDefault("Soulbound.Feedback_Messages_Enabled", true);
-        config.addDefault("Soulbound.Allow_Item_Drop", true);
-        config.addDefault("Soulbound.Allow_Item_Storing", true);
-        config.addDefault("Soulbound.Infinite_Durability", false);
-
-        String[] defaultBlockedcmds = { "/blockedcommand" };
-        config.addDefault("Soulbound.Blocked_Commands", Arrays.asList(defaultBlockedcmds));
-
-        String[] defaultSoulbindcmds = { "/enchant" };
-        config.addDefault("Soulbound.Commands_Bind_When_Used", Arrays.asList(defaultSoulbindcmds));
-
-        if (diabloDropsEnabled) {
-            config.addDefault("Dependency_Plugins.DiabloDrops.BindOnPickup", "Legendary, Rare, Unidentified");
-            config.addDefault("Dependency_Plugins.DiabloDrops.BindOnUse", "Magical");
-            config.addDefault("Dependency_Plugins.DiabloDrops.BindOnEquip", "Set");
-        }
-
-        if (epicBossRecodedEnabled) {
-            config.addDefault("Dependency_Plugins.EpicBossRecoded.BindOnPickup", true);
-            config.addDefault("Dependency_Plugins.EpicBossRecoded.BindOnEquip", false);
-            config.addDefault("Dependency_Plugins.EpicBossRecoded.BindOnUse", false);
-        }
-
-        if (loreLocksEnabled) {
-            config.addDefault("Dependency_Plugins.LoreLocks.Bind_Keys", true);
-        }
-
-        if (mythicDropsEnabled) {
-            config.addDefault("Dependency_Plugins.MythicDrops.BindOnPickup", "common, uncommon, rare");
-            config.addDefault("Dependency_Plugins.MythicDrops.BindOnUse", "terric, netheric");
-            config.addDefault("Dependency_Plugins.MythicDrops.BindOnEquip", "endric");
-        }
-
-        config.options().copyDefaults(true);
-        saveConfig();
-    }
-
     /**
      * Run things on disable.
      */
     @Override
     public void onDisable() {}
 
+    public static String getMainDirectory() {
+        return mainDirectory;
+    }
+
+    public void debug(String message) {
+        getLogger().info("[Debug] " + message);
+    }
+
+    /**
+     * Setup the various storage file paths
+     */
+    private void setupFilePaths() {
+        soulbound = getFile();
+        mainDirectory = getDataFolder().getPath() + File.separator;
+    }
+
     private void checkForUpdates() {
-        if (getConfig().getBoolean("General.update_check_enabled")) {
+        if (Config.getInstance().getUpdateCheckEnabled()) {
             try {
                 updateAvailable = UpdateChecker.updateAvailable();
             }

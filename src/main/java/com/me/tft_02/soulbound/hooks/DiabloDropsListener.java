@@ -12,7 +12,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import com.me.tft_02.soulbound.Soulbound;
-import com.me.tft_02.soulbound.SoulboundConfig;
+import com.me.tft_02.soulbound.config.Config;
 import com.me.tft_02.soulbound.util.ItemUtils;
 import com.modcrafting.diablodrops.DiabloDrops;
 import com.modcrafting.diablodrops.drops.DropsAPI;
@@ -47,7 +47,7 @@ public class DiabloDropsListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onRuinGenerate(RuinGenerateEvent event) {
         final Block block = event.getChest();
-        Bukkit.getScheduler().scheduleSyncDelayedTask(Soulbound.getInstance(), new Runnable() {
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Soulbound.p, new Runnable() {
             @Override
             public void run() {
                 if (block.getType() == Material.CHEST) {
@@ -59,20 +59,19 @@ public class DiabloDropsListener implements Listener {
 
     public void handleDiabloDropsItems(ItemStack itemStack) {
         DropsAPI dropsAPI = new DropsAPI(DiabloDrops.getInstance());
-        SoulboundConfig config = new SoulboundConfig();
         Tier tier = dropsAPI.getTier(itemStack);
         String tierName = "Any";
         if (tier != null) {
             tierName = tier.getName();
         }
 
-        if (config.getDiabloDropsBindOnEquipTiers().contains(tierName) && ItemUtils.isEquipable(itemStack)) {
+        if (Config.getInstance().getDiabloDropsBindOnEquipTiers().contains(tierName) && ItemUtils.isEquipable(itemStack)) {
             ItemUtils.boeItem(itemStack);
         }
-        else if (config.getDiabloDropsBindOnPickupTiers().contains(tierName)) {
+        else if (Config.getInstance().getDiabloDropsBindOnPickupTiers().contains(tierName)) {
             ItemUtils.bopItem(itemStack);
         }
-        else if (config.getDiabloDropsBindOnUseTiers().contains(tierName)) {
+        else if (Config.getInstance().getDiabloDropsBindOnUseTiers().contains(tierName)) {
             ItemUtils.bouItem(itemStack);
         }
     }

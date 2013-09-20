@@ -2,13 +2,11 @@ package com.me.tft_02.soulbound.hooks;
 
 //import me.ThaH3lper.com.Api.BossDeathEvent;
 
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
 import com.me.tft_02.soulbound.Soulbound;
-import com.me.tft_02.soulbound.SoulboundConfig;
+import com.me.tft_02.soulbound.config.Config;
 import com.me.tft_02.soulbound.util.ItemUtils;
 
 public class EpicBossRecodedListener implements Listener {
@@ -35,15 +33,13 @@ public class EpicBossRecodedListener implements Listener {
     }
 */
     public void handleEpicBossItems(ItemStack itemStack) {
-        SoulboundConfig config = new SoulboundConfig();
-
-        if (config.getEBRBindOnEquip() && ItemUtils.isEquipable(itemStack)) {
+        if (Config.getInstance().getEBRBindOnEquip() && ItemUtils.isEquipable(itemStack)) {
             ItemUtils.boeItem(itemStack);
         }
-        else if (config.getEBRBindOnPickup()) {
+        else if (Config.getInstance().getEBRBindOnPickup()) {
             ItemUtils.bopItem(itemStack);
         }
-        else if (config.getEBRBindOnUse()) {
+        else if (Config.getInstance().getEBRBindOnUse()) {
             ItemUtils.bouItem(itemStack);
         }
     }

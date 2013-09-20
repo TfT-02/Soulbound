@@ -9,6 +9,7 @@ Key:
 Version 1.1.5 | Tested on CB 1.5.2-R1.0
  + Added new permission nodes soulbound.items.keep_on_death and soulbound.items.delete_on_death, both are false by default
  = Fixed MythicDrops support, works with MythicDrops 1.1.2
+ ! Changed config file system, files now automatically update
  - Removed config options "Keep_On_Death" and "Delete_On_Death". Use permissions instead!
 
 Version 1.1.4 | Tested on CB 1.5.2-R0.1

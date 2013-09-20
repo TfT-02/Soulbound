@@ -1,4 +1,4 @@
-package com.me.tft_02.soulbound;
+package com.me.tft_02.soulbound.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -9,6 +9,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import com.me.tft_02.soulbound.Soulbound;
+import com.me.tft_02.soulbound.config.Config;
 import com.me.tft_02.soulbound.util.ItemUtils;
 
 public class Commands implements CommandExecutor {
@@ -197,7 +199,7 @@ public class Commands implements CommandExecutor {
                 }
             }
 
-            if (SoulboundConfig.getFeedbackMessagesEnabled()) {
+            if (Config.getInstance().getFeedbackEnabled()) {
                 player.sendMessage(ChatColor.GRAY + "All items in " + ChatColor.DARK_AQUA + target.getName() + ChatColor.GRAY + "'s inventory are now " + ChatColor.GOLD + "Soulbound " + ChatColor.GRAY + "to " + ChatColor.DARK_AQUA + target.getName());
             }
             return true;
@@ -212,7 +214,7 @@ public class Commands implements CommandExecutor {
 
         ItemUtils.soulbindItem(target, itemInHand);
 
-        if (ItemUtils.isSoulbound(itemInHand) && SoulboundConfig.getFeedbackMessagesEnabled()) {
+        if (ItemUtils.isSoulbound(itemInHand) && Config.getInstance().getFeedbackEnabled()) {
             player.sendMessage(ChatColor.GRAY + "Item is now " + ChatColor.GOLD + "Soulbound " + ChatColor.GRAY + "to " + ChatColor.DARK_AQUA + target.getName());
         }
         return true;

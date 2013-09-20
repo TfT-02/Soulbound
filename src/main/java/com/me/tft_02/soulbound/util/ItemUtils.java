@@ -33,7 +33,7 @@ public class ItemUtils {
         }
 
         SoulbindItemEvent soulbindItemEvent = new SoulbindItemEvent(player, itemStack);
-        Soulbound.getInstance().getServer().getPluginManager().callEvent(soulbindItemEvent);
+        Soulbound.p.getServer().getPluginManager().callEvent(soulbindItemEvent);
         itemStack = soulbindItemEvent.getItemStack();
 
         if (soulbindItemEvent.isCancelled()) {
