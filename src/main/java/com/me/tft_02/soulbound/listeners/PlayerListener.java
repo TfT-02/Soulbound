@@ -72,14 +72,14 @@ public class PlayerListener implements Listener {
         Item item = event.getItemDrop();
         ItemStack itemStack = item.getItemStack();
 
-        if (Config.getInstance().getAllowItemDrop()) {
-            return;
+        if (Config.getInstance().getPreventItemDrop()) {
+            if (ItemUtils.isSoulbound(itemStack) && ItemUtils.isBindedPlayer(player, itemStack)) {
+                player.updateInventory();
+                item.setPickupDelay(2 * 20);
+                event.setCancelled(true);
+            }
         }
 
-        if (ItemUtils.isSoulbound(itemStack) && ItemUtils.isBindedPlayer(player, itemStack)) {
-            player.updateInventory();
-            item.setPickupDelay(2 * 20);
-            event.setCancelled(true);
         }
 
         HashSet<Material> items = Config.getInstance().getAlwaysSoulboundItems(ActionType.DROP_ITEM);

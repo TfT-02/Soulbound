@@ -41,7 +41,7 @@ public class Config extends AutoUpdateConfigLoader {
 
     /* SOULBOUND SETTINGS */
     public boolean getFeedbackEnabled() { return config.getBoolean("Soulbound.Feedback_Messages_Enabled", true); }
-    public boolean getAllowItemDrop() { return config.getBoolean("Soulbound.Allow_Item_Drop", true); }
+    public boolean getPreventItemDrop() { return config.getBoolean("Soulbound.Prevent_Item_Drop", false); }
     public boolean getAllowItemStoring() { return config.getBoolean("Soulbound.Allow_Item_Storing", true); }
     public boolean getInfiniteDurability() { return config.getBoolean("Soulbound.Infinite_Durability", false); }
 

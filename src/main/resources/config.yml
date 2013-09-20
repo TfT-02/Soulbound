@@ -23,7 +23,7 @@ General:
 
 Soulbound:
   Feedback_Messages_Enabled: true
-  Allow_Item_Drop: true
+  Prevent_Item_Drop: false
   Allow_Item_Storing: true
   Infinite_Durability: false
   Blocked_Commands:
