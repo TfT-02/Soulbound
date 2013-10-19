@@ -72,7 +72,7 @@
 		</repository>
 		<repository>
 			<id>diablodrops-repo</id>
-			<url>http://ci.modcrafting.com/plugin/repository/everything/</url>
+			<url>https://diabloplugins.ci.cloudbees.com/job/DiabloDrops/</url>
 		</repository>
 		<repository>
 			<id>nuclearw-repo</id>
