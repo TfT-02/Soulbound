@@ -65,6 +65,11 @@ public class PlayerListener implements Listener {
         else if (ItemUtils.isBindOnPickup(itemStack)) {
             ItemUtils.soulbindItem(player, itemStack);
         }
+
+        HashSet<Material> items = Config.getInstance().getAlwaysSoulboundItems(ActionType.PICKUP_ITEM);
+        if (items != null && items.contains(itemStack.getType())) {
+            ItemUtils.soulbindItem(player, itemStack);
+        }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
@@ -89,10 +94,8 @@ public class PlayerListener implements Listener {
         }
 
         HashSet<Material> items = Config.getInstance().getAlwaysSoulboundItems(ActionType.DROP_ITEM);
-        if (items != null) {
-            if (items.contains(itemStack.getType())) {
-                ItemUtils.soulbindItem(player, itemStack);
-            }
+        if (items != null && items.contains(itemStack.getType())) {
+            ItemUtils.soulbindItem(player, itemStack);
         }
     }
 
@@ -176,7 +179,7 @@ public class PlayerListener implements Listener {
      * 
      * @param event The event to monitor
      */
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     private void onPlayerFish(PlayerFishEvent event) {
         ItemStack itemInHand = event.getPlayer().getItemInHand();
 
@@ -188,7 +191,7 @@ public class PlayerListener implements Listener {
      * 
      * @param event The event to monitor
      */
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     private void onPlayerShearEntity(PlayerShearEntityEvent event) {
         ItemStack itemInHand = event.getPlayer().getItemInHand();
 
@@ -217,7 +220,7 @@ public class PlayerListener implements Listener {
      * 
      * @param event The event to monitor
      */
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onPlayerCommandMonitor(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
         ItemStack inHand = player.getItemInHand();
