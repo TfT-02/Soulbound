@@ -6,6 +6,8 @@ Key:
   ! Change
   - Removal
 
+Version 1.1.6 | Tested on CB 1.6.4-R0.1
+
 Version 1.1.5 | Tested on CB 1.6.2-R1.0
  + Added new config option; "Delete_On_Drop"
  + Added new permission nodes soulbound.items.keep_on_death and soulbound.items.delete_on_death, both are false by default
