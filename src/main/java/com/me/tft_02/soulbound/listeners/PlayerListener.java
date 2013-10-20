@@ -24,6 +24,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerShearEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
+import com.me.tft_02.soulbound.runnables.UpdateInventoryTask;
 import com.me.tft_02.soulbound.util.PlayerData;
 import com.me.tft_02.soulbound.Soulbound;
 import com.me.tft_02.soulbound.config.Config;
@@ -80,9 +81,9 @@ public class PlayerListener implements Listener {
 
         if (Config.getInstance().getPreventItemDrop()) {
             if (ItemUtils.isSoulbound(itemStack) && ItemUtils.isBindedPlayer(player, itemStack)) {
-                player.updateInventory();
                 item.setPickupDelay(2 * 20);
                 event.setCancelled(true);
+                new UpdateInventoryTask(player).runTask(Soulbound.p);
             }
             return;
         }
@@ -144,7 +145,7 @@ public class PlayerListener implements Listener {
             }
         }
 
-        player.updateInventory();
+        new UpdateInventoryTask(player).runTask(Soulbound.p);
     }
 
     /**

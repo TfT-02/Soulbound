@@ -9,6 +9,7 @@ Key:
 Version 1.1.5 | Tested on CB 1.6.2-R1.0
  + Added new config option; "Delete_On_Drop"
  + Added new permission nodes soulbound.items.keep_on_death and soulbound.items.delete_on_death, both are false by default
+ = Fixed bug where soulbound items would disappear when dropping them by dragging them out of the inventory
  = Fixed MythicDrops support, works with MythicDrops 1.1.2
  ! Changed config file system, files now automatically update
  ! Changed "Allow_Item_Drop" to "Prevent_Item_Drop"
