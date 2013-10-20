@@ -79,11 +79,13 @@ public class PlayerListener implements Listener {
                 item.setPickupDelay(2 * 20);
                 event.setCancelled(true);
             }
+            return;
         }
 
         if (Config.getInstance().getDeleteOnDrop()) {
             player.playSound(player.getLocation(), Sound.ITEM_BREAK, 1.0F, 1.0F);
             event.getItemDrop().remove();
+            return;
         }
 
         HashSet<Material> items = Config.getInstance().getAlwaysSoulboundItems(ActionType.DROP_ITEM);
