@@ -8,6 +8,7 @@ public class Permissions {
 
     public static boolean keepOnDeath(Permissible permissible) { return permissible.hasPermission("soulbound.items.keep_on_death"); }
     public static boolean deleteOnDeath(Permissible permissible) { return permissible.hasPermission("soulbound.items.delete_on_death"); }
+    public static boolean pickupBypass(Permissible permissible) { return permissible.hasPermission("soulbound.pickup.bypass"); }
 
     public static int getSoulbindMaximum(Player player) {
         String match = "soulbound.maximum_allowed.";
