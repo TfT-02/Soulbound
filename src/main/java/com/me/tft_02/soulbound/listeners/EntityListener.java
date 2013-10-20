@@ -27,7 +27,7 @@ public class EntityListener implements Listener {
      * 
      * @param event The event to check
      */
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onEntityDeath(EntityDamageByEntityEvent event) {
         if (event.getDamage() == 0 || event.getEntity().isDead()) {
             return;
@@ -58,7 +58,7 @@ public class EntityListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     private void onEntityShootBow(EntityShootBowEvent event) {
         Entity entity = event.getEntity();
 
@@ -67,7 +67,7 @@ public class EntityListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     private void onEntityDamage(EntityDamageEvent event) {
         if (event.getDamage() == 0 || event.getEntity().isDead()) {
             return;
