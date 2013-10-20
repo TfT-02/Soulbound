@@ -10,7 +10,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.me.tft_02.soulbound.commands.Commands;
 import com.me.tft_02.soulbound.config.Config;
-import com.me.tft_02.soulbound.hooks.DiabloDropsListener;
 import com.me.tft_02.soulbound.hooks.EpicBossRecodedListener;
 import com.me.tft_02.soulbound.hooks.LoreLocksListener;
 import com.me.tft_02.soulbound.hooks.MythicDropsListener;
@@ -37,13 +36,11 @@ public class Soulbound extends JavaPlugin {
     private BlockListener blockListener = new BlockListener(this);
 
     // Listeners for hooking into other plugins
-    private DiabloDropsListener diabloDropsListener = new DiabloDropsListener(this);
     private EpicBossRecodedListener epicBossRecodedListener = new EpicBossRecodedListener(this);
     private LoreLocksListener loreLocksListener = new LoreLocksListener(this);
     private MythicDropsListener mythicDropsListener = new MythicDropsListener(this);
 
     // Checks for hooking into other plugins
-    public static boolean diabloDropsEnabled = false;
     public static boolean epicBossRecodedEnabled = false;
     public static boolean loreLocksEnabled = false;
     public static boolean mythicDropsEnabled = false;
@@ -61,7 +58,6 @@ public class Soulbound extends JavaPlugin {
 
         setupFilePaths();
 
-        setupDiabloDrops();
         setupEpicBossRecoded();
         setupLoreLocks();
         setupMythicDrops();
@@ -87,14 +83,6 @@ public class Soulbound extends JavaPlugin {
                 metrics.start();
             }
             catch (IOException e) {}
-        }
-    }
-
-    private void setupDiabloDrops() {
-        if (getServer().getPluginManager().isPluginEnabled("DiabloDrops")) {
-            diabloDropsEnabled = true;
-            getLogger().info("DiabloDrops found!");
-            getServer().getPluginManager().registerEvents(diabloDropsListener, this);
         }
     }
 

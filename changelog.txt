@@ -13,6 +13,7 @@ Version 1.1.5 | Tested on CB 1.6.2-R1.0
  ! Changed config file system, files now automatically update
  ! Changed "Allow_Item_Drop" to "Prevent_Item_Drop"
  - Removed config options "Keep_On_Death" and "Delete_On_Death". Use permissions instead!
+ - Removed DiabloDrops support
 
 Version 1.1.4 | Tested on CB 1.5.2-R0.1
  + Added a new configuration option to prevent using certain commands when holding a Soulbound item
