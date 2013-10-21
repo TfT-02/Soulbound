@@ -88,7 +88,7 @@ public class Soulbound extends JavaPlugin {
     private void setupEpicBossRecoded() {
         if (getServer().getPluginManager().isPluginEnabled("EpicBossRecoded")) {
             epicBossRecodedEnabled = true;
-            getLogger().info("EpicBossRecoded found!");
+            debug("EpicBossRecoded found!");
             getServer().getPluginManager().registerEvents(epicBossRecodedListener, this);
         }
     }
@@ -96,7 +96,7 @@ public class Soulbound extends JavaPlugin {
     private void setupLoreLocks() {
         if (getServer().getPluginManager().isPluginEnabled("LoreLocks")) {
             loreLocksEnabled = true;
-            getLogger().info("LoreLocks found!");
+            debug("LoreLocks found!");
             getServer().getPluginManager().registerEvents(loreLocksListener, this);
         }
     }
@@ -104,7 +104,7 @@ public class Soulbound extends JavaPlugin {
     private void setupMythicDrops() {
         if (getServer().getPluginManager().isPluginEnabled("MythicDrops")) {
             mythicDropsEnabled = true;
-            getLogger().info("MythicDrops found!");
+            debug("MythicDrops found!");
             getServer().getPluginManager().registerEvents(mythicDropsListener, this);
         }
     }
