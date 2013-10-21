@@ -2,9 +2,7 @@ package com.me.tft_02.soulbound;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
 
-import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -18,7 +16,8 @@ import com.me.tft_02.soulbound.listeners.EntityListener;
 import com.me.tft_02.soulbound.listeners.InventoryListener;
 import com.me.tft_02.soulbound.listeners.PlayerListener;
 import com.me.tft_02.soulbound.util.LogFilter;
-import com.me.tft_02.soulbound.util.UpdateChecker;
+
+import net.gravitydevelopment.updater.soulbound.Updater;
 import org.mcstats.Metrics;
 
 public class Soulbound extends JavaPlugin {
@@ -46,7 +45,7 @@ public class Soulbound extends JavaPlugin {
     public static boolean mythicDropsEnabled = false;
 
     // Update Check
-    public boolean updateAvailable;
+    private boolean updateAvailable;
 
     /**
      * Run things on enable.
@@ -120,6 +119,10 @@ public class Soulbound extends JavaPlugin {
         return mainDirectory;
     }
 
+    public boolean isUpdateAvailable() {
+        return updateAvailable;
+    }
+
     public void debug(String message) {
         getLogger().info("[Debug] " + message);
     }
@@ -133,18 +136,24 @@ public class Soulbound extends JavaPlugin {
     }
 
     private void checkForUpdates() {
-        if (Config.getInstance().getUpdateCheckEnabled()) {
-            try {
-                updateAvailable = UpdateChecker.updateAvailable();
-            }
-            catch (Exception e) {
-                updateAvailable = false;
-            }
-
-            if (updateAvailable) {
-                this.getLogger().log(Level.INFO, ChatColor.GOLD + "Soulbound is outdated!");
-                this.getLogger().log(Level.INFO, ChatColor.AQUA + "http://dev.bukkit.org/server-mods/soulbound/");
-            }
+        if (!Config.getInstance().getUpdateCheckEnabled()) {
+            return;
         }
+
+        Updater updater = new Updater(this, 53483, soulbound, Updater.UpdateType.NO_DOWNLOAD, false);
+
+        if (updater.getResult() != Updater.UpdateResult.UPDATE_AVAILABLE) {
+            this.updateAvailable = false;
+            return;
+        }
+
+        if (updater.getLatestType().equals("beta") && !Config.getInstance().getPreferBeta()) {
+            this.updateAvailable = false;
+            return;
+        }
+
+        this.updateAvailable = true;
+        getLogger().info("Soulbound is outdated!");
+        getLogger().info("http://dev.bukkit.org/server-mods/soulbound/");
     }
 }

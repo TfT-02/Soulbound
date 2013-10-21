@@ -7,6 +7,7 @@ Key:
   - Removal
 
 Version 1.1.6 | Tested on CB 1.6.4-R0.1
+ ! Changed Updater, now uses Gravity's updater v2.0
 
 Version 1.1.5 | Tested on CB 1.6.2-R1.0
  + Added new config option; "Delete_On_Drop"

@@ -44,7 +44,8 @@ public class PlayerListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     private void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if (Soulbound.p.updateAvailable && player.hasPermission("soulbound.updatecheck")) {
+
+        if (Soulbound.p.isUpdateAvailable() && Permissions.updateCheck(player)) {
             player.sendMessage(ChatColor.GOLD + "Soulbound is outdated!");
             player.sendMessage(ChatColor.AQUA + "http://dev.bukkit.org/server-mods/Soulbound/");
         }
