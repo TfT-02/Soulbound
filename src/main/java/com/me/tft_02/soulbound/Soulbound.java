@@ -1,5 +1,6 @@
 package com.me.tft_02.soulbound;
 
+import com.me.tft_02.soulbound.hooks.MythicDropsListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -10,7 +11,6 @@ import com.me.tft_02.soulbound.commands.Commands;
 import com.me.tft_02.soulbound.config.Config;
 import com.me.tft_02.soulbound.hooks.EpicBossRecodedListener;
 import com.me.tft_02.soulbound.hooks.LoreLocksListener;
-import com.me.tft_02.soulbound.hooks.MythicDropsListener;
 import com.me.tft_02.soulbound.listeners.BlockListener;
 import com.me.tft_02.soulbound.listeners.EntityListener;
 import com.me.tft_02.soulbound.listeners.InventoryListener;
