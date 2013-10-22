@@ -101,6 +101,13 @@
         <dependency>
             <groupId>com.conventnunnery</groupId>
             <artifactId>MythicDrops</artifactId>
+            <version>1.1.2-SNAPSHOT</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.nunnerycode.bukkit</groupId>
+            <artifactId>MythicDrops</artifactId>
             <version>2.0.0</version>
             <type>jar</type>
             <scope>compile</scope>
