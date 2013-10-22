@@ -19,7 +19,7 @@ public class ItemUtils {
         BIND_ON_PICKUP,
         BIND_ON_USE,
         BIND_ON_EQUIP;
-    };
+    }
 
     Soulbound plugin;
 
@@ -246,6 +246,7 @@ public class ItemUtils {
      * Checks to see if an item is an equipable item.
      *
      * @param is Item to check
+     *
      * @return true if the item is equipable, false otherwise
      */
     public static boolean isEquipable(ItemStack is) {
@@ -256,6 +257,7 @@ public class ItemUtils {
      * Checks to see if an item is a wearable armor piece.
      *
      * @param is Item to check
+     *
      * @return true if the item is armor, false otherwise
      */
     public static boolean isMinecraftArmor(ItemStack is) {
@@ -266,6 +268,7 @@ public class ItemUtils {
      * Checks to see if an item is a leather armor piece.
      *
      * @param is Item to check
+     *
      * @return true if the item is leather armor, false otherwise
      */
     public static boolean isLeatherArmor(ItemStack is) {
@@ -285,6 +288,7 @@ public class ItemUtils {
      * Checks to see if an item is a gold armor piece.
      *
      * @param is Item to check
+     *
      * @return true if the item is gold armor, false otherwise
      */
     public static boolean isGoldArmor(ItemStack is) {
@@ -304,6 +308,7 @@ public class ItemUtils {
      * Checks to see if an item is an iron armor piece.
      *
      * @param is Item to check
+     *
      * @return true if the item is iron armor, false otherwise
      */
     public static boolean isIronArmor(ItemStack is) {
@@ -323,6 +328,7 @@ public class ItemUtils {
      * Checks to see if an item is a diamond armor piece.
      *
      * @param is Item to check
+     *
      * @return true if the item is diamond armor, false otherwise
      */
     public static boolean isDiamondArmor(ItemStack is) {
@@ -342,6 +348,7 @@ public class ItemUtils {
      * Checks to see if an item is a chainmail armor piece.
      *
      * @param is Item to check
+     *
      * @return true if the item is chainmail armor, false otherwise
      */
     public static boolean isChainmailArmor(ItemStack is) {

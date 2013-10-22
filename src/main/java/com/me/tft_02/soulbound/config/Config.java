@@ -9,7 +9,7 @@ import org.bukkit.Material;
 import com.me.tft_02.soulbound.datatypes.ActionType;
 
 public class Config extends AutoUpdateConfigLoader {
-    private static  Config instance;
+    private static Config instance;
 
     private Config() {
         super("config.yml");

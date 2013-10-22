@@ -24,15 +24,15 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerShearEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.me.tft_02.soulbound.runnables.UpdateInventoryTask;
-import com.me.tft_02.soulbound.util.PlayerData;
 import com.me.tft_02.soulbound.Soulbound;
 import com.me.tft_02.soulbound.config.Config;
 import com.me.tft_02.soulbound.datatypes.ActionType;
 import com.me.tft_02.soulbound.runnables.UpdateArmorTask;
+import com.me.tft_02.soulbound.runnables.UpdateInventoryTask;
 import com.me.tft_02.soulbound.util.DurabilityUtils;
 import com.me.tft_02.soulbound.util.ItemUtils;
 import com.me.tft_02.soulbound.util.Permissions;
+import com.me.tft_02.soulbound.util.PlayerData;
 
 public class PlayerListener implements Listener {
     Soulbound plugin;
@@ -151,7 +151,7 @@ public class PlayerListener implements Listener {
 
     /**
      * Watch PlayerInteract events.
-     * 
+     *
      * @param event The event to watch
      */
     @EventHandler(priority = EventPriority.LOW)
@@ -178,7 +178,7 @@ public class PlayerListener implements Listener {
 
     /**
      * Monitor PlayerFishEvent events.
-     * 
+     *
      * @param event The event to monitor
      */
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
@@ -190,7 +190,7 @@ public class PlayerListener implements Listener {
 
     /**
      * Monitor PlayerShearEntityEvent events.
-     * 
+     *
      * @param event The event to monitor
      */
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
@@ -202,7 +202,7 @@ public class PlayerListener implements Listener {
 
     /**
      * Watch PlayerCommandPreprocessEvent events.
-     * 
+     *
      * @param event The event to watch
      */
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
@@ -219,7 +219,7 @@ public class PlayerListener implements Listener {
 
     /**
      * Monitor PlayerCommandPreprocessEvent events.
-     * 
+     *
      * @param event The event to monitor
      */
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)

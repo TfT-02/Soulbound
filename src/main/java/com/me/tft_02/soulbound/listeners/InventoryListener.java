@@ -158,10 +158,10 @@ public class InventoryListener implements Listener {
     public void onInventoryOpen(InventoryOpenEvent event) {
         HumanEntity humanEntity = event.getPlayer();
         Inventory inventory = event.getInventory();
-        
+
         if (humanEntity instanceof Player) {
             Player player = (Player) humanEntity;
-            
+
             HashSet<Material> items = Config.getInstance().getAlwaysSoulboundItems(ActionType.OPEN_CHEST);
             if (items != null) {
                 for (ItemStack itemStack : inventory.getContents()) {

@@ -13,8 +13,9 @@ public final class ItemAPI {
      * </br>
      * This function is designed for API usage.
      *
-     * @param player The Player to check
+     * @param player    The Player to check
      * @param itemStack The ItemStack to check
+     *
      * @return true or false
      */
     public static boolean isSoulbindedPlayer(Player player, ItemStack itemStack) {
@@ -26,8 +27,9 @@ public final class ItemAPI {
      * </br>
      * This function is designed for API usage.
      *
-     * @param player The Player to bind the item to
+     * @param player    The Player to bind the item to
      * @param itemStack The ItemStack to bind
+     *
      * @return the soulbound ItemStack
      */
     public static ItemStack soulbindItem(Player player, ItemStack itemStack) {
@@ -40,6 +42,7 @@ public final class ItemAPI {
      * This function is designed for API usage.
      *
      * @param itemStack The itemstack to check
+     *
      * @return true or false
      */
     public static boolean isSoulbound(ItemStack itemStack) {
@@ -52,6 +55,7 @@ public final class ItemAPI {
      * This function is designed for API usage.
      *
      * @param itemStack The itemstack to mark as Bind on Pickup
+     *
      * @return the marked itemstack
      */
     public static ItemStack bindOnPickupItem(ItemStack itemStack) {
@@ -64,6 +68,7 @@ public final class ItemAPI {
      * This function is designed for API usage.
      *
      * @param itemStack The itemstack to check
+     *
      * @return true or false
      */
     public static boolean isBindOnPickup(ItemStack itemStack) {
@@ -76,6 +81,7 @@ public final class ItemAPI {
      * This function is designed for API usage.
      *
      * @param itemStack The itemstack to mark as Bind on Use
+     *
      * @return the marked itemstack
      */
     public static ItemStack bindOnUseItem(ItemStack itemStack) {
@@ -88,6 +94,7 @@ public final class ItemAPI {
      * This function is designed for API usage.
      *
      * @param itemStack The itemstack to mark as Bind on Equip
+     *
      * @return the marked itemstack
      */
     public static ItemStack bindOnEquipItem(ItemStack itemStack) {
@@ -100,6 +107,7 @@ public final class ItemAPI {
      * This function is designed for API usage.
      *
      * @param itemStack The itemstack to check
+     *
      * @return the Bind type
      */
     public static String getItemType(ItemStack itemStack) {

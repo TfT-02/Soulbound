@@ -18,7 +18,7 @@ public class EpicBossRecodedListener implements Listener {
 
     /**
      * Check BossDeathEvent events.
-     * 
+     *
      * @param event The event to check
      */
 /*    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

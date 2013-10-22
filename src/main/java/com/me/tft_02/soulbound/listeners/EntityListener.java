@@ -24,7 +24,7 @@ public class EntityListener implements Listener {
 
     /**
      * Check EntityDamageByEntityEvent events.
-     * 
+     *
      * @param event The event to check
      */
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
@@ -40,7 +40,7 @@ public class EntityListener implements Listener {
 
     /**
      * Apply combat modifiers
-     * 
+     *
      * @param event The event to run the combat checks on.
      */
     void combatChecks(EntityDamageByEntityEvent event) {

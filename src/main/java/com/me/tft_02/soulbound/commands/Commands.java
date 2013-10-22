@@ -138,8 +138,9 @@ public class Commands implements CommandExecutor {
                     player.sendMessage(dot + ChatColor.GREEN + "/unbind" + ChatColor.GRAY + " Unbind the item in hand.");
                 }
             }
-            if (nextPage <= maxPages)
+            if (nextPage <= maxPages) {
                 player.sendMessage(ChatColor.GOLD + "Type /soulbound help " + nextPage + " for more");
+            }
         }
     }
 
