@@ -90,10 +90,13 @@ public class Soulbound extends JavaPlugin {
     }
 
 	private void setupMythicDropsV2() {
-		if (getServer().getPluginManager().isPluginEnabled("MythicDrops") && !mythicDropsEnabled) {
-			mythicDropsV2Enabled = true;
-			debug("MythicDrops found!");
-			getServer().getPluginManager().registerEvents(mythicDropsV2Listener, this);
+		if (getServer().getPluginManager().isPluginEnabled("MythicDrops")) {
+			if (getServer().getPluginManager().getPlugin("MythicDrops").getDescription().getVersion().startsWith("2")) {
+				System.out.println(getServer().getPluginManager().getPlugin("MythicDrops").getDescription().getVersion());
+				mythicDropsV2Enabled = true;
+				debug("MythicDrops found!");
+				getServer().getPluginManager().registerEvents(mythicDropsV2Listener, this);
+			}
 		}
 	}
 
@@ -115,9 +118,11 @@ public class Soulbound extends JavaPlugin {
 
     private void setupMythicDrops() {
         if (getServer().getPluginManager().isPluginEnabled("MythicDrops")) {
-            mythicDropsEnabled = true;
-            debug("MythicDrops found!");
-            getServer().getPluginManager().registerEvents(mythicDropsListener, this);
+			if (getServer().getPluginManager().getPlugin("MythicDrops").getDescription().getVersion().startsWith("1")) {
+           		mythicDropsEnabled = true;
+            	debug("MythicDrops found!");
+            	getServer().getPluginManager().registerEvents(mythicDropsListener, this);
+			}
         }
     }
 
