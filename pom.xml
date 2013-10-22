@@ -105,6 +105,13 @@
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>net.nunnerycode.bukkit</groupId>
+            <artifactId>MythicDrops</artifactId>
+            <version>2.0.0</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
