@@ -1,6 +1,7 @@
 package com.me.tft_02.soulbound;
 
 import com.me.tft_02.soulbound.hooks.MythicDropsListener;
+import com.me.tft_02.soulbound.hooks.MythicDropsV2Listener;
 import java.io.File;
 import java.io.IOException;
 
@@ -38,11 +39,13 @@ public class Soulbound extends JavaPlugin {
     private EpicBossRecodedListener epicBossRecodedListener = new EpicBossRecodedListener(this);
     private LoreLocksListener loreLocksListener = new LoreLocksListener(this);
     private MythicDropsListener mythicDropsListener = new MythicDropsListener(this);
+	private MythicDropsV2Listener mythicDropsV2Listener = new MythicDropsV2Listener(this);
 
     // Checks for hooking into other plugins
     public static boolean epicBossRecodedEnabled = false;
     public static boolean loreLocksEnabled = false;
     public static boolean mythicDropsEnabled = false;
+	public static boolean mythicDropsV2Enabled = false;
 
     // Update Check
     private boolean updateAvailable;
@@ -60,6 +63,7 @@ public class Soulbound extends JavaPlugin {
         setupEpicBossRecoded();
         setupLoreLocks();
         setupMythicDrops();
+		setupMythicDropsV2();
 
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(playerListener, this);
@@ -85,7 +89,15 @@ public class Soulbound extends JavaPlugin {
         }
     }
 
-    private void setupEpicBossRecoded() {
+	private void setupMythicDropsV2() {
+		if (getServer().getPluginManager().isPluginEnabled("MythicDrops") && !mythicDropsEnabled) {
+			mythicDropsV2Enabled = true;
+			debug("MythicDrops found!");
+			getServer().getPluginManager().registerEvents(mythicDropsV2Listener, this);
+		}
+	}
+
+	private void setupEpicBossRecoded() {
         if (getServer().getPluginManager().isPluginEnabled("EpicBossRecoded")) {
             epicBossRecodedEnabled = true;
             debug("EpicBossRecoded found!");
