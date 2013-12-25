@@ -8,6 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.me.tft_02.soulbound.commands.Commands;
 import com.me.tft_02.soulbound.config.Config;
+import com.me.tft_02.soulbound.config.ItemsConfig;
 import com.me.tft_02.soulbound.hooks.EpicBossRecodedListener;
 import com.me.tft_02.soulbound.hooks.LoreLocksListener;
 import com.me.tft_02.soulbound.hooks.MythicDropsListener;
@@ -48,6 +49,8 @@ public class Soulbound extends JavaPlugin {
         getLogger().setFilter(new LogFilter(this));
 
         setupFilePaths();
+
+        loadConfigFiles();
 
         setupEpicBossRecoded();
         setupLoreLocks();
@@ -138,6 +141,11 @@ public class Soulbound extends JavaPlugin {
     private void setupFilePaths() {
         soulbound = getFile();
         mainDirectory = getDataFolder().getPath() + File.separator;
+    }
+
+    private void loadConfigFiles() {
+        Config.getInstance();
+        ItemsConfig.getInstance();
     }
 
     private void checkForUpdates() {

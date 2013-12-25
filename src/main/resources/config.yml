@@ -22,12 +22,6 @@ General:
     Config_Update_Overwrite: true
 
 Soulbound:
-Misc:
-  Soulbound_On_Action:
-    open_chest:
-#      - Diamond_Sword
-    drop_item:
-#      - Diamond_Shovel
     Feedback_Messages_Enabled: true
     Prevent_Item_Drop: false
     Delete_On_Drop: false

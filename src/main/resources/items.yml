@@ -1,0 +1,35 @@
+#
+# Soulbound item configuration
+#
+# Items in this config file will be automatically Soulbound to the player on certain
+# actions, such as dropping the item or picking it up.
+#
+# You can add items under "Items" using the exact material name. You can add a data value using a |
+# For example, WOOL|15 would be Material.WOOL with data value 15.
+#
+# The bare minimum of a Soulbound item is that it has Actions
+#
+# Name: This is the displayname of an item
+#
+# Lore: List one or more lines of lore here
+#
+# Actions: The actions when the item should be soulbound to the player.
+# Valid values are: CRAFT, OPEN_CHEST, PICKUP_ITEM, DROP_ITEM
+#
+#
+###
+
+Items:
+    DIAMOND_SPADE:
+        Lore:
+            - Made from diamond,
+            - can dig dirt!
+        Actions:
+            - CRAFT
+            - OPEN_CHEST
+
+    WOOL|15:
+        Name: Black Piece Of Wool
+        Actions:
+            - PICKUP_ITEM
+            - DROP_ITEM

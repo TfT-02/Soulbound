@@ -1,11 +1,9 @@
 package com.me.tft_02.soulbound.listeners;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -26,6 +24,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.me.tft_02.soulbound.Soulbound;
 import com.me.tft_02.soulbound.config.Config;
+import com.me.tft_02.soulbound.config.ItemsConfig;
 import com.me.tft_02.soulbound.datatypes.ActionType;
 import com.me.tft_02.soulbound.runnables.UpdateArmorTask;
 import com.me.tft_02.soulbound.runnables.UpdateInventoryTask;
@@ -68,8 +67,7 @@ public class PlayerListener implements Listener {
             ItemUtils.soulbindItem(player, itemStack);
         }
 
-        HashSet<Material> items = Config.getInstance().getAlwaysSoulboundItems(ActionType.PICKUP_ITEM);
-        if (items != null && items.contains(itemStack.getType())) {
+        if (ItemsConfig.getInstance().isActionItem(itemStack, ActionType.PICKUP_ITEM)) {
             ItemUtils.soulbindItem(player, itemStack);
         }
     }
@@ -95,8 +93,7 @@ public class PlayerListener implements Listener {
             return;
         }
 
-        HashSet<Material> items = Config.getInstance().getAlwaysSoulboundItems(ActionType.DROP_ITEM);
-        if (items != null && items.contains(itemStack.getType())) {
+        if (ItemsConfig.getInstance().isActionItem(itemStack, ActionType.DROP_ITEM)) {
             ItemUtils.soulbindItem(player, itemStack);
         }
     }

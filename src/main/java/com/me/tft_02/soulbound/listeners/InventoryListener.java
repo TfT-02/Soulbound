@@ -1,8 +1,5 @@
 package com.me.tft_02.soulbound.listeners;
 
-import java.util.HashSet;
-
-import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.me.tft_02.soulbound.Soulbound;
 import com.me.tft_02.soulbound.config.Config;
+import com.me.tft_02.soulbound.config.ItemsConfig;
 import com.me.tft_02.soulbound.datatypes.ActionType;
 import com.me.tft_02.soulbound.runnables.UpdateArmorTask;
 import com.me.tft_02.soulbound.util.ItemUtils;
@@ -159,16 +157,15 @@ public class InventoryListener implements Listener {
         HumanEntity humanEntity = event.getPlayer();
         Inventory inventory = event.getInventory();
 
-        if (humanEntity instanceof Player) {
-            Player player = (Player) humanEntity;
+        if (!(humanEntity instanceof Player)) {
+            return;
+        }
 
-            HashSet<Material> items = Config.getInstance().getAlwaysSoulboundItems(ActionType.OPEN_CHEST);
-            if (items != null) {
-                for (ItemStack itemStack : inventory.getContents()) {
-                    if (itemStack != null && items.contains(itemStack.getType())) {
-                        ItemUtils.soulbindItem(player, itemStack);
-                    }
-                }
+        Player player = (Player) humanEntity;
+
+        for (ItemStack itemStack : inventory.getContents()) {
+            if (itemStack != null && ItemsConfig.getInstance().isActionItem(itemStack, ActionType.OPEN_CHEST)) {
+                ItemUtils.soulbindItem(player, itemStack);
             }
         }
     }

@@ -1,12 +1,7 @@
 package com.me.tft_02.soulbound.config;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-
-import org.bukkit.Material;
-
-import com.me.tft_02.soulbound.datatypes.ActionType;
 
 public class Config extends AutoUpdateConfigLoader {
     private static Config instance;
@@ -48,20 +43,6 @@ public class Config extends AutoUpdateConfigLoader {
 
     public List<String> getBlockedCommands() { return config.getStringList("Soulbound.Blocked_Commands"); }
     public List<String> getBindCommands() { return config.getStringList("Soulbound.Commands_Bind_When_Used"); }
-
-    // Binding certain items by material name
-    public HashSet<Material> getAlwaysSoulboundItems(ActionType action) {
-        HashSet<Material> items = new HashSet<Material>();
-
-        for (String item : config.getStringList("Misc.Soulbound_On_Action." + action.toString().toLowerCase())) {
-            Material material = Material.getMaterial(item.toUpperCase());
-
-            if (material != null) {
-                items.add(material);
-            }
-        }
-        return items;
-    }
 
     // EpicBossRecoded config settings
 
