@@ -22,35 +22,34 @@ General:
     Config_Update_Overwrite: true
 
 Soulbound:
-  Feedback_Messages_Enabled: true
-  Prevent_Item_Drop: false
-  Delete_On_Drop: false
-  Allow_Item_Storing: true
-  Infinite_Durability: false
-  Blocked_Commands:
-      /blockedcommand
-  Commands_Bind_When_Used:
-      /enchant
-
 Misc:
   Soulbound_On_Action:
     open_chest:
 #      - Diamond_Sword
     drop_item:
 #      - Diamond_Shovel
+    Feedback_Messages_Enabled: true
+    Prevent_Item_Drop: false
+    Delete_On_Drop: false
+    Allow_Item_Storing: true
+    Infinite_Durability: false
+    Blocked_Commands:
+        /blockedcommand
+    Commands_Bind_When_Used:
+        /enchant
 
 Dependency_Plugins:
-  DiabloDrops:
-    BindOnPickup: Legendary, Rare, Unidentified
-    BindOnUse: Magical
-    BindOnEquip: Set
-  EpicBossRecoded:
-    BindOnPickup: true
-    BindOnUse: false
-    BindOnEquip: false
-  LoreLocks:
-    Bind_Keys: true
-  MythicDrops:
-    BindOnPickup: common, uncommon, rare
-    BindOnUse: terric, netheric
-    BindOnEquip: endric
+    DiabloDrops:
+        BindOnPickup: Legendary, Rare, Unidentified
+        BindOnUse: Magical
+        BindOnEquip: Set
+    EpicBossRecoded:
+        BindOnPickup: true
+        BindOnUse: false
+        BindOnEquip: false
+    LoreLocks:
+        Bind_Keys: true
+    MythicDrops:
+        BindOnPickup: common, uncommon, rare
+        BindOnUse: terric, netheric
+        BindOnEquip: endric
