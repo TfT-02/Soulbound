@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
@@ -167,6 +168,28 @@ public class InventoryListener implements Listener {
             if (itemStack != null && ItemsConfig.getInstance().isActionItem(itemStack, ActionType.OPEN_CHEST)) {
                 ItemUtils.soulbindItem(player, itemStack);
             }
+        }
+    }
+
+    /**
+     * Monitor CraftItemEvent events.
+     *
+     * @param event The event to monitor
+     */
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    private void onCraftItem(CraftItemEvent event) {
+        HumanEntity humanEntity = event.getWhoClicked();
+
+        if (!(humanEntity instanceof Player)) {
+            return;
+        }
+
+        Player player = (Player) humanEntity;
+
+        ItemStack itemStack = event.getRecipe().getResult();
+
+        if (ItemsConfig.getInstance().isActionItem(itemStack, ActionType.CRAFT)) {
+            event.getInventory().setResult(ItemUtils.soulbindItem(player, itemStack));
         }
     }
 }
