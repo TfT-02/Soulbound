@@ -62,13 +62,17 @@ public class PlayerListener implements Listener {
             }
 
             event.setCancelled(true);
+            return;
         }
-        else if (ItemUtils.isBindOnPickup(itemStack)) {
+
+        if (ItemUtils.isBindOnPickup(itemStack)) {
             ItemUtils.soulbindItem(player, itemStack);
+            return;
         }
 
         if (ItemsConfig.getInstance().isActionItem(itemStack, ActionType.PICKUP_ITEM)) {
             ItemUtils.soulbindItem(player, itemStack);
+            return;
         }
     }
 
@@ -95,6 +99,7 @@ public class PlayerListener implements Listener {
 
         if (ItemsConfig.getInstance().isActionItem(itemStack, ActionType.DROP_ITEM)) {
             ItemUtils.soulbindItem(player, itemStack);
+            return;
         }
     }
 
