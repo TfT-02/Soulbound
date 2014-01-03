@@ -26,6 +26,7 @@ import com.me.tft_02.soulbound.Soulbound;
 import com.me.tft_02.soulbound.config.Config;
 import com.me.tft_02.soulbound.config.ItemsConfig;
 import com.me.tft_02.soulbound.datatypes.ActionType;
+import com.me.tft_02.soulbound.runnables.SoulbindInventoryTask;
 import com.me.tft_02.soulbound.runnables.UpdateArmorTask;
 import com.me.tft_02.soulbound.runnables.UpdateInventoryTask;
 import com.me.tft_02.soulbound.util.DurabilityUtils;
@@ -131,8 +132,13 @@ public class PlayerListener implements Listener {
         PlayerData.storeItemsDeath(player, items);
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     private void onPlayerRespawn(PlayerRespawnEvent event) {
+        new SoulbindInventoryTask(event.getPlayer()).runTask(Soulbound.p);
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    private void onPlayerRespawnHighest(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
         boolean keepOnDeath = Permissions.keepOnDeath(player);
 

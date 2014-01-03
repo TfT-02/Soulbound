@@ -20,6 +20,7 @@ public class ItemsConfig extends ConfigLoader {
     private List<SoulbindItem> soulbindOnOpenChest  = new ArrayList<SoulbindItem>();
     private List<SoulbindItem> soulbindOnPickupItem  = new ArrayList<SoulbindItem>();
     private List<SoulbindItem> soulbindOnDrop  = new ArrayList<SoulbindItem>();
+    private List<SoulbindItem> soulbindOnRespawn  = new ArrayList<SoulbindItem>();
 
     public ItemsConfig() {
         super("items.yml");
@@ -93,6 +94,9 @@ public class ItemsConfig extends ConfigLoader {
             case DROP_ITEM:
                 soulbindOnDrop.add(soulbindItem);
                 return;
+            case RESPAWN:
+                soulbindOnRespawn.add(soulbindItem);
+                return;
         }
     }
 
@@ -106,6 +110,8 @@ public class ItemsConfig extends ConfigLoader {
                 return soulbindOnPickupItem;
             case DROP_ITEM:
                 return soulbindOnDrop;
+            case RESPAWN:
+                return soulbindOnRespawn;
             default:
                 return null;
         }
