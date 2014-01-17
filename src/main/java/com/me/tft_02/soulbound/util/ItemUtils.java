@@ -32,6 +32,10 @@ public class ItemUtils {
             return itemStack;
         }
 
+        if (isSoulbound(itemStack)) {
+            return itemStack;
+        }
+
         SoulbindItemEvent soulbindItemEvent = new SoulbindItemEvent(player, itemStack);
         Soulbound.p.getServer().getPluginManager().callEvent(soulbindItemEvent);
         itemStack = soulbindItemEvent.getItemStack();
@@ -63,6 +67,10 @@ public class ItemUtils {
             return itemStack;
         }
 
+        if (isBindOnPickup(itemStack)) {
+            return itemStack;
+        }
+
         ItemMeta itemMeta = itemStack.getItemMeta();
 
         List<String> itemLore = new ArrayList<String>();
@@ -80,6 +88,10 @@ public class ItemUtils {
             return itemStack;
         }
 
+        if (isBindOnEquip(itemStack)) {
+            return itemStack;
+        }
+
         ItemMeta itemMeta = itemStack.getItemMeta();
 
         List<String> itemLore = new ArrayList<String>();
@@ -94,6 +106,10 @@ public class ItemUtils {
 
     public static ItemStack bouItem(ItemStack itemStack) {
         if (itemStack == null) {
+            return itemStack;
+        }
+
+        if (isBindOnUse(itemStack)) {
             return itemStack;
         }
 
