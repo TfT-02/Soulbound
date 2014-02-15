@@ -153,7 +153,7 @@ public class InventoryListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onInventoryOpen(InventoryOpenEvent event) {
         HumanEntity humanEntity = event.getPlayer();
         Inventory inventory = event.getInventory();
@@ -172,11 +172,11 @@ public class InventoryListener implements Listener {
     }
 
     /**
-     * Monitor CraftItemEvent events.
+     * Check CraftItemEvent events.
      *
-     * @param event The event to monitor
+     * @param event The event to check
      */
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private void onCraftItem(CraftItemEvent event) {
         HumanEntity humanEntity = event.getWhoClicked();
 
