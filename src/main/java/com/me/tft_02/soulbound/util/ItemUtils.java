@@ -57,6 +57,7 @@ public class ItemUtils {
 
         itemLore.add(ChatColor.GOLD + "Soulbound");
         itemLore.add(player.getName());
+        itemLore.add(ChatColor.BLACK + player.getUniqueId().toString());
         itemMeta.setLore(itemLore);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
@@ -212,7 +213,20 @@ public class ItemUtils {
 
     public static boolean isBindedPlayer(Player player, ItemStack itemStack) {
         List<String> itemLore = itemStack.getItemMeta().getLore();
-        return itemLore.contains(player.getName());
+
+        checkNameChange(player, itemStack);
+        return itemLore.contains(player.getName()) || itemLore.contains(player.getUniqueId().toString());
+    }
+
+    private static void checkNameChange(Player player, ItemStack itemStack) {
+        List<String> itemLore = itemStack.getItemMeta().getLore();
+        if (!itemLore.contains(player.getName()) && itemLore.contains(player.getUniqueId().toString())) {
+            return;
+        }
+
+        int index = itemLore.indexOf(ChatColor.GOLD + "Soulbound") + 1;
+        itemLore.remove(index);
+        itemLore.set(index, player.getName());
     }
 
     public static boolean isNormalItem(ItemStack itemStack) {
