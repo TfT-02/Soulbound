@@ -6,7 +6,12 @@ import java.io.IOException;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.me.tft_02.soulbound.commands.Commands;
+import com.me.tft_02.soulbound.commands.BindCommand;
+import com.me.tft_02.soulbound.commands.BindOnEquipCommand;
+import com.me.tft_02.soulbound.commands.BindOnPickupCommand;
+import com.me.tft_02.soulbound.commands.BindOnUseCommand;
+import com.me.tft_02.soulbound.commands.SoulboundCommand;
+import com.me.tft_02.soulbound.commands.UnbindCommand;
 import com.me.tft_02.soulbound.config.Config;
 import com.me.tft_02.soulbound.config.ItemsConfig;
 import com.me.tft_02.soulbound.hooks.EpicBossRecodedListener;
@@ -58,12 +63,12 @@ public class Soulbound extends JavaPlugin {
 
         registerEvents();
 
-        getCommand("soulbound").setExecutor(new Commands(this));
-        getCommand("bind").setExecutor(new Commands(this));
-        getCommand("bindonpickup").setExecutor(new Commands(this));
-        getCommand("bindonuse").setExecutor(new Commands(this));
-        getCommand("bindonequip").setExecutor(new Commands(this));
-        getCommand("unbind").setExecutor(new Commands(this));
+        getCommand("soulbound").setExecutor(new SoulboundCommand());
+        getCommand("bind").setExecutor(new BindCommand());
+        getCommand("bindonpickup").setExecutor(new BindOnPickupCommand());
+        getCommand("bindonuse").setExecutor(new BindOnUseCommand());
+        getCommand("bindonequip").setExecutor(new BindOnEquipCommand());
+        getCommand("unbind").setExecutor(new UnbindCommand());
 
         checkForUpdates();
 
