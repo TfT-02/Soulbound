@@ -5,5 +5,6 @@ public enum ActionType {
     OPEN_CHEST,
     PICKUP_ITEM,
     DROP_ITEM,
-    RESPAWN;
+    RESPAWN,
+    KIT;
 };

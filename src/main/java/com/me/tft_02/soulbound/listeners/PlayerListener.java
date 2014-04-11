@@ -134,7 +134,7 @@ public class PlayerListener implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     private void onPlayerRespawn(PlayerRespawnEvent event) {
-        new SoulbindInventoryTask(event.getPlayer()).runTask(Soulbound.p);
+        new SoulbindInventoryTask(event.getPlayer(), ActionType.RESPAWN).runTask(Soulbound.p);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
@@ -219,9 +219,14 @@ public class PlayerListener implements Listener {
         ItemStack itemStack = player.getItemInHand();
         String command = event.getMessage();
 
+        System.out.println("command " + command);
+
         if (ItemUtils.isSoulbound(itemStack) && Config.getInstance().getBlockedCommands().contains(command)) {
             player.sendMessage(ChatColor.RED + "You're not allowed to use " + ChatColor.GOLD + command + ChatColor.RED + " command while holding a Soulbound item.");
             event.setCancelled(true);
+        }
+        else if (command.contains("kit")) {
+            new SoulbindInventoryTask(player, ActionType.KIT).runTask(Soulbound.p);
         }
     }
 
