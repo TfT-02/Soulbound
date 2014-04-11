@@ -128,7 +128,7 @@ public class ItemUtils {
 
     public static ItemStack unbindItem(ItemStack itemStack) {
         if (itemStack == null) {
-            return itemStack;
+            return null;
         }
 
         ItemMeta itemMeta = itemStack.getItemMeta();
@@ -136,17 +136,25 @@ public class ItemUtils {
             List<String> oldLore = itemMeta.getLore();
             int loreSize = oldLore.size();
 
-            if (loreSize > 2) {
-                List<String> itemLore = new ArrayList<String>();
-                itemLore.addAll(oldLore);
-                itemLore.remove(oldLore.get(loreSize - 1));
-                itemLore.remove(oldLore.get(loreSize - 2));
-                itemMeta.setLore(itemLore);
-            }
-            else {
+            if (loreSize <= 3) {
                 itemMeta.setLore(null);
+                itemStack.setItemMeta(itemMeta);
+                return itemStack;
             }
+
+            List<String> itemLore = new ArrayList<String>();
+            itemLore.addAll(oldLore);
+            int index = itemLore.indexOf(ChatColor.GOLD + "Soulbound");
+            itemLore.remove(index);
+            itemLore.remove(index + 1);
+
+            if (loreSize > 3) {
+                itemLore.remove(index + 2);
+            }
+
+            itemMeta.setLore(itemLore);
         }
+
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
