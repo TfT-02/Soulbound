@@ -211,30 +211,12 @@ public class ItemUtils {
     }
 
     public static boolean isBindedPlayer(Player player, ItemStack itemStack) {
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        List<String> itemLore = itemMeta.getLore();
-        if (itemLore.contains(player.getName())) {
-            return true;
-        }
-        return false;
+        List<String> itemLore = itemStack.getItemMeta().getLore();
+        return itemLore.contains(player.getName());
     }
 
     public static boolean isNormalItem(ItemStack itemStack) {
-        if (!itemStack.hasItemMeta()) {
-            return true;
-        }
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        if (!itemMeta.hasLore()) {
-            return true;
-        }
-
-        ItemType itemType = ItemUtils.getItemType(itemStack);
-        switch (itemType) {
-            case NORMAL:
-                return true;
-            default:
-                return false;
-        }
+        return !itemStack.hasItemMeta() && !itemStack.getItemMeta().hasLore() || ItemUtils.getItemType(itemStack) == ItemType.NORMAL;
     }
 
     public static ItemType getItemType(ItemStack itemStack) {

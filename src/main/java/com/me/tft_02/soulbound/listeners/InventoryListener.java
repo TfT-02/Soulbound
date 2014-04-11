@@ -22,6 +22,7 @@ import com.me.tft_02.soulbound.datatypes.ActionType;
 import com.me.tft_02.soulbound.runnables.UpdateArmorTask;
 import com.me.tft_02.soulbound.util.ItemUtils;
 import com.me.tft_02.soulbound.util.ItemUtils.ItemType;
+import com.me.tft_02.soulbound.util.Permissions;
 
 public class InventoryListener implements Listener {
     Soulbound plugin;
@@ -74,6 +75,12 @@ public class InventoryListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onInventoryClickEvent(InventoryClickEvent event) {
         HumanEntity entity = event.getWhoClicked();
+
+        if (!(entity instanceof Player)) {
+            return;
+        }
+
+        Player player = (Player) entity;
         ItemStack itemStack = event.getCurrentItem();
         InventoryType inventoryType = event.getInventory().getType();
 
@@ -83,73 +90,38 @@ public class InventoryListener implements Listener {
 
         ItemType itemType = ItemUtils.getItemType(itemStack);
 
-        if (itemStack == null) {
+        if (itemType != ItemType.SOULBOUND) {
             return;
         }
 
-        if (entity instanceof Player) {
-            Player player = (Player) entity;
-            switch (itemType) {
-                case NORMAL:
-                    return;
-                case SOULBOUND:
-                    if (!Config.getInstance().getAllowItemStoring() && !(inventoryType == InventoryType.CRAFTING)) {
-                        event.setCancelled(true);
-                    }
-
-                    if (!ItemUtils.isBindedPlayer(player, itemStack)) {
-                        if (player.hasPermission("soulbound.pickup.bypass")) {
-                            return;
-                        }
-
-                        event.setCancelled(true);
-                    }
-                    return;
-                default:
-                    return;
-            }
+        if (!Config.getInstance().getAllowItemStoring() && !(inventoryType == InventoryType.CRAFTING)) {
+            event.setCancelled(true);
         }
+
+        if (ItemUtils.isBindedPlayer(player, itemStack) || Permissions.pickupBypass(player)) {
+            return;
+        }
+
+        event.setCancelled(true);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onInventoryMoveEvent(InventoryMoveItemEvent event) {
         ItemStack itemStack = event.getItem();
-
         ItemType itemType = ItemUtils.getItemType(itemStack);
 
-        if (itemStack == null) {
-            return;
-        }
-
-        switch (itemType) {
-            case NORMAL:
-                return;
-            case SOULBOUND:
-                event.setCancelled(true);
-                return;
-            default:
-                return;
+        if (itemType == ItemType.SOULBOUND) {
+            event.setCancelled(true);
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onInventoryPickupItemEvent(InventoryPickupItemEvent event) {
         ItemStack itemStack = event.getItem().getItemStack();
-
         ItemType itemType = ItemUtils.getItemType(itemStack);
 
-        if (itemStack == null) {
-            return;
-        }
-
-        switch (itemType) {
-            case NORMAL:
-                return;
-            case SOULBOUND:
-                event.setCancelled(true);
-                return;
-            default:
-                return;
+        if (itemType == ItemType.SOULBOUND) {
+            event.setCancelled(true);
         }
     }
 

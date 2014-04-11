@@ -216,10 +216,10 @@ public class PlayerListener implements Listener {
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onPlayerCommand(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
-        ItemStack inHand = player.getItemInHand();
+        ItemStack itemStack = player.getItemInHand();
         String command = event.getMessage();
 
-        if (ItemUtils.isSoulbound(inHand) && Config.getInstance().getBlockedCommands().contains(command)) {
+        if (ItemUtils.isSoulbound(itemStack) && Config.getInstance().getBlockedCommands().contains(command)) {
             player.sendMessage(ChatColor.RED + "You're not allowed to use " + ChatColor.GOLD + command + ChatColor.RED + " command while holding a Soulbound item.");
             event.setCancelled(true);
         }
