@@ -130,7 +130,7 @@ public class ItemsConfig extends ConfigLoader {
                     }
 
                     if (soulbindItem.getLore() != null && !soulbindItem.getLore().isEmpty()) {
-                        if (!itemMeta.getLore().contains(soulbindItem.getLore())) {
+                        if (itemMeta.hasLore() || !itemMeta.getLore().containsAll(soulbindItem.getLore())) {
                             return false;
                         }
                     }
