@@ -16,12 +16,12 @@ import com.me.tft_02.soulbound.datatypes.SoulbindItem;
 public class ItemsConfig extends ConfigLoader {
     private static ItemsConfig instance;
 
-    private List<SoulbindItem> soulbindOnCraft  = new ArrayList<SoulbindItem>();
-    private List<SoulbindItem> soulbindOnOpenChest  = new ArrayList<SoulbindItem>();
-    private List<SoulbindItem> soulbindOnPickupItem  = new ArrayList<SoulbindItem>();
-    private List<SoulbindItem> soulbindOnDrop  = new ArrayList<SoulbindItem>();
-    private List<SoulbindItem> soulbindOnRespawn  = new ArrayList<SoulbindItem>();
-    private List<SoulbindItem> soulbindOnKit  = new ArrayList<SoulbindItem>();
+    private List<SoulbindItem> soulbindOnCraft = new ArrayList<SoulbindItem>();
+    private List<SoulbindItem> soulbindOnOpenChest = new ArrayList<SoulbindItem>();
+    private List<SoulbindItem> soulbindOnPickupItem = new ArrayList<SoulbindItem>();
+    private List<SoulbindItem> soulbindOnDrop = new ArrayList<SoulbindItem>();
+    private List<SoulbindItem> soulbindOnRespawn = new ArrayList<SoulbindItem>();
+    private List<SoulbindItem> soulbindOnKit = new ArrayList<SoulbindItem>();
 
     public ItemsConfig() {
         super("items.yml");
