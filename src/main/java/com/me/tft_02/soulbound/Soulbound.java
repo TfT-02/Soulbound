@@ -1,31 +1,24 @@
 package com.me.tft_02.soulbound;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.java.JavaPlugin;
-
-import com.me.tft_02.soulbound.commands.BindCommand;
-import com.me.tft_02.soulbound.commands.BindOnEquipCommand;
-import com.me.tft_02.soulbound.commands.BindOnPickupCommand;
-import com.me.tft_02.soulbound.commands.BindOnUseCommand;
-import com.me.tft_02.soulbound.commands.SoulboundCommand;
-import com.me.tft_02.soulbound.commands.UnbindCommand;
+import com.me.tft_02.soulbound.commands.*;
 import com.me.tft_02.soulbound.config.Config;
 import com.me.tft_02.soulbound.config.ItemsConfig;
 import com.me.tft_02.soulbound.hooks.EpicBossRecodedListener;
 import com.me.tft_02.soulbound.hooks.LoreLocksListener;
 import com.me.tft_02.soulbound.hooks.MythicDropsListener;
-import com.me.tft_02.soulbound.hooks.MythicDropsV2Listener;
 import com.me.tft_02.soulbound.listeners.BlockListener;
 import com.me.tft_02.soulbound.listeners.EntityListener;
 import com.me.tft_02.soulbound.listeners.InventoryListener;
 import com.me.tft_02.soulbound.listeners.PlayerListener;
 import com.me.tft_02.soulbound.util.LogFilter;
-
 import net.gravitydevelopment.updater.soulbound.Updater;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.Metrics;
+import org.nunnerycode.bukkit.mythicdropsapi.MythicDropsHook;
+
+import java.io.File;
+import java.io.IOException;
 
 public class Soulbound extends JavaPlugin {
     /* File Paths */
@@ -40,7 +33,6 @@ public class Soulbound extends JavaPlugin {
     public static boolean epicBossRecodedEnabled = false;
     public static boolean loreLocksEnabled = false;
     public static boolean mythicDropsEnabled = false;
-    public static boolean mythicDropsV2Enabled = false;
 
     // Update Check
     private boolean updateAvailable;
@@ -107,18 +99,11 @@ public class Soulbound extends JavaPlugin {
     }
 
     private void setupMythicDrops() {
-        if (getServer().getPluginManager().isPluginEnabled("MythicDrops")) {
+        MythicDropsHook mythicDropsHook = new MythicDropsHook(this);
+        if (mythicDropsHook.hasHook()) {
+            mythicDropsEnabled = true;
             debug("MythicDrops found!");
-            String mythicDropsVersion = getServer().getPluginManager().getPlugin("MythicDrops").getDescription().getVersion();
-
-            if (mythicDropsVersion.startsWith("1")) {
-                mythicDropsEnabled = true;
-                getServer().getPluginManager().registerEvents(new MythicDropsListener(this), this);
-            }
-            else if (mythicDropsVersion.startsWith("2")) {
-                mythicDropsV2Enabled = true;
-                getServer().getPluginManager().registerEvents(new MythicDropsV2Listener(this), this);
-            }
+            getServer().getPluginManager().registerEvents(new MythicDropsListener(this, mythicDropsHook), this);
         }
     }
 
