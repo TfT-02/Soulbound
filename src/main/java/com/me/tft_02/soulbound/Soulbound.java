@@ -17,7 +17,6 @@ import com.me.tft_02.soulbound.config.ItemsConfig;
 import com.me.tft_02.soulbound.hooks.EpicBossRecodedListener;
 import com.me.tft_02.soulbound.hooks.LoreLocksListener;
 import com.me.tft_02.soulbound.hooks.MythicDropsListener;
-import com.me.tft_02.soulbound.hooks.MythicDropsV2Listener;
 import com.me.tft_02.soulbound.listeners.BlockListener;
 import com.me.tft_02.soulbound.listeners.EntityListener;
 import com.me.tft_02.soulbound.listeners.InventoryListener;
