@@ -41,12 +41,17 @@
                     <artifactSet>
                         <includes>
                             <include>org.mcstats.bukkit:metrics</include>
+                            <include>org.nunnerycode.bukkit:mythicdropsapi-lib</include>
                         </includes>
                     </artifactSet>
                     <relocations>
                         <relocation>
                             <pattern>org.mcstats.bukkit:metrics</pattern>
                             <shadedPattern>com.me.tft_02.soulbound.util</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>org.nunnerycode.bukkit</pattern>
+                            <shadedPatten>com.me.tft_02.soulbound.util</shadedPatten>
                         </relocation>
                     </relocations>
                 </configuration>
