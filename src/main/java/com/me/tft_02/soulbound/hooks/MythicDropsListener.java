@@ -9,17 +9,16 @@ import com.me.tft_02.soulbound.Soulbound;
 import com.me.tft_02.soulbound.config.Config;
 import com.me.tft_02.soulbound.util.ItemUtils;
 
-import com.conventnunnery.plugins.mythicdrops.MythicDrops;
-import com.conventnunnery.plugins.mythicdrops.events.CreatureEquippedWithItemStackEvent;
-import com.conventnunnery.plugins.mythicdrops.events.ItemIdentifiedEvent;
-import com.conventnunnery.plugins.mythicdrops.managers.TierManager;
-import com.conventnunnery.plugins.mythicdrops.objects.Tier;
+import org.nunnerycode.bukkit.mythicdropsapi.MythicDropsHook;
+import org.nunnerycode.bukkit.mythicdropsapi.api.MythicDropsItemEvent;
 
 public class MythicDropsListener implements Listener {
     Soulbound plugin;
+    MythicDropsHook mythicDropsHook;
 
-    public MythicDropsListener(Soulbound instance) {
+    public MythicDropsListener(Soulbound instance, MythicDropsHook mythicDropsHook) {
         plugin = instance;
+        this.mythicDropsHook = mythicDropsHook;
     }
 
     /**
@@ -28,7 +27,11 @@ public class MythicDropsListener implements Listener {
      * @param event The event to check
      */
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onMythicDropsEntitySpawn(CreatureEquippedWithItemStackEvent event) {
+    public void onMythicDropsItemEvent(MythicDropsItemEvent event) {
+        if (event.isCancelled()) {
+            return;
+        }
+
         ItemStack itemStack = event.getItemStack();
 
         ItemStack newItemStack = handleMythicDropsItems(itemStack.clone());
@@ -38,25 +41,8 @@ public class MythicDropsListener implements Listener {
         }
     }
 
-    /**
-     * Check ItemIdentifiedEvent events.
-     *
-     * @param event The event to check
-     */
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onItemIdentifiedEvent(ItemIdentifiedEvent event) {
-        ItemStack itemStack = event.getItemStack();
-
-        handleMythicDropsItems(itemStack);
-    }
-
     private ItemStack handleMythicDropsItems(ItemStack itemStack) {
-        TierManager tierManager = MythicDrops.getInstance().getTierManager();
-        Tier tier = tierManager.getTierFromItemStack(itemStack);
-        String tierName = "Any";
-        if (tier != null) {
-            tierName = tier.getName();
-        }
+        String tierName = mythicDropsHook.getWrapper().getTierFromItemStack(itemStack);
 
         if (Config.getInstance().getMythicDropsBindOnEquipTiers().contains(tierName) && ItemUtils.isEquipable(itemStack)) {
             return ItemUtils.boeItem(itemStack);
