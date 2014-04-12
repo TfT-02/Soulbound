@@ -103,7 +103,7 @@ public class Soulbound extends JavaPlugin {
         if (mythicDropsHook.hasHook()) {
             mythicDropsEnabled = true;
             debug("MythicDrops found!");
-            getServer().getPluginManager().registerEvents(new MythicDropsListener(this), this);
+            getServer().getPluginManager().registerEvents(new MythicDropsListener(this, mythicDropsHook), this);
         }
     }
 
