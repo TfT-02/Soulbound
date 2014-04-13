@@ -232,6 +232,10 @@ public class ItemUtils {
             return;
         }
 
+        if (itemLore.size() < 2) {
+            return;
+        }
+
         int index = itemLore.indexOf(ChatColor.GOLD + "Soulbound") + 1;
         itemLore.remove(index);
         itemLore.set(index, player.getName());
