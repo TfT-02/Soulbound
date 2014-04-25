@@ -25,11 +25,6 @@ import com.me.tft_02.soulbound.util.ItemUtils.ItemType;
 import com.me.tft_02.soulbound.util.Permissions;
 
 public class InventoryListener implements Listener {
-    Soulbound plugin;
-
-    public InventoryListener(Soulbound instance) {
-        plugin = instance;
-    }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     void onInventoryClick(InventoryClickEvent event) {

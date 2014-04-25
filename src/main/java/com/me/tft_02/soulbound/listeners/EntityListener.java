@@ -12,15 +12,9 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.me.tft_02.soulbound.Soulbound;
 import com.me.tft_02.soulbound.util.DurabilityUtils;
 
 public class EntityListener implements Listener {
-    Soulbound plugin;
-
-    public EntityListener(Soulbound instance) {
-        plugin = instance;
-    }
 
     /**
      * Check EntityDamageByEntityEvent events.

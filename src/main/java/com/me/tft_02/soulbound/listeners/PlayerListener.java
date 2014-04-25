@@ -35,11 +35,6 @@ import com.me.tft_02.soulbound.util.Permissions;
 import com.me.tft_02.soulbound.util.PlayerData;
 
 public class PlayerListener implements Listener {
-    Soulbound plugin;
-
-    public PlayerListener(Soulbound instance) {
-        plugin = instance;
-    }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     private void onPlayerJoin(PlayerJoinEvent event) {

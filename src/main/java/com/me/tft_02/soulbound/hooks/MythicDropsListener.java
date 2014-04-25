@@ -5,7 +5,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
-import com.me.tft_02.soulbound.Soulbound;
 import com.me.tft_02.soulbound.config.Config;
 import com.me.tft_02.soulbound.util.ItemUtils;
 
@@ -13,11 +12,9 @@ import org.nunnerycode.bukkit.mythicdropsapi.MythicDropsHook;
 import org.nunnerycode.bukkit.mythicdropsapi.api.MythicDropsItemEvent;
 
 public class MythicDropsListener implements Listener {
-    Soulbound plugin;
     MythicDropsHook mythicDropsHook;
 
-    public MythicDropsListener(Soulbound instance, MythicDropsHook mythicDropsHook) {
-        plugin = instance;
+    public MythicDropsListener(MythicDropsHook mythicDropsHook) {
         this.mythicDropsHook = mythicDropsHook;
     }
 

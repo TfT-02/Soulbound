@@ -10,11 +10,6 @@ import com.me.tft_02.soulbound.config.Config;
 import com.me.tft_02.soulbound.util.ItemUtils;
 
 public class EpicBossRecodedListener implements Listener {
-    Soulbound plugin;
-
-    public EpicBossRecodedListener(Soulbound instance) {
-        plugin = instance;
-    }
 
     /**
      * Check BossDeathEvent events.

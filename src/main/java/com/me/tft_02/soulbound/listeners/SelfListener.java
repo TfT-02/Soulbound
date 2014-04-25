@@ -14,11 +14,6 @@ import com.me.tft_02.soulbound.util.ItemUtils;
 import com.me.tft_02.soulbound.util.Permissions;
 
 public class SelfListener implements Listener {
-    Soulbound plugin;
-
-    public SelfListener(Soulbound instance) {
-        plugin = instance;
-    }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private void onItemSoulbound(SoulbindItemEvent event) {

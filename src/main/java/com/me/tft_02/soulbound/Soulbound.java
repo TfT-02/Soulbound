@@ -83,17 +83,17 @@ public class Soulbound extends JavaPlugin {
 
     private void registerEvents() {
         PluginManager pm = getServer().getPluginManager();
-        pm.registerEvents(new PlayerListener(this), this);
-        pm.registerEvents(new InventoryListener(this), this);
-        pm.registerEvents(new EntityListener(this), this);
-        pm.registerEvents(new BlockListener(this), this);
+        pm.registerEvents(new PlayerListener(), this);
+        pm.registerEvents(new InventoryListener(), this);
+        pm.registerEvents(new EntityListener(), this);
+        pm.registerEvents(new BlockListener(), this);
     }
 
     private void setupEpicBossRecoded() {
         if (getServer().getPluginManager().isPluginEnabled("EpicBossRecoded")) {
             epicBossRecodedEnabled = true;
             debug("EpicBossRecoded found!");
-            getServer().getPluginManager().registerEvents(new EpicBossRecodedListener(this), this);
+            getServer().getPluginManager().registerEvents(new EpicBossRecodedListener(), this);
         }
     }
 
@@ -101,7 +101,7 @@ public class Soulbound extends JavaPlugin {
         if (getServer().getPluginManager().isPluginEnabled("LoreLocks")) {
             loreLocksEnabled = true;
             debug("LoreLocks found!");
-            getServer().getPluginManager().registerEvents(new LoreLocksListener(this), this);
+            getServer().getPluginManager().registerEvents(new LoreLocksListener(), this);
         }
     }
 
@@ -110,7 +110,7 @@ public class Soulbound extends JavaPlugin {
         if (mythicDropsHook.hasHook()) {
             mythicDropsEnabled = true;
             debug("MythicDrops found!");
-            getServer().getPluginManager().registerEvents(new MythicDropsListener(this, mythicDropsHook), this);
+            getServer().getPluginManager().registerEvents(new MythicDropsListener(mythicDropsHook), this);
         }
     }
 

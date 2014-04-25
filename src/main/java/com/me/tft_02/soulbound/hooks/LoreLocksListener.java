@@ -6,18 +6,12 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
-import com.me.tft_02.soulbound.Soulbound;
 import com.me.tft_02.soulbound.config.Config;
 import com.me.tft_02.soulbound.util.ItemUtils;
 
 import com.github.derwisch.loreLocks.KeyCreateEvent;
 
 public class LoreLocksListener implements Listener {
-    Soulbound plugin;
-
-    public LoreLocksListener(Soulbound instance) {
-        plugin = instance;
-    }
 
     /**
      * Monitor KeyCreateEvent events.
