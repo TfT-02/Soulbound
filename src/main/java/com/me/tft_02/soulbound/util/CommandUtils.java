@@ -17,7 +17,7 @@ public final class CommandUtils {
     }
 
     public static boolean isOffline(CommandSender sender, OfflinePlayer player) {
-        if (player.isOnline()) {
+        if (player != null && player.isOnline()) {
             return false;
         }
 
