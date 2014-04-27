@@ -7,6 +7,7 @@ Key:
   - Removal
 
 Version 1.1.10 | Tested on CB 1.7.5-R0.1
+ + Added support for giving Soulbinded kits to other players
 
 Version 1.1.9 | Tested on CB 1.7.5-R0.1
  ! Now using MythicDrops hook to support MythicDrops versions 1.1.2 through 3.0.0. Huge shout-out to Nunnery!

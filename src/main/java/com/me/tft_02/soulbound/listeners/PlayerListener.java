@@ -213,15 +213,32 @@ public class PlayerListener implements Listener {
         Player player = event.getPlayer();
         ItemStack itemStack = player.getItemInHand();
         String command = event.getMessage();
+        String[] args = {""};
 
-        System.out.println("command " + command);
+        String[] split = command.split(" ", 2);
+        if (split.length > 1) {
+            args = split[1].split(" ");
+        }
 
         if (ItemUtils.isSoulbound(itemStack) && Config.getInstance().getBlockedCommands().contains(command)) {
             player.sendMessage(ChatColor.RED + "You're not allowed to use " + ChatColor.GOLD + command + ChatColor.RED + " command while holding a Soulbound item.");
             event.setCancelled(true);
         }
         else if (command.contains("kit")) {
-            new SoulbindInventoryTask(player, ActionType.KIT).runTask(Soulbound.p);
+            Player target;
+
+            if (args.length >= 1 && !args[0].isEmpty()) {
+                target = Soulbound.p.getServer().getPlayer(args[0]);
+            }
+            else {
+                target = player;
+            }
+
+            if (target == null) {
+                return;
+            }
+
+            new SoulbindInventoryTask(target, ActionType.KIT).runTask(Soulbound.p);
         }
     }
 
