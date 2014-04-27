@@ -227,8 +227,8 @@ public class PlayerListener implements Listener {
         else if (command.contains("kit")) {
             Player target;
 
-            if (args.length >= 1 && !args[0].isEmpty()) {
-                target = Soulbound.p.getServer().getPlayer(args[0]);
+            if (args.length >= 2) {
+                target = Soulbound.p.getServer().getPlayer(args[1]);
             }
             else {
                 target = player;
