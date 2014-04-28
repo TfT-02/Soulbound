@@ -7,6 +7,17 @@ import org.bukkit.entity.Player;
 
 public final class CommandUtils {
 
+    public static String[] extractArgs(String command) {
+        String[] args = {""};
+        String[] split = command.split(" ", 2);
+
+        if (split.length > 1) {
+            args = split[1].split(" ");
+        }
+
+        return args;
+    }
+
     public static boolean noConsoleUsage(CommandSender sender) {
         if (sender instanceof Player) {
             return false;

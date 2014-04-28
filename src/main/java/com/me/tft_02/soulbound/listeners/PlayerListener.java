@@ -20,6 +20,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerShearEntityEvent;
+import org.bukkit.event.server.ServerCommandEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.me.tft_02.soulbound.Soulbound;
@@ -29,6 +30,7 @@ import com.me.tft_02.soulbound.datatypes.ActionType;
 import com.me.tft_02.soulbound.runnables.SoulbindInventoryTask;
 import com.me.tft_02.soulbound.runnables.UpdateArmorTask;
 import com.me.tft_02.soulbound.runnables.UpdateInventoryTask;
+import com.me.tft_02.soulbound.util.CommandUtils;
 import com.me.tft_02.soulbound.util.DurabilityUtils;
 import com.me.tft_02.soulbound.util.ItemUtils;
 import com.me.tft_02.soulbound.util.Permissions;
@@ -213,18 +215,31 @@ public class PlayerListener implements Listener {
         Player player = event.getPlayer();
         ItemStack itemStack = player.getItemInHand();
         String command = event.getMessage();
-        String[] args = {""};
-
-        String[] split = command.split(" ", 2);
-        if (split.length > 1) {
-            args = split[1].split(" ");
-        }
 
         if (ItemUtils.isSoulbound(itemStack) && Config.getInstance().getBlockedCommands().contains(command)) {
             player.sendMessage(ChatColor.RED + "You're not allowed to use " + ChatColor.GOLD + command + ChatColor.RED + " command while holding a Soulbound item.");
             event.setCancelled(true);
         }
-        else if (command.contains("kit")) {
+    }
+
+    /**
+     * Monitor PlayerCommandPreprocessEvent events.
+     *
+     * @param event The event to monitor
+     */
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onPlayerCommandMonitor(PlayerCommandPreprocessEvent event) {
+        Player player = event.getPlayer();
+        ItemStack inHand = player.getItemInHand();
+        String command = event.getMessage();
+        String[] args = CommandUtils.extractArgs(command);
+
+        if (!ItemUtils.isSoulbound(inHand) && Config.getInstance().getBindCommands().contains(command)) {
+            ItemUtils.soulbindItem(player, inHand);
+            return;
+        }
+
+        if (command.contains("kit")) {
             Player target;
 
             if (args.length >= 2) {
@@ -243,18 +258,25 @@ public class PlayerListener implements Listener {
     }
 
     /**
-     * Monitor PlayerCommandPreprocessEvent events.
+     * Monitor ServerCommandEvent events.
      *
      * @param event The event to monitor
      */
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onPlayerCommandMonitor(PlayerCommandPreprocessEvent event) {
-        Player player = event.getPlayer();
-        ItemStack inHand = player.getItemInHand();
-        String command = event.getMessage();
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onServerCommand(ServerCommandEvent event) {
+        String command = event.getCommand();
+        String[] args = CommandUtils.extractArgs(command);
 
-        if (!ItemUtils.isSoulbound(inHand) && Config.getInstance().getBindCommands().contains(command)) {
-            ItemUtils.soulbindItem(player, inHand);
+        if (!command.contains("kit")) {
+            return;
         }
+
+        if (args.length < 2) {
+            return;
+        }
+
+        Player target = Soulbound.p.getServer().getPlayer(args[1]);
+
+        new SoulbindInventoryTask(target, ActionType.KIT).runTask(Soulbound.p);
     }
 }
