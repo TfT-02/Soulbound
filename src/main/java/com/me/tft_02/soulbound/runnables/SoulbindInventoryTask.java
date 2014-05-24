@@ -24,5 +24,11 @@ public class SoulbindInventoryTask extends BukkitRunnable {
                 ItemUtils.soulbindItem(player, itemStack);
             }
         }
+
+        for (ItemStack itemStack : player.getInventory().getArmorContents()) {
+            if (itemStack != null && ItemsConfig.getInstance().isActionItem(itemStack, actionType)) {
+                ItemUtils.soulbindItem(player, itemStack);
+            }
+        }
     }
 }
