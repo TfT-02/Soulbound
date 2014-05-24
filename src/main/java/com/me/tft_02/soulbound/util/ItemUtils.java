@@ -2,6 +2,7 @@ package com.me.tft_02.soulbound.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -10,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.me.tft_02.soulbound.Soulbound;
+import com.me.tft_02.soulbound.config.Config;
 import com.me.tft_02.soulbound.events.SoulbindItemEvent;
 
 public class ItemUtils {
@@ -19,12 +21,6 @@ public class ItemUtils {
         BIND_ON_PICKUP,
         BIND_ON_USE,
         BIND_ON_EQUIP;
-    }
-
-    Soulbound plugin;
-
-    public ItemUtils(Soulbound instance) {
-        plugin = instance;
     }
 
     public static ItemStack soulbindItem(Player player, ItemStack itemStack) {
@@ -55,9 +51,10 @@ public class ItemUtils {
             itemLore.addAll(oldLore);
         }
 
-        itemLore.add(ChatColor.GOLD + "Soulbound");
-        itemLore.add(player.getName());
-        itemLore.add(ChatColor.BLACK + player.getUniqueId().toString());
+        itemLore.add(Misc.SOULBOUND_TAG + StringUtils.hideUUID(player.getUniqueId()));
+        if (Config.getInstance().getShowNameInLore()) {
+            itemLore.add(player.getName());
+        }
         itemMeta.setLore(itemLore);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
@@ -144,7 +141,7 @@ public class ItemUtils {
 
             List<String> itemLore = new ArrayList<String>();
             itemLore.addAll(oldLore);
-            int index = itemLore.indexOf(ChatColor.GOLD + "Soulbound");
+            int index = StringUtils.getIndexOfSoulbound(itemLore);
             itemLore.remove(index);
             itemLore.remove(index + 1);
 
@@ -167,8 +164,10 @@ public class ItemUtils {
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta.hasLore()) {
             List<String> itemLore = itemMeta.getLore();
-            if (itemLore.contains(ChatColor.GOLD + "Soulbound")) {
-                return true;
+            for (String lore : itemLore) {
+                if (lore.contains(Misc.SOULBOUND_TAG)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -220,25 +219,59 @@ public class ItemUtils {
     }
 
     public static boolean isBindedPlayer(Player player, ItemStack itemStack) {
+        updateOldLore(player, itemStack);
+        checkNameChange(player, itemStack);
         List<String> itemLore = itemStack.getItemMeta().getLore();
 
-        checkNameChange(player, itemStack);
-        return itemLore.contains(player.getName()) || itemLore.contains(player.getUniqueId().toString());
+        return player.getUniqueId().equals(StringUtils.readUUIDFromLore(itemLore)) || itemLore.contains(player.getName());
     }
 
-    private static void checkNameChange(Player player, ItemStack itemStack) {
-        List<String> itemLore = itemStack.getItemMeta().getLore();
-        if (!itemLore.contains(player.getName()) && itemLore.contains(player.getUniqueId().toString())) {
-            return;
+    private static ItemStack updateOldLore(Player player, ItemStack itemStack) {
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        List<String> itemLore = itemMeta.getLore();
+
+        if (itemLore.size() < 3) {
+            return itemStack;
         }
 
-        if (itemLore.size() < 2) {
-            return;
+        int indexOfSoulbound = StringUtils.getIndexOfSoulbound(itemLore);
+        int indexOfUniqueId = indexOfSoulbound + 2;
+        UUID uuid = null;
+
+        if (itemLore.get(indexOfUniqueId).contains(player.getUniqueId().toString())) {
+            uuid = UUID.fromString(ChatColor.stripColor(itemLore.get(indexOfUniqueId)));
+            itemLore.remove(indexOfUniqueId);
         }
 
-        int index = itemLore.indexOf(ChatColor.GOLD + "Soulbound") + 1;
-        itemLore.remove(index);
-        itemLore.set(index, player.getName());
+        if (StringUtils.readUUIDFromLore(itemLore) == null && uuid != null) {
+            itemLore.set(indexOfSoulbound, Misc.SOULBOUND_TAG + StringUtils.hideUUID(uuid));
+        }
+
+        itemMeta.setLore(itemLore);
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
+
+    private static ItemStack checkNameChange(Player player, ItemStack itemStack) {
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        List<String> itemLore = itemMeta.getLore();
+
+        int indexName = StringUtils.getIndexOfSoulbound(itemLore) + 1;
+
+        if (itemLore.size() >= 2 && itemLore.contains(player.getName()) && !Config.getInstance().getShowNameInLore()) {
+            itemLore.remove(indexName);
+            itemMeta.setLore(itemLore);
+            itemStack.setItemMeta(itemMeta);
+            return itemStack;
+        }
+
+        if (Config.getInstance().getShowNameInLore() && !itemLore.contains(player.getName()) && player.getUniqueId().equals(StringUtils.readUUIDFromLore(itemLore))) {
+            itemLore.add(indexName, player.getName());
+        }
+
+        itemMeta.setLore(itemLore);
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
     }
 
     public static boolean isNormalItem(ItemStack itemStack) {

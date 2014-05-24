@@ -35,6 +35,7 @@ public class Config extends AutoUpdateConfigLoader {
     /* @formatter:on */
 
     /* SOULBOUND SETTINGS */
+    public boolean getShowNameInLore() { return config.getBoolean("Soulbound.Show_Name_In_Lore", true); }
     public boolean getFeedbackEnabled() { return config.getBoolean("Soulbound.Feedback_Messages_Enabled", true); }
     public boolean getPreventItemDrop() { return config.getBoolean("Soulbound.Prevent_Item_Drop", false); }
     public boolean getDeleteOnDrop() { return config.getBoolean("Soulbound.Delete_On_Drop", false); }

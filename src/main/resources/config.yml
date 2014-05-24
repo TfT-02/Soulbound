@@ -22,6 +22,7 @@ General:
     Config_Update_Overwrite: true
 
 Soulbound:
+    Show_Name_In_Lore: true
     Feedback_Messages_Enabled: true
     Prevent_Item_Drop: false
     Delete_On_Drop: false
