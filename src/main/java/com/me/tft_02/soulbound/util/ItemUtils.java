@@ -223,6 +223,9 @@ public class ItemUtils {
         checkNameChange(player, itemStack);
         List<String> itemLore = itemStack.getItemMeta().getLore();
 
+        Soulbound.p.debug("UUID MATCH? " + player.getUniqueId().equals(StringUtils.readUUIDFromLore(itemLore)));
+        Soulbound.p.debug("NAME MATCH? " + itemLore.contains(player.getName()));
+
         return player.getUniqueId().equals(StringUtils.readUUIDFromLore(itemLore)) || itemLore.contains(player.getName());
     }
 
@@ -259,6 +262,8 @@ public class ItemUtils {
         int indexName = StringUtils.getIndexOfSoulbound(itemLore) + 1;
 
         if (itemLore.size() >= 2 && itemLore.contains(player.getName()) && !Config.getInstance().getShowNameInLore()) {
+            Soulbound.p.debug("Item lore has a player name but that's disabled in config");
+            Soulbound.p.debug("Going to remove what is at indexName " + indexName + " which is: " + itemLore.get(indexName));
             itemLore.remove(indexName);
             itemMeta.setLore(itemLore);
             itemStack.setItemMeta(itemMeta);
@@ -266,6 +271,7 @@ public class ItemUtils {
         }
 
         if (Config.getInstance().getShowNameInLore() && !itemLore.contains(player.getName()) && player.getUniqueId().equals(StringUtils.readUUIDFromLore(itemLore))) {
+            Soulbound.p.debug("Item lore doesn't have (correct) player name but it should and the UUIDs match");
             itemLore.add(indexName, player.getName());
         }
 
