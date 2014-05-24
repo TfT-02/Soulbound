@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
@@ -66,7 +67,7 @@ public class ItemsConfig extends ConfigLoader {
 
             String name = null;
             if (config.contains("Items." + itemName + ".Name")) {
-                name = config.getString("Items." + itemName + ".Name");
+                name = ChatColor.translateAlternateColorCodes('&', config.getString("Items." + itemName + ".Name"));
             }
 
             SoulbindItem soulbindItem = new SoulbindItem(itemMaterialData, name, lore);
