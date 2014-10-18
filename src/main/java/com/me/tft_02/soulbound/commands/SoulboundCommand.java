@@ -11,20 +11,21 @@ import com.me.tft_02.soulbound.Soulbound;
 public class SoulboundCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        switch (args.length) {
-            case 0:
-                sender.sendMessage("Soulbound version " + Soulbound.p.getDescription().getVersion());
-                return printUsage(sender);
-            case 1:
-                if (args[0].equalsIgnoreCase("reload")) {
-                    return reloadConfiguration(sender);
-                }
-                else if (args[0].equalsIgnoreCase("help") || args[0].equalsIgnoreCase("?")) {
-                    return helpPages(sender, args);
-                }
-            default:
-                return false;
+        
+        if (args.length == 0) {
+            sender.sendMessage("Soulbound version " + Soulbound.p.getDescription().getVersion());
+            return printUsage(sender);
         }
+        else if (args[0].equalsIgnoreCase("reload")) {
+            return reloadConfiguration(sender);
+        }
+        else if (args[0].equalsIgnoreCase("help") || args[0].equalsIgnoreCase("?")) {
+            return helpPages(sender, args);
+        }
+        else {
+            return false;
+        }
+        
     }
 
     private boolean reloadConfiguration(CommandSender sender) {
@@ -42,7 +43,7 @@ public class SoulboundCommand implements CommandExecutor {
             sender.sendMessage("Can't use this from the console, sorry!");
             return false;
         }
-
+        
         if (args.length >= 2 && Integer.parseInt(args[1]) > 1) {
             getHelpPage(Integer.parseInt(args[1]), sender);
             return true;
