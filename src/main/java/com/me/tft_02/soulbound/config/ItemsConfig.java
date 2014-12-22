@@ -60,9 +60,12 @@ public class ItemsConfig extends ConfigLoader {
             byte itemData = (itemInfo.length == 2) ? Byte.valueOf(itemInfo[1]) : 0;
             MaterialData itemMaterialData = new MaterialData(itemMaterial, itemData);
 
-            List<String> lore = null;
+            List<String> lore = new ArrayList<String>();
             if (config.contains("Items." + itemName + ".Lore")) {
-                lore = config.getStringList("Items." + itemName + ".Lore");
+
+                for (String loreEntry : config.getStringList("Items." + itemName + ".Lore")) {
+                    lore.add(ChatColor.translateAlternateColorCodes('&', loreEntry));
+                }
             }
 
             String name = null;
