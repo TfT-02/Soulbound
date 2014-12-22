@@ -76,10 +76,6 @@
             <url>http://repo.mcstats.org/content/repositories/public</url>
         </repository>
         <repository>
-            <id>nuclearw-repo</id>
-            <url>http://repo.nuclearw.com/</url>
-        </repository>
-        <repository>
             <id>mythicdrops-repo</id>
             <url>http://repository-topplethenun.forge.cloudbees.com/snapshot/</url>
         </repository>
@@ -97,11 +93,6 @@
             <artifactId>metrics</artifactId>
             <version>R7</version>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.github.derwisch.loreLocks</groupId>
-            <artifactId>LoreLocks</artifactId>
-            <version>2.1.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.nunnerycode.bukkit</groupId>

@@ -15,7 +15,6 @@ import com.me.tft_02.soulbound.commands.UnbindCommand;
 import com.me.tft_02.soulbound.config.Config;
 import com.me.tft_02.soulbound.config.ItemsConfig;
 import com.me.tft_02.soulbound.hooks.EpicBossRecodedListener;
-import com.me.tft_02.soulbound.hooks.LoreLocksListener;
 import com.me.tft_02.soulbound.hooks.MythicDropsListener;
 import com.me.tft_02.soulbound.listeners.BlockListener;
 import com.me.tft_02.soulbound.listeners.EntityListener;
@@ -57,7 +56,6 @@ public class Soulbound extends JavaPlugin {
         loadConfigFiles();
 
         setupEpicBossRecoded();
-        setupLoreLocks();
         setupMythicDrops();
 
         registerEvents();
@@ -94,14 +92,6 @@ public class Soulbound extends JavaPlugin {
             epicBossRecodedEnabled = true;
             debug("EpicBossRecoded found!");
             getServer().getPluginManager().registerEvents(new EpicBossRecodedListener(), this);
-        }
-    }
-
-    private void setupLoreLocks() {
-        if (getServer().getPluginManager().isPluginEnabled("LoreLocks")) {
-            loreLocksEnabled = true;
-            debug("LoreLocks found!");
-            getServer().getPluginManager().registerEvents(new LoreLocksListener(), this);
         }
     }
 
