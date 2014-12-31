@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.enchantment.EnchantItemEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
@@ -157,6 +158,22 @@ public class InventoryListener implements Listener {
 
         if (ItemsConfig.getInstance().isActionItem(itemStack, ActionType.CRAFT)) {
             event.getInventory().setResult(ItemUtils.soulbindItem(player, itemStack));
+        }
+    }
+
+    /**
+     * Check EnchantItemEvent events.
+     *
+     * @param event The event to check
+     */
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    private void onEnchantItem(EnchantItemEvent event) {
+        Player player = event.getEnchanter();
+        ItemStack itemStack = event.getItem();
+
+        if (ItemUtils.isBindOnUse(itemStack)) {
+            ItemUtils.soulbindItem(player, itemStack);
+            return;
         }
     }
 }

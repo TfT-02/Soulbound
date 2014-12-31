@@ -10,6 +10,7 @@ Version 1.2.0 | Tested on CB 1.7.9-R0.1
  + Added support for giving Soulbinded kits to other players
  + Added option to have Soulbind items without adding the player name
  ! Changed the way UUIDs are handled, they are now hidden in the Soulbound lore :)
+ ! Changed "Bind on Use" also triggers when enchanting
 
 Version 1.1.9 | Tested on CB 1.7.5-R0.1
  ! Now using MythicDrops hook to support MythicDrops versions 1.1.2 through 3.0.0. Huge shout-out to Nunnery!
