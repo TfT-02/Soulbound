@@ -231,9 +231,14 @@ public class ItemUtils {
 
     private static ItemStack updateOldLore(Player player, ItemStack itemStack) {
         ItemMeta itemMeta = itemStack.getItemMeta();
+        if (itemMeta != null) {
+            if (!itemMeta.hasLore()) {
+                return itemStack;
+            }
+        }
         List<String> itemLore = itemMeta.getLore();
 
-        if (itemLore.size() < 3) {
+        if (itemLore.size() - 1 < StringUtils.getIndexOfSoulbound(itemLore) + 2) {
             return itemStack;
         }
 
